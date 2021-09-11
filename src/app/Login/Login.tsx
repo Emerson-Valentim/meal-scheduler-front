@@ -1,8 +1,3 @@
 export function Login() {
-
-  return (
-    <div>
-      Olá
-    </div>
-  )
+	return <div>Olá</div>;
 }
