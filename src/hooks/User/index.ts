@@ -1,66 +1,69 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import request from '../../api';
-import { RootState, AppThunk } from '../store';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import authRequest from '../../api'
 
 export type Credentials = {
-	cnpj: string;
-	password: string;
-};
+  cnpj: string
+  password: string
+}
+
+export enum LoginState {
+  BAD_CREDENTIALS = 'badCredentials',
+  LOGGED = 'logged',
+  DEFAULT = 'default'
+}
 
 export interface UserState {
-	credentials: Credentials;
-	logged: {
-		value: boolean;
-		reason: 'badCredentials' | 'error' | 'default';
-	};
+  credentials: Credentials
+  logged: {
+    value: boolean
+    state: LoginState
+  }
 }
 
 const initialState: UserState = {
-	credentials: {
-		cnpj: '',
-		password: '',
-	},
-	logged: {
-		value: false,
-		reason: 'default',
-	},
-};
+  credentials: {
+    cnpj: '',
+    password: '',
+  },
+  logged: {
+    value: false,
+    state: LoginState.DEFAULT
+  },
+}
 
-export const authenticate = createAsyncThunk('user/load', async () => {
-	const { data: userInfo } = await request('GET', 'user/load', {});
-	return userInfo;
-});
+const saveCredentials = (credentials?: Credentials) => window.localStorage.setItem('credentials', credentials ? JSON.stringify(credentials) : '')
+
+export const authenticate = createAsyncThunk('user/load', async (credentials: Credentials) => {
+  saveCredentials(credentials)
+  const { data: userInfo } = await authRequest('GET', 'user/load')
+  return userInfo
+})
 
 export const user = createSlice({
-	name: 'user',
-	initialState,
-	reducers: {
-		login: (state, action: PayloadAction<Credentials>) => {
-			state.credentials = action.payload;
-		},
-	},
-	extraReducers: (builder) =>
-		builder
-			.addCase(authenticate.pending, (state) => {
-				state.logged = {
-					value: false,
-					reason: 'default',
-				};
-			})
-			.addCase(authenticate.rejected, (state) => {
-				state.logged = {
-					value: false,
-					reason: 'badCredentials',
-				};
-			})
-			.addCase(authenticate.fulfilled, (state) => {
-				state.logged = {
-					value: true,
-					reason: 'default',
-				};
-			}),
-});
+  name: 'user',
+  initialState,
+  reducers: {
+  },
+  extraReducers: (builder) =>
+    builder
+      .addCase(authenticate.pending, (state) => {
+        state.logged = {
+          value: false,
+          state: LoginState.DEFAULT
+        }
+      })
+      .addCase(authenticate.rejected, (state) => {
+        state.logged = {
+          value: false,
+          state: LoginState.BAD_CREDENTIALS
+        }
+      })
+      .addCase(authenticate.fulfilled, (state) => {
+        state.logged = {
+          value: true,
+          state: LoginState.LOGGED
+        }
+      }),
+})
 
-export const { login } = user.actions;
-
-export default user.reducer;
+export default user.reducer
