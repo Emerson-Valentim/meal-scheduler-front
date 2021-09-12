@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	env: {
 		browser: true,
@@ -22,6 +23,6 @@ export default {
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
-		semi: ['error', 'never'],
-	},
+		semi: ['error', 'never']
+  },
 };
