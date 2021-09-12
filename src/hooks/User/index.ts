@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import authRequest from '../../api'
 
 export type Credentials = {
@@ -6,7 +6,7 @@ export type Credentials = {
   password: string
 }
 
-export enum LoginReasonError {
+export enum LoginState {
   BAD_CREDENTIALS = 'badCredentials',
   LOGGED = 'logged',
   DEFAULT = 'default'
@@ -16,7 +16,7 @@ export interface UserState {
   credentials: Credentials
   logged: {
     value: boolean
-    reason: LoginReasonError
+    state: LoginState
   }
 }
 
@@ -27,7 +27,7 @@ const initialState: UserState = {
   },
   logged: {
     value: false,
-    reason: LoginReasonError.DEFAULT
+    state: LoginState.DEFAULT
   },
 }
 
@@ -43,32 +43,27 @@ export const user = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<Credentials>) => {
-      state.credentials = action.payload
-    },
   },
   extraReducers: (builder) =>
     builder
       .addCase(authenticate.pending, (state) => {
         state.logged = {
           value: false,
-          reason: LoginReasonError.DEFAULT
+          state: LoginState.DEFAULT
         }
       })
       .addCase(authenticate.rejected, (state) => {
         state.logged = {
           value: false,
-          reason: LoginReasonError.BAD_CREDENTIALS
+          state: LoginState.BAD_CREDENTIALS
         }
       })
       .addCase(authenticate.fulfilled, (state) => {
         state.logged = {
           value: true,
-          reason: LoginReasonError.LOGGED
+          state: LoginState.LOGGED
         }
       }),
 })
-
-export const { login } = user.actions
 
 export default user.reducer

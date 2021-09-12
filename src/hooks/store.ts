@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userReducer from './User';
 import commonReducer from './Common';
+import establishmentReducer from './Establishment';
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
-    common: commonReducer
+    common: commonReducer,
+    establishment: establishmentReducer
 	},
 });
 
