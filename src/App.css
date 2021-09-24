@@ -1,7 +1,8 @@
-@import '~antd/dist/antd.dark.css';
+@import '~antd/dist/antd.compact.css';
 
 .App {
   text-align: center;
+  min-height: 100%;
 }
 
 .App-logo {

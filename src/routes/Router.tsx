@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Home } from '../app/Home/Home';
 
 export function MainRouter(): JSX.Element {
+
 	return (
-		<div>
 			<Router>
 				<Switch>
 					<Route path="/">
@@ -12,6 +13,5 @@ export function MainRouter(): JSX.Element {
 					</Route>
 				</Switch>
 			</Router>
-		</div>
 	);
 }
