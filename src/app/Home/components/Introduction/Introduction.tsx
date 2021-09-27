@@ -3,24 +3,15 @@ import { Button, Carousel } from 'antd';
 
 import { useHistory } from 'react-router-dom'
 
-import { Card, MainWrapper, WelcomeCarousel } from './styles';
-import { Redirect } from 'react-router';
-
-type WestPlazaCardProps = {
-  button: JSX.Element | undefined
-}
+import { MainWrapper, WelcomeCarousel } from './styles';
+import { WestPlazaCard } from '../../../../components/ShoppingHolder/ShoppingHolder';
+import { Card } from '../../../../components/ShoppingHolder/styles';
 
 export function Introduction(): JSX.Element {
 
   const history = useHistory()
 
-  const WestPlazaCard = ({ button }: WestPlazaCardProps) => (
-    <Card color="white" pFontSize="4vh">
-      <h1>Shopping</h1>
-      <p>West Plaza</p>
-      {button}
-    </Card>
-  )
+
 
   const listInfoAboutEstablishment = useCallback(() => {
     history.push('/welcome')
@@ -30,7 +21,7 @@ export function Introduction(): JSX.Element {
     <WelcomeCarousel>
       <Carousel>
         <MainWrapper>
-          <WestPlazaCard button={undefined}/>
+          <WestPlazaCard/>
         </MainWrapper>
         <MainWrapper>
           <Card>
