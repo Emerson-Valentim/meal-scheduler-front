@@ -14,7 +14,7 @@ export function Welcome(): JSX.Element {
 
   useEffect(() => {
     dispatch(load())
-  }, [dispatch])
+  }, [])
 
   return (
     <MainWrapper>
