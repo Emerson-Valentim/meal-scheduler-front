@@ -11,8 +11,6 @@ export function Introduction(): JSX.Element {
 
   const history = useHistory()
 
-
-
   const listInfoAboutEstablishment = useCallback(() => {
     history.push('/welcome')
   }, [])
@@ -25,7 +23,7 @@ export function Introduction(): JSX.Element {
         </MainWrapper>
         <MainWrapper>
           <Card>
-            <img src="/Intro2.png" alt="Welcome" />
+            <img src="/Intro1.png" alt="Welcome" />
             <h1>Celebre!</h1>
             <p>Aproveite os melhores momentos da sua vida com pessoas que você ama</p>
           </Card>

@@ -30,6 +30,7 @@ export const Card = styled.div`
     font-family: 'Poppins', sans-serif;
     font-size: ${({pFontSize}) => pFontSize || '2vh' }};
     color: ${({ pFontColor }) => pFontColor || 'black'};
+    width: 70vh;
   }
 
   img {

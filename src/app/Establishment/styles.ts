@@ -12,7 +12,7 @@ export const MainWrapper = styled.div`
   min-width: 100%;
 
   h1 {
-    max-width: 60%;
+    max-width: 70%;
     font-family: 'COCOGOOSE', sans-serif;
     font-size: ${({hFontSize}) => hFontSize || ''};
   }
@@ -31,7 +31,7 @@ export const EstablishmentList = styled.div`
 
   background-color: gray;
 
-  height: 70vh;
+  height: 80vh;
   min-width: 100%;
   padding: 1vh;
 
