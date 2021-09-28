@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { CustomCarousel } from '../../components/CustomCarousel/CustomCarousel'
 import { WestPlazaCard } from '../../components/ShoppingHolder/ShoppingHolder'
 import { EstablishmentCard, EstablishmentList, MainWrapper } from './styles'
 
@@ -9,6 +11,11 @@ export function Establishment(): JSX.Element {
     hFontColor: 'white',
     pFontSize: '2vh',
     pFontColor: 'white'
+  }
+
+  const commonSize = {
+    height: '100%',
+    width: '100%',
   }
 
   const establishments = [
@@ -53,8 +60,12 @@ export function Establishment(): JSX.Element {
       <EstablishmentList>
         {establishments.map( ({ name, description }) => (
           <EstablishmentCard>
-            <h1>{name}</h1>
-            <img src="Intro2.png" alt={`${name}`}/>
+            <CustomCarousel items={[
+              <div>
+                <h1>{name}</h1>
+                <img src="Intro2.png" alt={`${name}`}/>
+              </div>
+            ]} style={commonSize}/>
           </EstablishmentCard>
         ))}
       </EstablishmentList>
