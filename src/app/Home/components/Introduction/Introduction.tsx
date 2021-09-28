@@ -23,9 +23,9 @@ export function Introduction(): JSX.Element {
     'border-radius': '10px',
     'slicker-slider': {
       position: 'fixed',
-      bottom: '5%'
+      bottom: '7.5%'
     }
-  }  
+  }
 
   return (
     <CustomCarousel style={carouselStyle} items={
