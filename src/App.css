@@ -16,7 +16,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #C8D4A1 !important;
+  background-color: rgba(7, 7, 7, 0.897) !important;
 }
 
 .App {
