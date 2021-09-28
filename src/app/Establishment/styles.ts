@@ -7,7 +7,7 @@ export const MainWrapper = styled.div`
   
   align-items: center;
   
-  background-color: green;
+  background-color: #C8D4A1;
   
   height: 100vh;
   
@@ -73,11 +73,24 @@ export const ModalWrapper = styled(Modal)`
   top: 6vh !important;
 
   .ant-modal-close-x {
-    color: green;
+    color: black;
+    
+    :hover {
+      transform: scale(1.1);
+    }
   }
 
   .ant-modal-content {
     width: 100%;
+
+    background: #C8D4A1;
+
+    border:  1px solid gray;
+
+    .ant-modal-header {
+      border-color: black;
+      background: transparent;
+    }
     
     .ant-modal-body {
       display: flex;
@@ -90,12 +103,27 @@ export const ModalWrapper = styled(Modal)`
     }
 
     .ant-modal-footer {
+      border-color: black;
+
       button {
         width: 30%;
       }
       
       .ant-btn-primary {
-          background: green;
+          color: white !important;
+          background: black;
+          border-color: black;
+
+          :hover {
+            border: 1px solid white !important;
+          }
+      }
+
+      .ant-btn {
+        :hover {
+          color: black;
+          border-color: black;
+        }
       }
     }
   }

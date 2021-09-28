@@ -12,11 +12,11 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: lightgreen !important;
+  background: black !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: green !important;
+  background: #C8D4A1 !important;
 }
 
 .App {

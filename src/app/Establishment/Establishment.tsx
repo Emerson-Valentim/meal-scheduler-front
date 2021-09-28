@@ -25,9 +25,9 @@ export function Establishment(): JSX.Element {
 
   const CardStyle = {
     hFontSize: '1.75vh',
-    hFontColor: 'white',
+    hFontColor: 'black',
     pFontSize: '2vh',
-    pFontColor: 'white'
+    pFontColor: 'black'
   }
 
   useEffect(() => {
