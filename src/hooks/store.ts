@@ -2,12 +2,14 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userReducer from './User';
 import commonReducer from './Common';
 import establishmentReducer from './Establishment';
+import tableReducer from './Table';
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
     common: commonReducer,
-    establishment: establishmentReducer
+    establishment: establishmentReducer,
+    table: tableReducer
 	},
 });
 

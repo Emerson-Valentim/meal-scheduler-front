@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState, useEffect } from 'react'
 
-import { Card, Modal } from 'antd';
+import { Card } from 'antd';
 
 import { WestPlazaCard } from '../../components/ShoppingHolder/ShoppingHolder'
-import { EstablishmentCard, EstablishmentList, MainWrapper } from './styles'
+import { EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
 import { TableList } from './components/TableList/TableList';
@@ -19,8 +19,9 @@ export function Establishment(): JSX.Element {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
-  const establishments = useAppSelector(state => state.establishment.load.list?.data)
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
+
+  const establishments = useAppSelector(state => state.establishment.load.list?.data)
 
   const CardStyle = {
     hFontSize: '1.75vh',
@@ -66,15 +67,15 @@ export function Establishment(): JSX.Element {
           </EstablishmentCard>
         ))}
       </EstablishmentList>
-      <Modal
+      <ModalWrapper
         title={establishment?.name}
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <TableList />
-        <MenuList />
-      </Modal>
+        <TableList environments={establishment?.environments} />
+        <MenuList menu={establishment?.menu_items} />
+      </ModalWrapper>
     </MainWrapper>)
 }

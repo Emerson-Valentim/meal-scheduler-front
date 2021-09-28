@@ -1,5 +1,65 @@
 import React from 'react'
+import { CustomCollapse, CollapseWrapper } from '../../styles'
+import { MenuCard } from './styles'
 
-export function MenuList() {
-  return (<div>Lista de Menu</div>)
+const { Panel } = CustomCollapse;
+
+type MenuListDefinition = {
+  menu: any[]
+}
+
+export function MenuList({ menu }: MenuListDefinition) {
+  return (
+    <CollapseWrapper>
+      <CustomCollapse accordion>
+        <Panel header="Pratos disponíveis" key="2">
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}
+          {menu.map(item =>
+            <MenuCard>
+              {item.name}
+            </MenuCard>
+          )}s
+        </Panel>
+      </CustomCollapse>
+    </CollapseWrapper>
+  )
 }

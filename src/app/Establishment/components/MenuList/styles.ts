@@ -1,5 +1,7 @@
+import { Card } from 'antd'
 import styled from 'styled-components'
 
-export const MainWrapper = styled.div`
 
+export const MenuCard = styled(Card)`
+  
 `

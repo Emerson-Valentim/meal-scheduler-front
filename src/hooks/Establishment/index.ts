@@ -89,7 +89,7 @@ export const establishment = createSlice({
         state.load = {
           ...state.load,
           filtered: {
-            state: 'loading',
+            state: 'ok',
             data: payload
           }
         }

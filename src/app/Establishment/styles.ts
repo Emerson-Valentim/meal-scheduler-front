@@ -1,4 +1,4 @@
-import { Card } from "antd"
+import { Card, Collapse, Modal } from "antd"
 import styled from "styled-components"
 
 export const MainWrapper = styled.div`
@@ -64,4 +64,42 @@ export const EstablishmentCard = styled(Card)`
     margin-top: 2vh;
     width: 95%
   }
+`
+
+export const ModalWrapper = styled(Modal)`
+
+  display: flex;
+  flex-direction: column;
+  top: 6vh !important;
+
+  .ant-modal-content {
+    width: 100%;
+
+    background-color: pink;
+    
+    .ant-modal-body {
+      display: flex;
+
+      height: 70vh;
+      overflow-y: scroll;
+
+      align-items: center;
+      flex-direction: column;
+    }
+
+  }
+`
+
+export const CustomCollapse = styled(Collapse)`
+  margin-bottom: 1vh;
+  
+  .ant-collapse-content-box {
+    max-height: 40vh;
+    overflow-y: scroll;
+  }
+`
+
+export const CollapseWrapper = styled.div`
+  width: 100%;
+  background-color: blue;
 `
