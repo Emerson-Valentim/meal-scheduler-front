@@ -38,6 +38,7 @@ export const StyledCarousel = styled.div`
         div {
           div {
             display: flex !important;
+            margin-bottom: 5vh;
           }
         }
       }
