@@ -120,7 +120,7 @@ export const ModalWrapper = styled(Modal)`
       }
 
       .ant-btn {
-        :hover {
+        :hover, :focus {
           color: black;
           border-color: black;
         }

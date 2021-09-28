@@ -18,6 +18,7 @@ export function Establishment(): JSX.Element {
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [reservationModal, setReservationModal] = useState(false);
 
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
 
@@ -35,20 +36,23 @@ export function Establishment(): JSX.Element {
   }, [])
 
   const openEstablishmentModal = useCallback(async ({ id }) => {
+    setReservationModal(false);
     await dispatch(loadEstablishment(id))
     setVisible(true);
-  }, [])
+  }, [reservationModal])
 
   const handleOk = () => {
     setConfirmLoading(true);
     setTimeout(() => {
-      setVisible(false);
+      setReservationModal(true);
       setConfirmLoading(false);
     }, 2000);
   };
 
   const handleCancel = () => {
-    setVisible(false);
+    reservationModal 
+    ? setReservationModal(false)
+    : setVisible(false)
   };
 
   return (
@@ -76,8 +80,14 @@ export function Establishment(): JSX.Element {
         okText={'Reservar'}
         cancelText={'Voltar'}
       >
-        <TableList environments={establishment?.environments} />
-        <MenuList menu={establishment?.menu_items} />
+        {
+          reservationModal 
+          ? (<div/>) 
+          : (
+            <><TableList environments={establishment?.environments} /><MenuList menu={establishment?.menu_items} /></>
+          )
+        }
+        
       </ModalWrapper>
     </MainWrapper>)
 }
