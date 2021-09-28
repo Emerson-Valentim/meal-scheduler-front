@@ -1,3 +1,4 @@
+import { Card } from "antd"
 import styled from "styled-components"
 
 export const MainWrapper = styled.div`
@@ -24,8 +25,7 @@ export const EstablishmentList = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 
-  align-content: flex-start;
-  justify-content: space-around;
+  justify-content: space-evenly;
 
   overflow-y: scroll;
 
@@ -37,9 +37,14 @@ export const EstablishmentList = styled.div`
 
 `
 
-export const EstablishmentCard = styled.div`
-  width: 45%;
-  height: 35%;
+export const EstablishmentCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+
+  width: 40vh;
+  height: 50vh;
 
   border-radius: 3vh;
   
@@ -55,8 +60,7 @@ export const EstablishmentCard = styled.div`
   }
 
   img {
-    max-width: 65%;
-    max-height: 65%;
+    margin-top: 2vh;
+    width: 95%
   }
-
 `
