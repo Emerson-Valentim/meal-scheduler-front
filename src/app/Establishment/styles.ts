@@ -10,7 +10,8 @@ export const MainWrapper = styled.div`
   background-color: green;
   
   height: 100vh;
-  min-width: 100%;
+  
+  overflow: hidden;
 
   h1 {
     max-width: 70%;
