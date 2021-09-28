@@ -73,6 +73,8 @@ export function Establishment(): JSX.Element {
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
+        okText={'Reservar'}
+        cancelText={'Voltar'}
       >
         <TableList environments={establishment?.environments} />
         <MenuList menu={establishment?.menu_items} />

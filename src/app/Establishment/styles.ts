@@ -16,7 +16,7 @@ export const MainWrapper = styled.div`
   h1 {
     max-width: 70%;
     font-family: 'COCOGOOSE', sans-serif;
-    font-size: ${({hFontSize}) => hFontSize || ''};
+    font-size: ${({ hFontSize }) => hFontSize || ''};
   }
 `
 
@@ -28,7 +28,7 @@ export const EstablishmentList = styled.div`
 
   justify-content: space-evenly;
 
-  overflow-y: scroll;
+  overflow-y: auto;
 
   background-color: gray;
 
@@ -72,21 +72,32 @@ export const ModalWrapper = styled(Modal)`
   flex-direction: column;
   top: 6vh !important;
 
+  .ant-modal-close-x {
+    color: green;
+  }
+
   .ant-modal-content {
     width: 100%;
-
-    background-color: pink;
     
     .ant-modal-body {
       display: flex;
 
       height: 70vh;
-      overflow-y: scroll;
+      overflow-y: auto;
 
       align-items: center;
       flex-direction: column;
     }
 
+    .ant-modal-footer {
+      button {
+        width: 30%;
+      }
+      
+      .ant-btn-primary {
+          background: green;
+      }
+    }
   }
 `
 
@@ -95,11 +106,10 @@ export const CustomCollapse = styled(Collapse)`
   
   .ant-collapse-content-box {
     max-height: 40vh;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 `
 
 export const CollapseWrapper = styled.div`
   width: 100%;
-  background-color: blue;
 `
