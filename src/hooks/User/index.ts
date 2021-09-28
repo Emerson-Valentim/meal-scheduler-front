@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import authRequest from '../../api'
+import { authRequest } from '../../api'
 
 export type Credentials = {
   cnpj: string

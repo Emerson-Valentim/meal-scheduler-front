@@ -5,11 +5,10 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
-export type HttpData = {
-  data: any
+export type HttpData<T> = {
+  data: T
   state: 'ok' | 'error' | 'notFound' | 'loading'
 }
-
 
 export const request = <T>(
   method: Method,
@@ -23,7 +22,7 @@ export const request = <T>(
   });
 };
 
-const authRequest = <T>(
+export const authRequest = <T>(
   method: Method,
   url: string,
   params?: any
@@ -39,5 +38,3 @@ const authRequest = <T>(
     }
   });
 };
-
-export default authRequest;
