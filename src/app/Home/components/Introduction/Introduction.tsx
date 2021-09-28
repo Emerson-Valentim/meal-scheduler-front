@@ -7,6 +7,7 @@ import { MainWrapper } from './styles';
 import { WestPlazaCard } from '../../../../components/ShoppingHolder/ShoppingHolder';
 import { Card } from '../../../../components/ShoppingHolder/styles';
 import { CustomCarousel } from '../../../../components/CustomCarousel/CustomCarousel';
+import { CarouselStyle } from '../../../../components/CustomCarousel/style';
 
 export function Introduction(): JSX.Element {
 
@@ -16,14 +17,18 @@ export function Introduction(): JSX.Element {
     history.push('/welcome')
   }, [])
 
-  const commonSize = {
+  const carouselStyle: CarouselStyle = {
     height: '1vh',
     width: '4vh',
-    'border-radius': '10px'
+    'border-radius': '10px',
+    'slicker-slider': {
+      position: 'fixed',
+      bottom: '5%'
+    }
   }  
 
   return (
-    <CustomCarousel style={commonSize} items={
+    <CustomCarousel style={carouselStyle} items={
       [
         <MainWrapper>
           <WestPlazaCard/>

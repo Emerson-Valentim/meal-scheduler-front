@@ -4,6 +4,10 @@ export interface CarouselStyle {
   height: string
   width: string
   'border-radius'?: string
+  'slicker-slider'?: {
+    position: string;
+    bottom: string;
+  }
 }
 
 export const StyledCarousel = styled.div`
@@ -13,6 +17,9 @@ export const StyledCarousel = styled.div`
   .ant-carousel {
     .slick-slider {
       ul {
+
+        ${props => props.style['slicker-slider']}
+
         li {            
           background: white;
 
