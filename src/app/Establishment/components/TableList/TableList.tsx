@@ -19,26 +19,6 @@ export function TableList({ environments }: TableListDefinition) {
               {environment.description}
             </TableCard>
           ))}
-          {environments.map(environment => (
-            <TableCard>
-              {environment.description}
-            </TableCard>
-          ))}
-          {environments.map(environment => (
-            <TableCard>
-              {environment.description}
-            </TableCard>
-          ))}
-          {environments.map(environment => (
-            <TableCard>
-              {environment.description}
-            </TableCard>
-          ))}
-          {environments.map(environment => (
-            <TableCard>
-              {environment.description}
-            </TableCard>
-          ))}
         </Panel>
       </CustomCollapse>
     </CollapseWrapper>)

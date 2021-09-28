@@ -18,46 +18,6 @@ export function MenuList({ menu }: MenuListDefinition) {
               {item.name}
             </MenuCard>
           )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}s
         </Panel>
       </CustomCollapse>
     </CollapseWrapper>
