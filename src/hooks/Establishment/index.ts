@@ -1,20 +1,36 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import authRequest, { HttpData } from '../../api'
+import { authRequest, request, HttpData } from '../../api'
 
 export interface EstablishmentState {
-  load: HttpData
+  load: EstablishmentFilter
+}
+
+type EstablishmentFilter = {
+  list?: HttpData<any[]>,
+  filtered?: HttpData<any>
 }
 
 const initialState: EstablishmentState = {
   load: {
-    state: 'ok',
-    data: []
+    list: {
+      state: 'ok',
+      data: []
+    },
+    filtered: {
+      state: 'ok',
+      data: []
+    }
   }
 }
 
-export const load = createAsyncThunk('establishment/load', async (id?: number) => {
-  const { data: establishmentList } = await authRequest('GET', `establishment/load${ id ? `/${id}`: ''}`)
-  return establishmentList
+export const loadEstablishments = createAsyncThunk('establishment/load', async (): Promise<any[]> => {
+  const { data: establishmentList } = await request<any[]>('GET', 'establishment/load')
+  return establishmentList.length ? establishmentList : []
+})
+
+export const loadEstablishment = createAsyncThunk('establishment/load/id', async (filterId: number): Promise<any> => {
+  const { data: establishment } = await request<any[]>('GET', `establishment/load/${filterId}`)
+  return establishment
 })
 
 export const establishment = createSlice({
@@ -24,22 +40,58 @@ export const establishment = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(load.pending, (state) => {
+      .addCase(loadEstablishments.pending, (state) => {
         state.load = {
-          data: [],
-          state: 'loading'
+          ...state.load,
+          list: {
+            state: 'loading',
+            data: []
+          },
         }
       })
-      .addCase(load.rejected, (state) => {
+      .addCase(loadEstablishments.rejected, (state) => {
         state.load = {
-          data: [],
-          state: 'error'
+          ...state.load,
+          list: {
+            state: 'error',
+            data: []
+          },
         }
       })
-      .addCase(load.fulfilled, (state, action) => {
+      .addCase(loadEstablishments.fulfilled, (state, { payload }) => {
         state.load = {
-          data: action.payload ? action.payload : [],
-          state: action.payload ? 'ok' : 'notFound'
+          ...state.load,
+          list: {
+            state: 'ok',
+            data: payload ? payload : (initialState.load.list?.data || []),
+          }
+        }
+      })
+      .addCase(loadEstablishment.pending, (state) => {
+        state.load = {
+          ...state.load,
+          filtered: {
+            state: 'loading',
+            data: undefined
+          }
+        }
+      })
+      .addCase(loadEstablishment.rejected, (state) => {
+        state.load = {
+          ...state.load,
+          filtered: {
+            state: 'loading',
+            data: undefined
+          }
+        }
+      })
+      .addCase(loadEstablishment.fulfilled, (state, { payload }) => {
+        state.load = {
+          ...state.load,
+          filtered: {
+            state: 'loading',
+            data: payload
+          }
         }
       }),
 })
