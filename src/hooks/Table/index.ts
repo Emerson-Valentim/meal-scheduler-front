@@ -12,7 +12,7 @@ type TableFilter = {
 const initialState: TableState = {
   load: {
     list: {
-      state: 'ok',
+      state: 'pending',
       data: []
     }
   }
@@ -34,7 +34,7 @@ export const table = createSlice({
         state.load = {
           ...state.load,
           list: {
-            state: 'loading',
+            state: 'pending',
             data: []
           },
         }

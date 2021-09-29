@@ -6,14 +6,14 @@ export interface ScheduleState {
 }
 
 type ScheduleFilter = {
-  filtered?: HttpData<any>,
+  filtered: HttpData<any>,
 }
 
 const initialState: ScheduleState = {
   load: {
     filtered: {
-      state: 'ok',
-      data: {}
+      state: 'pending',
+      data: undefined
     }
   }
 }
@@ -37,8 +37,8 @@ export const Schedule = createSlice({
         state.load = {
           ...state.load,
           filtered: {
-            state: 'loading',
-            data: {}
+            state: 'pending',
+            data: undefined
           },
         }
       })
@@ -47,7 +47,7 @@ export const Schedule = createSlice({
           ...state.load,
           filtered: {
             state: 'error',
-            data: {}
+            data: undefined
           },
         }
       })

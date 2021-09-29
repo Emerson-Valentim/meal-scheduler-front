@@ -12,7 +12,7 @@ type MenuFilter = {
 const initialState: MenuState = {
   load: {
     list: {
-      state: 'ok',
+      state: 'pending',
       data: []
     }
   }
@@ -34,7 +34,7 @@ export const Menu = createSlice({
         state.load = {
           ...state.load,
           list: {
-            state: 'loading',
+            state: 'pending',
             data: []
           },
         }

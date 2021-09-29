@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { authRequest, request, HttpData } from '../../api'
+import { ReservationDefinition } from '../../app/Establishment/components/Reservation/Reservation'
 
 export interface ReservationState {
   load: ReservationFilter
@@ -12,15 +13,20 @@ type ReservationFilter = {
 const initialState: ReservationState = {
   load: {
     list: {
-      state: 'ok',
+      state: 'pending',
       data: []
     }
   }
 }
 
-export const loadReservations = createAsyncThunk('reservation/load', async (establishmentId: number): Promise<any[]> => {
-  const { data: reservationList } = await request<any[]>('GET', 'reservation/load/')
+export const loadReservations = createAsyncThunk('reservation/safeLoad', async (params: Omit<ReservationDefinition, 'schedule'>): Promise<any[]> => {
+  const { data: reservationList } = await request<any[]>('GET', 'reservation/safeLoad', { params })
   return reservationList.length ? reservationList : []
+})
+
+export const createReservation = createAsyncThunk('reservation/create', async (data: any): Promise<any> => {
+  const { data: newReservation } = await request<any>('POST', 'reservation/create', { data })
+  return newReservation
 })
 
 export const Reservation = createSlice({
@@ -34,7 +40,7 @@ export const Reservation = createSlice({
         state.load = {
           ...state.load,
           list: {
-            state: 'loading',
+            state: 'pending',
             data: []
           },
         }
@@ -56,6 +62,15 @@ export const Reservation = createSlice({
             data: payload ? payload : (initialState.load.list?.data || []),
           }
         }
+      })
+      .addCase(createReservation.pending, (state) => {
+        
+      })
+      .addCase(createReservation.rejected, (state) => {
+        
+      })
+      .addCase(createReservation.fulfilled, (state) => {
+        
       }),
 })
 
