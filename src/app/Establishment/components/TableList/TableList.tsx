@@ -18,7 +18,7 @@ export function TableList({ environments }: TableListDefinition) {
       <CustomCollapse accordion  expandIconPosition="right" expandIcon={() => (<DownCircleFilled  style={{ fontSize: '1.3vh' }} />)}>
         <Panel header="Ambientes disponíveis" key="1">
           {environments.map(environment => (
-            <TableCard>
+            <TableCard key={`${environment.id}-EnvironmentItem`}>
               {environment.description}
             </TableCard>
           ))}

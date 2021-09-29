@@ -17,7 +17,7 @@ export function MenuList({ menu }: MenuListDefinition) {
       <CustomCollapse accordion expandIconPosition="right" expandIcon={() => (<DownCircleFilled style={{ fontSize: '1.3vh' }} />)}>
         <Panel header="Pratos disponíveis" key="2">
           {menu.map(item =>
-            <MenuCard>
+            <MenuCard key={`${item.id}-MenuItem`}>
               {item.name}
             </MenuCard>
           )}
