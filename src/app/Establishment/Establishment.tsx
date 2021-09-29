@@ -95,7 +95,13 @@ export function Establishment(): JSX.Element {
       >
         {
           reservationModal
-            ? (<Reservation scheduleId={establishment?.schedule} />)
+            ? (
+              <Reservation
+                key='ReservationEstablishment'
+                schedule={establishment?.schedule}
+                establishment_id={establishment.id}
+              />
+            )
             : (
               <>
                 <TableList key='TableEstablishment' environments={establishment?.environments} />

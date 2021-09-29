@@ -7,7 +7,7 @@ import { MainWrapper } from './styles';
 import { WestPlazaCard } from '../../../../components/ShoppingHolder/ShoppingHolder';
 import { Card } from '../../../../components/ShoppingHolder/styles';
 import { CustomCarousel } from '../../../../components/CustomCarousel/CustomCarousel';
-import { CarouselStyle } from '../../../../components/CustomCarousel/style';
+import { CarouselStyle } from '../../../../components/CustomCarousel/styles';
 
 export function Introduction(): JSX.Element {
 
