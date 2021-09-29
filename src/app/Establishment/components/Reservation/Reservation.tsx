@@ -8,7 +8,7 @@ import { loadSchedule } from '../../../../hooks/Schedule';
 export function Reservation({ scheduleId }) {
 
   const dispatch = useAppDispatch();
-  
+
   const schedule = useAppSelector(state => state.schedule.load.filtered);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ export function Reservation({ scheduleId }) {
 
   return (
     <MainWrapper>
-      { JSON.stringify(schedule) }
+      {JSON.stringify(schedule)}
     </MainWrapper>
   )
 }
