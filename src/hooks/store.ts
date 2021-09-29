@@ -4,6 +4,7 @@ import commonReducer from './Common';
 import establishmentReducer from './Establishment';
 import tableReducer from './Table';
 import scheduleReducer from './Schedule';
+import reservationReducer from './Reservation';
 
 export const store = configureStore({
 	reducer: {
@@ -11,7 +12,8 @@ export const store = configureStore({
     common: commonReducer,
     establishment: establishmentReducer,
     table: tableReducer,
-    schedule: scheduleReducer
+    schedule: scheduleReducer,
+    reservation: reservationReducer
 	},
 });
 
