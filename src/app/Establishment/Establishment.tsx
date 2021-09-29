@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
 import { TableList } from './components/TableList/TableList';
 import { MenuList } from './components/MenuList/MenuList';
+import { Reservation } from './components/Reservation/Reservation';
 
 const { Meta } = Card
 
@@ -41,18 +42,28 @@ export function Establishment(): JSX.Element {
     setVisible(true);
   }, [reservationModal])
 
-  const handleOk = () => {
+  const confirmReservation = useCallback(() => {
+    console.log('Oi')
+  }, [])
+
+  const nextPage = useCallback(() => {
     setConfirmLoading(true);
     setTimeout(() => {
-      setReservationModal(true);
       setConfirmLoading(false);
+      setReservationModal(true);
     }, 2000);
+  }, [])
+
+  const handleOk = () => {
+    reservationModal
+      ? confirmReservation()
+      : nextPage()
   };
 
-  const handleCancel = () => {
-    reservationModal 
-    ? setReservationModal(false)
-    : setVisible(false)
+  const handleCancel = ({ target }) => {
+    reservationModal && target.type === 'button'
+      ? setReservationModal(false)
+      : setVisible(false)
   };
 
   return (
@@ -76,18 +87,23 @@ export function Establishment(): JSX.Element {
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
+        key='ModalEstablishment'
         onCancel={handleCancel}
         okText={'Reservar'}
         cancelText={'Voltar'}
+        destroyOnClose={true}
       >
         {
-          reservationModal 
-          ? (<div/>) 
-          : (
-            <><TableList environments={establishment?.environments} /><MenuList menu={establishment?.menu_items} /></>
-          )
+          reservationModal
+            ? (<Reservation scheduleId={establishment?.schedule} />)
+            : (
+              <>
+                <TableList key='TableEstablishment' environments={establishment?.environments} />
+                <MenuList key='MenuEstablishment' menu={establishment?.menu_items} />
+              </>
+            )
         }
-        
+
       </ModalWrapper>
     </MainWrapper>)
 }
