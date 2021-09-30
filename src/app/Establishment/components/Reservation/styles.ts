@@ -6,5 +6,5 @@ export const MainWrapper = styled.div`
 `
 
 export const CustomScheduleComponent = styled(ScheduleComponent)`
-
+  display: flex;
 `

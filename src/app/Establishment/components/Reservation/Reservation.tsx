@@ -74,26 +74,33 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
     }
   }, [])
 
-  const createNewReservation = useCallback(async ({ addedRecords, requestType }) => {
+  const onAction = useCallback(async (event) => {
 
-    if (requestType === 'eventCreated') {
-      const { StartTime, EndTime } = addedRecords[0];
+    switch (event.requestType) {
+      case 'eventCreated':
+        const { StartTime, EndTime } = event.addedRecords[0];
 
-      const payload = {
-        cpf: '46911198844',
-        phone: '5511948083191',
-        status: 'scheduled',
-        table: 1,
-        establishment: 1,
-        interval: {
-          start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
-          end: formatDate(EndTime).minus({ milliseconds: 1 }).toString()
+        const payload = {
+          cpf: '46911198844',
+          phone: '5511948083191',
+          status: 'scheduled',
+          table: 1,
+          establishment: 1,
+          interval: {
+            start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
+            end: formatDate(EndTime).minus({ milliseconds: 1 }).toString()
+          }
         }
-      }
-      
-      await dispatch(createReservation(payload))
-      await dispatch(loadReservations(params))
+
+        await dispatch(createReservation(payload))
+        await dispatch(loadReservations(params))
+        break
+
+      case 'dateNavigate':
+        event.cancel = true
+        break
     }
+
   }, [params])
 
   useEffect(() => {
@@ -112,8 +119,9 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
         popupOpen={handleEvent}
         workDays={workingDays()}
         currentView='WorkWeek'
-        actionComplete={createNewReservation}
+        actionComplete={onAction}
         ref={scheduleRef => handleConfig(scheduleRef)}
+        allowDragAndDrop={false}
       >
         <ViewsDirective>
           <ViewDirective option='WorkWeek' />
