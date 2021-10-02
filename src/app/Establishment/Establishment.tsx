@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
 import { EnvironmentList } from './components/EnvironmentList/EnvironmentList';
 import { MenuList } from './components/MenuList/MenuList';
-import { Reservation } from './components/Reservation/Reservation';
+import { Agenda } from './components/Agenda/Agenda';
 import {
   CalendarFilled,
   ShopFilled,
@@ -52,7 +52,7 @@ export function Establishment(): JSX.Element {
     'menu': (<MenuList key='MenuEstablishment' menu={establishment?.menu_items} />),
     'environment': (<EnvironmentList key='EnvironmentEstablishment' environments={establishment?.environments} />),
     'table': (<TableList key='TableEstablishment' tables={establishment?.environments?.flatMap(environment => environment.tables)} />),
-    'reservation': (<Reservation schedule={establishment?.schedule} establishment_id={establishment?.id} />)
+    'reservation': (<Agenda schedule={establishment?.schedule} establishment_id={establishment?.id} />)
   }
 
   const [visible, setVisible] = useState(false);

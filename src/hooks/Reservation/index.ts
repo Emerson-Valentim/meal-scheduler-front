@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authRequest, request, HttpData } from '../../api'
-import { ReservationDefinition } from '../../app/Establishment/components/Reservation/Reservation'
+import { ReservationDefinition } from '../../app/Establishment/components/Agenda/Agenda'
 
 type ReservationParams = {
   establishment?: number
@@ -78,6 +78,9 @@ export const reservation = createSlice({
     filterTable: (state, { payload }: PayloadAction<any>) => {
       const tableId = payload;
       state.create.params.table = tableId
+    },
+    setReservationInterval: (state, { payload }: PayloadAction<any>) => {
+      state.create.params.interval = payload
     }
   },
   extraReducers: (builder) =>
@@ -120,6 +123,11 @@ export const reservation = createSlice({
       }),
 })
 
-export const { filterEnvironment, filterTable, resetNewReservation } = reservation.actions
+export const { 
+  filterEnvironment, 
+  filterTable, 
+  resetNewReservation,
+  setReservationInterval
+} = reservation.actions
 
 export default reservation.reducer

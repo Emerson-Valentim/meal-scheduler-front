@@ -16,7 +16,7 @@ import {
 import { extend } from '@syncfusion/ej2-base';
 
 import { DateTime } from 'luxon';
-import { createReservation, loadReservations } from '../../../../hooks/Reservation';
+import { createReservation, loadReservations, reservation, setReservationInterval } from '../../../../hooks/Reservation';
 import { updateLoading } from '../../../../hooks/Common';
 
 export type ReservationDefinition = {
@@ -28,12 +28,14 @@ export type ReservationDefinition = {
 
 const formatDate = (date: Date): DateTime => DateTime.fromJSDate(new Date(date)).toUTC()
 
-export function Reservation({ schedule: scheduleId, ...params }: ReservationDefinition) {
+export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
   const dispatch = useAppDispatch();
 
   const schedule = useAppSelector(state => state.schedule.load.filtered);
   const reservations = useAppSelector(state => state.reservation.load.list)
+
+  const { establishment, table } = useAppSelector(state => state.reservation.create.params)
 
   const workingDays = useCallback((): number[] => {
     dispatch(updateLoading(true))
@@ -62,13 +64,22 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
 
   const handleEvent = useCallback((event) => {
     switch (event.type) {
+      case 'QuickInfo':
+        const { StartTime, EndTime } = event.data;
+
+        const interval = {
+          start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
+          end: formatDate(EndTime).minus({ milliseconds: 1 }).toString()
+        }
+
+        dispatch(setReservationInterval(interval))
+
+        break
       case 'ViewEventInfo':
         event.cancel = true
         break
-      default:
-        break
     }
-  }, [])
+  }, [reservations])
 
   const handleConfig = useCallback((scheduleConfig: ScheduleComponent) => {
     if (scheduleConfig) {
@@ -78,38 +89,17 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
   }, [])
 
   const onAction = useCallback(async (event) => {
-
     switch (event.requestType) {
-      case 'eventCreated':
-        const { StartTime, EndTime } = event.addedRecords[0];
-
-        const payload = {
-          cpf: '46911198844',
-          phone: '5511948083191',
-          status: 'scheduled',
-          table: 1,
-          establishment: 1,
-          interval: {
-            start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
-            end: formatDate(EndTime).minus({ milliseconds: 1 }).toString()
-          }
-        }
-
-        await dispatch(createReservation(payload))
-        await dispatch(loadReservations(params))
-        break
-
       case 'dateNavigate':
         event.cancel = true
         break
     }
-
-  }, [params])
+  }, [])
 
   useEffect(() => {
     (async () => {
       await dispatch(loadSchedule(scheduleId))
-      await dispatch(loadReservations(params))
+      await dispatch(loadReservations({ establishment_id: establishment, table_id: table }))
     })()
   }, [scheduleId])
 
@@ -124,7 +114,6 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
         currentView='WorkWeek'
         actionComplete={onAction}
         ref={scheduleRef => handleConfig(scheduleRef)}
-        allowDragAndDrop={false}
       >
         <ViewsDirective>
           <ViewDirective option='WorkWeek' />
