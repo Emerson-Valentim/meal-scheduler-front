@@ -1,13 +1,25 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authRequest, request, HttpData } from '../../api'
 import { ReservationDefinition } from '../../app/Establishment/components/Reservation/Reservation'
 
-export interface ReservationState {
-  load: ReservationFilter
+type ReservationParams = {
+  establishment?: number
+  environments: number[]
+  table?: number
+  interval: any
 }
 
 type ReservationFilter = {
-  list?: HttpData<any[]>,
+  list: HttpData<any[]>,
+}
+
+type ReservationCreation = {
+  params: ReservationParams
+}
+
+export interface ReservationState {
+  load: ReservationFilter
+  create: ReservationCreation
 }
 
 const initialState: ReservationState = {
@@ -15,6 +27,17 @@ const initialState: ReservationState = {
     list: {
       state: 'pending',
       data: []
+    }
+  },
+  create: {
+    params: {
+      establishment: undefined,
+      environments: [],
+      table: undefined,
+      interval: {
+        start: '',
+        end: ''
+      }
     }
   }
 }
@@ -29,10 +52,33 @@ export const createReservation = createAsyncThunk('reservation/create', async (d
   return newReservation
 })
 
-export const Reservation = createSlice({
+export const reservation = createSlice({
   name: 'Reservation',
   initialState,
   reducers: {
+    resetNewReservation: (state, { payload }: PayloadAction<any>) => {
+      state.create.params = {
+        establishment: payload,
+        environments: [],
+        table: undefined,
+        interval: {
+          start: '',
+          end: ''
+        }
+      }
+    },
+    filterEnvironment: (state, { payload }: PayloadAction<any>) => {
+      const currentEnvironments = state.create.params.environments
+      const environmentIndex = currentEnvironments.indexOf(payload)
+
+      environmentIndex > -1
+        ? state.create.params.environments.splice(environmentIndex, 1)
+        : state.create.params.environments.push(payload)
+    },
+    filterTable: (state, { payload }: PayloadAction<any>) => {
+      const tableId = payload;
+      state.create.params.table = tableId
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -64,14 +110,16 @@ export const Reservation = createSlice({
         }
       })
       .addCase(createReservation.pending, (state) => {
-        
+
       })
       .addCase(createReservation.rejected, (state) => {
-        
+
       })
       .addCase(createReservation.fulfilled, (state) => {
-        
+
       }),
 })
 
-export default Reservation.reducer
+export const { filterEnvironment, filterTable, resetNewReservation } = reservation.actions
+
+export default reservation.reducer
