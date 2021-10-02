@@ -19,6 +19,7 @@ import { FaChair } from 'react-icons/fa';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
 import { TableList } from './components/TableList/TableList';
+import { resetNewReservation } from '../../hooks/Reservation';
 
 const { Meta } = Card
 
@@ -38,7 +39,6 @@ export function Establishment(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
-
   const establishments = useAppSelector(state => state.establishment.load.list?.data)
 
   const CardStyle = {
@@ -65,6 +65,7 @@ export function Establishment(): JSX.Element {
 
   useEffect(() => {
     setActiveView(Views.menu)
+    dispatch(resetNewReservation(establishment?.id))
   }, [establishment])
 
   const openEstablishmentModal = useCallback(async ({ id }) => {

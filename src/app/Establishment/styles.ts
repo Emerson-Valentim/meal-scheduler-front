@@ -139,6 +139,8 @@ export const ModalWrapper = styled(Modal)`
 export const CustomViewBody = styled.div`
   padding: 3vh 0 1vh 0;
   background-color: white;
+
+  width: 100%;
   
   display: flex;
   flex-wrap: wrap;
