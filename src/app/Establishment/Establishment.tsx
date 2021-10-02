@@ -15,8 +15,8 @@ import {
   ShopFilled,
 } from '@ant-design/icons/lib/icons';
 
-import { FaChair } from "react-icons/fa";
-import { IoFastFoodOutline } from "react-icons/io5";
+import { FaChair } from 'react-icons/fa';
+import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
 
 const { Meta } = Card
@@ -109,12 +109,11 @@ export function Establishment(): JSX.Element {
         onCancel={handleCancel}
         okText={'Reservar'}
         cancelText={'Voltar'}
-        onSelect={({item}) => console.log(item)}
         destroyOnClose
       >
         <CustomMenu
           onClick={({ key }) => { setActiveView(Views[key]) }}
-          mode="inline"
+          mode='horizontal'
           defaultSelectedKeys={[EnumViewMapping.MENU]}
           forceSubMenuRender
           inlineIndent={12}
