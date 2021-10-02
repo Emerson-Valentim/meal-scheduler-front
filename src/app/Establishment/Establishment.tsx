@@ -17,8 +17,7 @@ import {
 
 import { FaChair } from "react-icons/fa";
 import { IoFastFoodOutline } from "react-icons/io5";
-
-
+import { updateLoading } from '../../hooks/Common';
 
 const { Meta } = Card
 
@@ -57,41 +56,32 @@ export function Establishment(): JSX.Element {
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [reservationModal, setReservationModal] = useState(false);
-  const [activeView, setActiveView] = useState(Views.menu)
-
+  const [activeView, setActiveView] = useState(<></>)
+  
   useEffect(() => {
     (async () => await dispatch(loadEstablishments()))()
   }, [])
 
-  const openEstablishmentModal = useCallback(async ({ id }) => {
-    setReservationModal(false);
-    await dispatch(loadEstablishment(id))
-    setVisible(true);
-  }, [reservationModal])
+  useEffect(() => {
+    setActiveView(Views.menu)
+  }, [establishment])
 
-  const confirmReservation = useCallback(() => {
-    console.log('Oi')
+  const openEstablishmentModal = useCallback(async ({ id }) => {
+    dispatch(updateLoading(true))
+    await dispatch(loadEstablishment(id))
+    dispatch(updateLoading(false))
+    setVisible(true);
   }, [])
 
-  const nextPage = useCallback(() => {
+  const confirmReservation = useCallback(() => {
     setConfirmLoading(true);
     setTimeout(() => {
       setConfirmLoading(false);
-      setReservationModal(true);
     }, 2000);
   }, [])
 
-  const handleOk = () => {
-    reservationModal
-      ? confirmReservation()
-      : nextPage()
-  };
-
   const handleCancel = ({ target }) => {
-    reservationModal && target.type === 'button'
-      ? setReservationModal(false)
-      : setVisible(false)
+    setVisible(false)
   };
 
   return (
@@ -113,7 +103,7 @@ export function Establishment(): JSX.Element {
       <ModalWrapper
         title={establishment?.name}
         visible={visible}
-        onOk={handleOk}
+        onOk={confirmReservation}
         confirmLoading={confirmLoading}
         key='ModalEstablishment'
         onCancel={handleCancel}
@@ -124,7 +114,9 @@ export function Establishment(): JSX.Element {
         <CustomMenu
           onClick={({ key }) => { setActiveView(Views[key]) }}
           mode="inline"
+          defaultSelectedKeys={[EnumViewMapping.MENU]}
           forceSubMenuRender
+          inlineIndent={12}
         >
           <CustomMenuItem key={EnumViewMapping.MENU} icon={<IoFastFoodOutline />}>
             Pratos
