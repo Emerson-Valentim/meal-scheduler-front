@@ -1,4 +1,4 @@
-import { Card, Collapse, Modal } from "antd"
+import { Card, Modal, Menu } from "antd"
 import styled from "styled-components"
 
 export const MainWrapper = styled.div`
@@ -66,6 +66,8 @@ export const EstablishmentCard = styled(Card)`
   }
 `
 
+const modalBodyMargin = '1px'
+
 export const ModalWrapper = styled(Modal)`
 
   display: flex;
@@ -85,7 +87,7 @@ export const ModalWrapper = styled(Modal)`
 
     background: #C8D4A1;
 
-    border:  1px solid gray;
+    border:  ${modalBodyMargin} solid gray;
 
     .ant-modal-header {
       border-color: black;
@@ -129,15 +131,32 @@ export const ModalWrapper = styled(Modal)`
   }
 `
 
-export const CustomCollapse = styled(Collapse)`
-  margin-bottom: 1vh;
+export const CustomViewBody = styled.div`
+  padding: 1vh 0 1vh 0;
+  background-color: white;
   
-  .ant-collapse-content-box {
-    max-height: 40vh;
-    overflow-y: auto;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1vh;
+  
+  overflow-y: auto;
 `
 
-export const CollapseWrapper = styled.div`
+export const CustomMenu = styled(Menu)`
   width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+
+  justify-content: center;
+`
+
+export const CustomMenuItem = styled(Menu.Item)`
+
+  .ant-menu-item-icon {
+    vertical-align: -0.125em;
+  }
+
 `

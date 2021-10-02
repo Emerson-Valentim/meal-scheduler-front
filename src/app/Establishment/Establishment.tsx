@@ -4,22 +4,38 @@ import React, { useCallback, useState, useEffect } from 'react'
 import { Card } from 'antd';
 
 import { WestPlazaCard } from '../../components/ShoppingHolder/ShoppingHolder'
-import { EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
+import { CustomMenu, CustomMenuItem, EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
 import { TableList } from './components/TableList/TableList';
 import { MenuList } from './components/MenuList/MenuList';
 import { Reservation } from './components/Reservation/Reservation';
+import {
+  CalendarFilled,
+  ShopFilled,
+} from '@ant-design/icons/lib/icons';
+
+import { FaChair } from "react-icons/fa";
+import { IoFastFoodOutline } from "react-icons/io5";
+
+
 
 const { Meta } = Card
+
+enum EnumViewMapping {
+  'MENU' = 'menu',
+  'ENVIRONMENT' = 'environment',
+  'TABLE' = 'table',
+  'RESERVATION' = 'reservation'
+}
+
+type ViewMapping = {
+  [key in EnumViewMapping]: JSX.Element
+}
 
 export function Establishment(): JSX.Element {
 
   const dispatch = useAppDispatch()
-
-  const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [reservationModal, setReservationModal] = useState(false);
 
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
 
@@ -31,6 +47,20 @@ export function Establishment(): JSX.Element {
     pFontSize: '2vh',
     pFontColor: 'black'
   }
+
+  const Views: ViewMapping = {
+    'menu': (<MenuList key='MenuEstablishment' menu={establishment?.menu_items} />),
+    'environment': (<TableList key='TableEstablishment' environments={establishment?.environments} />),
+    'table': (<TableList key='TableEstablishment' environments={establishment?.environments} />),
+    'reservation': (<Reservation schedule={establishment?.schedule} establishment_id={establishment?.id} />)
+  }
+
+  const [visible, setVisible] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [reservationModal, setReservationModal] = useState(false);
+  const [activeView, setActiveView] = useState(Views.menu)
+
+
 
   useEffect(() => {
     (async () => await dispatch(loadEstablishments()))()
@@ -91,25 +121,27 @@ export function Establishment(): JSX.Element {
         onCancel={handleCancel}
         okText={'Reservar'}
         cancelText={'Voltar'}
-        destroyOnClose={true}
+        destroyOnClose
       >
-        {
-          reservationModal
-            ? (
-              <Reservation
-                key='ReservationEstablishment'
-                schedule={establishment?.schedule}
-                establishment_id={establishment.id}
-              />
-            )
-            : (
-              <>
-                <TableList key='TableEstablishment' environments={establishment?.environments} />
-                <MenuList key='MenuEstablishment' menu={establishment?.menu_items} />
-              </>
-            )
-        }
-
+        <CustomMenu
+          onClick={({ key }) => { setActiveView(Views[key]) }}
+          mode="horizontal"
+          forceSubMenuRender
+        >
+          <CustomMenuItem key={EnumViewMapping.MENU} icon={<IoFastFoodOutline />}>
+            Pratos
+          </CustomMenuItem>
+          <CustomMenuItem key={EnumViewMapping.ENVIRONMENT} icon={<ShopFilled />}>
+            Ambientes
+          </CustomMenuItem>
+          <CustomMenuItem key={EnumViewMapping.TABLE} icon={<FaChair />}>
+            Mesas
+          </CustomMenuItem>
+          <CustomMenuItem key={EnumViewMapping.RESERVATION} icon={<CalendarFilled />}>
+            Reservas
+          </CustomMenuItem>
+        </CustomMenu>
+        {activeView}
       </ModalWrapper>
     </MainWrapper>)
 }
