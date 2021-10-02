@@ -18,6 +18,7 @@ import {
 import { FaChair } from 'react-icons/fa';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
+import { TableList } from './components/TableList/TableList';
 
 const { Meta } = Card
 
@@ -50,7 +51,7 @@ export function Establishment(): JSX.Element {
   const Views: ViewMapping = {
     'menu': (<MenuList key='MenuEstablishment' menu={establishment?.menu_items} />),
     'environment': (<EnvironmentList key='EnvironmentEstablishment' environments={establishment?.environments} />),
-    'table': (<EnvironmentList key='TableEstablishment' environments={establishment?.environments} />),
+    'table': (<TableList key='TableEstablishment' tables={establishment?.environments?.flatMap(environment => environment.tables)} />),
     'reservation': (<Reservation schedule={establishment?.schedule} establishment_id={establishment?.id} />)
   }
 

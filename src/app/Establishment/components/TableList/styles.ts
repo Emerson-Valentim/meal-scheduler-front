@@ -2,6 +2,6 @@ import { Card } from 'antd'
 import styled from 'styled-components'
 
 
-export const MenuCard = styled(Card)`
-  width: 47%;
+export const TableCard = styled(Card)`
+  min-width: 95%;
 `

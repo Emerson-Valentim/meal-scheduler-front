@@ -2,7 +2,7 @@ import { Card } from 'antd'
 import styled from 'styled-components'
 
 export const EnvironmentCard = styled(Card)`
-  min-width: 48%;
+  min-width: 47%;
   margin-bottom: 1vh;
 `
 
