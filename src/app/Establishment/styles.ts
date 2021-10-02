@@ -73,6 +73,7 @@ export const ModalWrapper = styled(Modal)`
   display: flex;
   flex-direction: column;
   top: 6vh !important;
+  width: 50% !important;
 
   .ant-modal-close-x {
     color: black;
@@ -128,6 +129,10 @@ export const ModalWrapper = styled(Modal)`
         }
       }
     }
+  }
+
+  @media(max-width: 800px) {
+    width: 95% !important;
   }
 `
 

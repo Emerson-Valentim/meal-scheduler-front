@@ -2,7 +2,7 @@ import { Card } from 'antd'
 import styled from 'styled-components'
 
 export const EnvironmentCard = styled(Card)`
-  max-width: 40%;
+  min-width: 48%;
   margin-bottom: 1vh;
 `
 
@@ -15,9 +15,12 @@ export const EnvironmentCardBody = styled.div`
   min-width: 100%;
   min-height: 40%;
 
+  word-break: break-all;
+  
   p {
-    text-align: left;
     margin-bottom: 1px;
+
+    text-align: left;
 
     :last-child {
       margin-bottom: 2vh;

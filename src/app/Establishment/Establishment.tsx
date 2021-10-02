@@ -109,6 +109,7 @@ export function Establishment(): JSX.Element {
         onCancel={handleCancel}
         okText={'Reservar'}
         cancelText={'Voltar'}
+        onSelect={({item}) => console.log(item)}
         destroyOnClose
       >
         <CustomMenu
