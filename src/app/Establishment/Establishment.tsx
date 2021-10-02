@@ -19,7 +19,7 @@ import { FaChair } from 'react-icons/fa';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
 import { TableList } from './components/TableList/TableList';
-import { resetNewReservation } from '../../hooks/Reservation';
+import { createReservation, resetNewReservation } from '../../hooks/Reservation';
 
 const { Meta } = Card
 
@@ -41,6 +41,11 @@ export function Establishment(): JSX.Element {
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
   const establishments = useAppSelector(state => state.establishment.load.list?.data)
 
+  const {
+    environments: stateEnvironments,
+    ...params
+  } = useAppSelector(state => state.reservation.create.params)
+
   const CardStyle = {
     hFontSize: '1.75vh',
     hFontColor: 'black',
@@ -58,7 +63,7 @@ export function Establishment(): JSX.Element {
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [activeView, setActiveView] = useState(<></>)
-  
+
   useEffect(() => {
     (async () => await dispatch(loadEstablishments()))()
   }, [])
@@ -75,16 +80,18 @@ export function Establishment(): JSX.Element {
     setVisible(true);
   }, [])
 
-  const confirmReservation = useCallback(() => {
+  const confirmReservation = useCallback(async () => {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setConfirmLoading(false);
-    }, 2000);
-  }, [])
-
-  const handleCancel = ({ target }) => {
-    setVisible(false)
-  };
+    
+    await dispatch(createReservation({
+      ...params,
+      status: 'scheduled',
+      phone: '5511948083191',
+      cpf: '46911198844'
+    }))
+    
+    setConfirmLoading(false);
+  }, [params])
 
   return (
     <MainWrapper>
@@ -105,13 +112,18 @@ export function Establishment(): JSX.Element {
       <ModalWrapper
         title={establishment?.name}
         visible={visible}
+
         onOk={confirmReservation}
+        onCancel={() => setVisible(false)}
+
         confirmLoading={confirmLoading}
-        key='ModalEstablishment'
-        onCancel={handleCancel}
+
         okText={'Reservar'}
         cancelText={'Voltar'}
+
         destroyOnClose
+
+        key='ModalEstablishment'
       >
         <CustomMenu
           onClick={({ key }) => { setActiveView(Views[key]) }}
