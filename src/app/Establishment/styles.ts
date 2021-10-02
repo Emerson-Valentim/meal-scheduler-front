@@ -150,7 +150,7 @@ export const CustomMenu = styled(Menu)`
 
   flex-direction: row;
 
-  justify-content: center;
+  justify-content: space-evenly;
 `
 
 export const CustomMenuItem = styled(Menu.Item)`
