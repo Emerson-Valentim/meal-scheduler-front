@@ -7,7 +7,7 @@ import { WestPlazaCard } from '../../components/ShoppingHolder/ShoppingHolder'
 import { CustomMenu, CustomMenuItem, EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
-import { TableList } from './components/TableList/TableList';
+import { EnvironmentList } from './components/EnvironmentList/EnvironmentList';
 import { MenuList } from './components/MenuList/MenuList';
 import { Reservation } from './components/Reservation/Reservation';
 import {
@@ -49,8 +49,8 @@ export function Establishment(): JSX.Element {
 
   const Views: ViewMapping = {
     'menu': (<MenuList key='MenuEstablishment' menu={establishment?.menu_items} />),
-    'environment': (<TableList key='TableEstablishment' environments={establishment?.environments} />),
-    'table': (<TableList key='TableEstablishment' environments={establishment?.environments} />),
+    'environment': (<EnvironmentList key='EnvironmentEstablishment' environments={establishment?.environments} />),
+    'table': (<EnvironmentList key='TableEstablishment' environments={establishment?.environments} />),
     'reservation': (<Reservation schedule={establishment?.schedule} establishment_id={establishment?.id} />)
   }
 
