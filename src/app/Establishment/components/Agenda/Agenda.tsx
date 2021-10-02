@@ -16,7 +16,7 @@ import {
 import { extend } from '@syncfusion/ej2-base';
 
 import { DateTime } from 'luxon';
-import { createReservation, loadReservations, reservation, setReservationInterval } from '../../../../hooks/Reservation';
+import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation';
 import { updateLoading } from '../../../../hooks/Common';
 
 export type ReservationDefinition = {
