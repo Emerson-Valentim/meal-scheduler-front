@@ -13,7 +13,7 @@ export const LoadingModal = styled.div`
   overflow: auto;
   outline: 0;
 
-  z-index: 1000;
+  z-index: 2000;
   background-color: gray;
   opacity: 85%;
 
@@ -22,4 +22,27 @@ export const LoadingModal = styled.div`
 
   height: 100vh;
   width: 100vw;
+`
+export const Reload = styled.div`
+  position: fixed;
+
+  width: 44vw;
+
+  background-color: transparent;
+
+  bottom: 1.5vh;
+  left: 0;
+
+  button {
+    color: black !important;
+
+    border: none;
+    width: 100%;
+    border-radius: 0 1vw 1vh 0;
+    background-color: white;
+
+    :active {
+      background-color: #FFFFFF;
+    }
+  }
 `

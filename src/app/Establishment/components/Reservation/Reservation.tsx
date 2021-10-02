@@ -17,6 +17,7 @@ import { extend } from '@syncfusion/ej2-base';
 
 import { DateTime } from 'luxon';
 import { createReservation, loadReservations } from '../../../../hooks/Reservation';
+import { updateLoading } from '../../../../hooks/Common';
 
 export type ReservationDefinition = {
   establishment_id?: number
@@ -35,7 +36,9 @@ export function Reservation({ schedule: scheduleId, ...params }: ReservationDefi
   const reservations = useAppSelector(state => state.reservation.load.list)
 
   const workingDays = useCallback((): number[] => {
+    dispatch(updateLoading(true))
     if (schedule?.state === 'ok' && schedule?.data.definition) {
+      dispatch(updateLoading(false))
       return Object.keys(schedule?.data.definition).map(day => +day)
     }
     return [1]

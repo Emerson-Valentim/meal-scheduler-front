@@ -1,20 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-import { useAppSelector } from '../../hooks/hooks'
-import { LoadingModal } from './styles'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { LoadingModal, Reload } from './styles'
 
-import { Spin } from 'antd';
+import { Button, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { enableAlert } from '../../hooks/Common';
 
 
 export function Loading() {
 
+  const dispatch = useAppDispatch()
+
   const { enabled } = useAppSelector((state) => state.common.loadingState)
   const antIcon = <LoadingOutlined style={{ fontSize: '200px', color: 'black' }} spin />;
+
+  const [reload, allowReload] = useState(false)
+
+  useEffect(() => {
+    if (enabled) {
+      const timeout = setTimeout(() => {
+        allowReload(true)
+        dispatch(enableAlert({
+          enabled: true,
+          message: 'Parece que tivemos um problema',
+          type: 'error'
+        }))
+      }, 5000)
+
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, [enabled])
 
   return (
     <LoadingModal enabled={enabled}>
       <Spin indicator={antIcon} />
+      {reload
+        ? (
+          <Reload>
+            <Button onClick={() => { window.location.reload() }}>Atualizar</Button>
+          </Reload>
+        )
+        : null}
     </LoadingModal>
   )
 }
