@@ -1,11 +1,8 @@
 import React from 'react'
 
-import DownCircleFilled from '@ant-design/icons/lib/icons/DownCircleOutlined';
-
-import { CustomCollapse, CollapseWrapper } from '../../styles'
+import { CustomViewBody } from '../../styles'
 import { MenuCard } from './styles'
-
-const { Panel } = CustomCollapse;
+import Meta from 'antd/lib/card/Meta';
 
 type MenuListDefinition = {
   menu: any[]
@@ -13,16 +10,15 @@ type MenuListDefinition = {
 
 export function MenuList({ menu }: MenuListDefinition) {
   return (
-    <CollapseWrapper>
-      <CustomCollapse accordion expandIconPosition="right" expandIcon={() => (<DownCircleFilled style={{ fontSize: '1.3vh' }} />)}>
-        <Panel header="Pratos disponíveis" key="2">
-          {menu.map(item =>
-            <MenuCard>
-              {item.name}
-            </MenuCard>
-          )}
-        </Panel>
-      </CustomCollapse>
-    </CollapseWrapper>
+    <CustomViewBody >
+      {menu?.map(item =>
+        <MenuCard
+          key={`${item.id}-MenuItem`}
+          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+        >
+          <Meta title={item.name} description={item.ingredients} />
+        </MenuCard>
+      )}
+    </CustomViewBody>
   )
 }

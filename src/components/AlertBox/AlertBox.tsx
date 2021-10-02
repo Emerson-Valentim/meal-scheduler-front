@@ -15,7 +15,13 @@ export function AlertBox(): JSX.Element {
   }
 
   return (
-  <div>
-    {enabled ? (<Alert message={message} type={type} closable showIcon onClose={closeAlert}/>) : null}
-  </div>)
+    <div>
+      {enabled ? (<Alert
+        message={message}
+        type={type}
+        closable
+        showIcon
+        style={ { zIndex: 3000, width: '100vw' }}
+        onClose={closeAlert} />) : null}
+    </div>)
 }

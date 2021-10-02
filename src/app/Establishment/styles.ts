@@ -1,4 +1,4 @@
-import { Card, Collapse, Modal } from "antd"
+import { Card, Modal, Menu } from "antd"
 import styled from "styled-components"
 
 export const MainWrapper = styled.div`
@@ -66,11 +66,14 @@ export const EstablishmentCard = styled(Card)`
   }
 `
 
+const modalBodyMargin = '1px'
+
 export const ModalWrapper = styled(Modal)`
 
   display: flex;
   flex-direction: column;
   top: 6vh !important;
+  width: 50% !important;
 
   .ant-modal-close-x {
     color: black;
@@ -85,7 +88,7 @@ export const ModalWrapper = styled(Modal)`
 
     background: #C8D4A1;
 
-    border:  1px solid gray;
+    border:  ${modalBodyMargin} solid gray;
 
     .ant-modal-header {
       border-color: black;
@@ -96,7 +99,7 @@ export const ModalWrapper = styled(Modal)`
       display: flex;
 
       height: 70vh;
-      overflow-y: auto;
+      overflow-y: hidden;
 
       align-items: center;
       flex-direction: column;
@@ -120,24 +123,47 @@ export const ModalWrapper = styled(Modal)`
       }
 
       .ant-btn {
-        :hover {
+        :hover, :focus {
           color: black;
           border-color: black;
         }
       }
     }
   }
-`
 
-export const CustomCollapse = styled(Collapse)`
-  margin-bottom: 1vh;
-  
-  .ant-collapse-content-box {
-    max-height: 40vh;
-    overflow-y: auto;
+  @media(max-width: 800px) {
+    width: 95% !important;
   }
 `
 
-export const CollapseWrapper = styled.div`
+export const CustomViewBody = styled.div`
+  padding: 3vh 0 1vh 0;
+  background-color: white;
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1vh;
+  
+  overflow-y: auto;
+`
+
+export const CustomMenu = styled(Menu)`
   width: 100%;
+
+  display: flex;
+
+  flex-direction: row;
+
+  justify-content: space-evenly;
+  
+  border-bottom: 1px solid black;
+`
+
+export const CustomMenuItem = styled(Menu.Item)`
+
+  .ant-menu-item-icon {
+    vertical-align: -0.125em;
+  }
+
 `

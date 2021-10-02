@@ -1,28 +1,18 @@
+import Meta from 'antd/lib/card/Meta'
 import React from 'react'
-
-import DownCircleFilled from '@ant-design/icons/lib/icons/DownCircleOutlined';
-
-import { CustomCollapse, CollapseWrapper } from '../../styles'
+import { CustomViewBody } from '../../styles'
 import { TableCard } from './styles'
 
-const { Panel } = CustomCollapse;
-
-type TableListDefinition = {
-  environments: any[]
-}
-
-export function TableList({ environments }: TableListDefinition) {
-
+export function TableList({ tables }) {
   return (
-    <CollapseWrapper>
-      <CustomCollapse accordion  expandIconPosition="right" expandIcon={() => (<DownCircleFilled  style={{ fontSize: '1.3vh' }} />)}>
-        <Panel header="Ambientes disponíveis" key="1">
-          {environments.map(environment => (
-            <TableCard>
-              {environment.description}
-            </TableCard>
-          ))}
-        </Panel>
-      </CustomCollapse>
-    </CollapseWrapper>)
+    <CustomViewBody>
+      {tables?.map(table => 
+        <TableCard
+          key={`${table.id}-Table`}
+        >
+        <Meta title={`Mesa ${table.identification}`} description={`Mesa com ${table.seats} lugares`} />
+        </TableCard>
+      )}
+    </CustomViewBody>
+  )
 }

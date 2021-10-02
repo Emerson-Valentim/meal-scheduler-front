@@ -13,12 +13,12 @@ type EstablishmentFilter = {
 const initialState: EstablishmentState = {
   load: {
     list: {
-      state: 'ok',
+      state: 'pending',
       data: []
     },
     filtered: {
-      state: 'ok',
-      data: []
+      state: 'pending',
+      data: undefined
     }
   }
 }
@@ -44,7 +44,7 @@ export const establishment = createSlice({
         state.load = {
           ...state.load,
           list: {
-            state: 'loading',
+            state: 'pending',
             data: []
           },
         }
@@ -71,7 +71,7 @@ export const establishment = createSlice({
         state.load = {
           ...state.load,
           filtered: {
-            state: 'loading',
+            state: 'pending',
             data: undefined
           }
         }
@@ -80,7 +80,7 @@ export const establishment = createSlice({
         state.load = {
           ...state.load,
           filtered: {
-            state: 'loading',
+            state: 'pending',
             data: undefined
           }
         }

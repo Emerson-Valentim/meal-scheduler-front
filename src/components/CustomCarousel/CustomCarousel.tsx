@@ -1,6 +1,6 @@
 import React from 'react'
 import { Carousel as AntCarousel } from 'antd'
-import { CarouselStyle, StyledCarousel } from './style'
+import { CarouselStyle, StyledCarousel } from './styles'
 
 type CarouselDefinition = {
   items: JSX.Element[],
