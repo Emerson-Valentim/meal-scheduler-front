@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
 import { EnvironmentList } from './components/EnvironmentList/EnvironmentList';
 import { MenuList } from './components/MenuList/MenuList';
-import { Reservation } from './components/Reservation/Reservation';
+import { Agenda } from './components/Agenda/Agenda';
 import {
   CalendarFilled,
   ShopFilled,
@@ -19,6 +19,7 @@ import { FaChair } from 'react-icons/fa';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
 import { TableList } from './components/TableList/TableList';
+import { createReservation, resetNewReservation } from '../../hooks/Reservation';
 
 const { Meta } = Card
 
@@ -38,8 +39,12 @@ export function Establishment(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
-
   const establishments = useAppSelector(state => state.establishment.load.list?.data)
+
+  const {
+    environments: stateEnvironments,
+    ...params
+  } = useAppSelector(state => state.reservation.create.params)
 
   const CardStyle = {
     hFontSize: '1.75vh',
@@ -52,19 +57,20 @@ export function Establishment(): JSX.Element {
     'menu': (<MenuList key='MenuEstablishment' menu={establishment?.menu_items} />),
     'environment': (<EnvironmentList key='EnvironmentEstablishment' environments={establishment?.environments} />),
     'table': (<TableList key='TableEstablishment' tables={establishment?.environments?.flatMap(environment => environment.tables)} />),
-    'reservation': (<Reservation schedule={establishment?.schedule} establishment_id={establishment?.id} />)
+    'reservation': (<Agenda schedule={establishment?.schedule} establishment_id={establishment?.id} />)
   }
 
   const [visible, setVisible] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [activeView, setActiveView] = useState(<></>)
-  
+
   useEffect(() => {
     (async () => await dispatch(loadEstablishments()))()
   }, [])
 
   useEffect(() => {
     setActiveView(Views.menu)
+    dispatch(resetNewReservation(establishment?.id))
   }, [establishment])
 
   const openEstablishmentModal = useCallback(async ({ id }) => {
@@ -74,16 +80,18 @@ export function Establishment(): JSX.Element {
     setVisible(true);
   }, [])
 
-  const confirmReservation = useCallback(() => {
+  const confirmReservation = useCallback(async () => {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setConfirmLoading(false);
-    }, 2000);
-  }, [])
-
-  const handleCancel = ({ target }) => {
-    setVisible(false)
-  };
+    
+    await dispatch(createReservation({
+      ...params,
+      status: 'scheduled',
+      phone: '5511948083191',
+      cpf: '46911198844'
+    }))
+    
+    setConfirmLoading(false);
+  }, [params])
 
   return (
     <MainWrapper>
@@ -104,13 +112,18 @@ export function Establishment(): JSX.Element {
       <ModalWrapper
         title={establishment?.name}
         visible={visible}
+
         onOk={confirmReservation}
+        onCancel={() => setVisible(false)}
+
         confirmLoading={confirmLoading}
-        key='ModalEstablishment'
-        onCancel={handleCancel}
+
         okText={'Reservar'}
         cancelText={'Voltar'}
+
         destroyOnClose
+
+        key='ModalEstablishment'
       >
         <CustomMenu
           onClick={({ key }) => { setActiveView(Views[key]) }}
