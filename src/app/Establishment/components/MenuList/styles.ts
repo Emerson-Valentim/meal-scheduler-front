@@ -3,5 +3,5 @@ import styled from 'styled-components'
 
 
 export const MenuCard = styled(Card)`
-  
+  max-width: 40%;
 `
