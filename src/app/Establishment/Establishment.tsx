@@ -60,8 +60,6 @@ export function Establishment(): JSX.Element {
   const [reservationModal, setReservationModal] = useState(false);
   const [activeView, setActiveView] = useState(Views.menu)
 
-
-
   useEffect(() => {
     (async () => await dispatch(loadEstablishments()))()
   }, [])
@@ -125,7 +123,7 @@ export function Establishment(): JSX.Element {
       >
         <CustomMenu
           onClick={({ key }) => { setActiveView(Views[key]) }}
-          mode="horizontal"
+          mode="inline"
           forceSubMenuRender
         >
           <CustomMenuItem key={EnumViewMapping.MENU} icon={<IoFastFoodOutline />}>

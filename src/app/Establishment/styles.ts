@@ -98,7 +98,7 @@ export const ModalWrapper = styled(Modal)`
       display: flex;
 
       height: 70vh;
-      overflow-y: auto;
+      overflow-y: hidden;
 
       align-items: center;
       flex-direction: column;
