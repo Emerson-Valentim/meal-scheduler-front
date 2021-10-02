@@ -11,8 +11,8 @@ type EnvironmentListDefinition = {
 }
 
 enum LocationLabel {
-  indoor = 'Interno',
-  outdoor = 'Externo'
+  indoor = 'fechado',
+  outdoor = 'ao ar livre'
 }
 
 export function EnvironmentList({ environments }: EnvironmentListDefinition) {
