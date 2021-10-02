@@ -43,7 +43,7 @@ export function EnvironmentList({ environments }: EnvironmentListDefinition) {
         <EnvironmentCard
           key={`${environment.id}-Table`}
           style={{ width: '44%' }}
-          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+          cover={<img alt="example" src="Intro3.png" />}
           selected={stateEnvironments.includes(environment.id)}
           onClick={() => selectEnvironment(environment.id)}
         >

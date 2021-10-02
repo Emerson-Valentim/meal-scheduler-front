@@ -14,7 +14,7 @@ export function MenuList({ menu }: MenuListDefinition) {
       {menu?.map(item =>
         <MenuCard
           key={`${item.id}-MenuItem`}
-          cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+          cover={<img alt="example" src="Intro1.png" />}
         >
           <Meta title={item.name} description={item.ingredients} />
         </MenuCard>
