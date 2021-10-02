@@ -1813,154 +1813,6 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
-"@syncfusion/ej2-base@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-base/-/ej2-base-19.2.60.tgz#fcb5be87f33948e19f23fea459f311fab8114867"
-  integrity sha512-TlUKqKc9/B9c8UWdihM9HIS2QG/YietKA12QTaQuDR2tZNVnU40VJmCwGUJT1LxhDxJRrJrzV8aCbbCGM/a8Xw==
-  dependencies:
-    "@syncfusion/ej2-icons" "~19.2.60"
-
-"@syncfusion/ej2-buttons@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-buttons/-/ej2-buttons-19.2.60.tgz#f743fafdbd6ba95746dfa8cd97e9e77a5b8cbdde"
-  integrity sha512-AvxDXrVqvkPlTb/DnQHs4izjq0tKlheobyR2NUibD8a3mcVbll/0nRjMTuUcuDuTz/KNvLTyLNso5FXgrbKOxw==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-
-"@syncfusion/ej2-calendars@~19.2.60":
-  version "19.2.62"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-calendars/-/ej2-calendars-19.2.62.tgz#8ffb2341f8cedc94ee46df17cc2b001cdd6122a4"
-  integrity sha512-zoN+MrriQsHf2UbeBvvDjiBbg38t1W3hB7mAHYruj+qmKE12RQrdWpHMCkqfCyCmOiS5YZytu0aV89iKB1sjRQ==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-    "@syncfusion/ej2-inputs" "~19.2.60"
-    "@syncfusion/ej2-lists" "~19.2.60"
-    "@syncfusion/ej2-popups" "~19.2.62"
-
-"@syncfusion/ej2-compression@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-compression/-/ej2-compression-19.2.60.tgz#259c7af20e615b02cab1df061a80cd4ca6f6fe93"
-  integrity sha512-XFl25vGqdPRLBv71/6+U843TDBx4n+2DTyHm4u7Jr+qDMOZI2D+Jd+2zx9eV3IXPa3vibtyud56P4KxVQsPCMw==
-  dependencies:
-    "@syncfusion/ej2-file-utils" "~19.2.60"
-
-"@syncfusion/ej2-data@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-data/-/ej2-data-19.2.60.tgz#e59bf730670055a9d3a3617202ede980147fd4b3"
-  integrity sha512-OaSYS9/Hbcw60AtrKOYiwNQqD1tmuC8LeSstqCnCwtsjtvbflH9CTh9vNlvfCs72/+0JscNyOw+cTP8dMt50ag==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-
-"@syncfusion/ej2-dropdowns@~19.2.60":
-  version "19.2.62"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-dropdowns/-/ej2-dropdowns-19.2.62.tgz#ce703e735b24e270cb608b1c97729a716f218c91"
-  integrity sha512-szbw4Aqtosba1D83M7EhcWjNFw3Q0sdw4g09YEUS2hPvXOd/3l+RS5eMy99bgFO/rD0ZVWbgm4gT5KwoAD9eeQ==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-data" "~19.2.60"
-    "@syncfusion/ej2-inputs" "~19.2.60"
-    "@syncfusion/ej2-lists" "~19.2.60"
-    "@syncfusion/ej2-navigations" "~19.2.62"
-    "@syncfusion/ej2-popups" "~19.2.62"
-
-"@syncfusion/ej2-excel-export@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-excel-export/-/ej2-excel-export-19.2.60.tgz#958f709617cd1c5c1e91f4bc3fa2418e881ad47e"
-  integrity sha512-D9fF3688LBpIQTuYYE7/2Q0IGiSdeURYfB8FZf4o5f8sP1Ms3+9q24pwrlDKGwgcK57GI3costlj7ZJraZmFwg==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-compression" "~19.2.60"
-
-"@syncfusion/ej2-file-utils@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-file-utils/-/ej2-file-utils-19.2.60.tgz#fab3c87710cd8202bb9bc60d4cbd517727f13985"
-  integrity sha512-GIKB2Ta8g5ED8BN26rMuJCNcZiYlUQu6XqNTPjtifigBLfCUtB99J2ssBJgDaUaQ7437IdduFfk7ArWWyuK1fA==
-
-"@syncfusion/ej2-icons@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-icons/-/ej2-icons-19.2.60.tgz#d0091c7a5e4777077f1c23faa43e131cc06ba48b"
-  integrity sha512-Q2XdkPSJ7FpYaAKmVTY9ZGPFxTrB3L9s8c24jNT+kFVZ7KiygEmSfESq52MmURkiZ8fLRY4qmil7x1y8Q5nDMQ==
-
-"@syncfusion/ej2-inputs@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-inputs/-/ej2-inputs-19.2.60.tgz#5e7ebf06f790f0f755ac5c5b2fcc1ff55d05b838"
-  integrity sha512-so/uIEEWPL6PiXWekwba6u2tZC8ZavNwAJ6YKefHRjRswdvtncbGx1+x3pBT4apN0f4fy5J200d1EJ3QgnzHhg==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-    "@syncfusion/ej2-popups" "~19.2.60"
-    "@syncfusion/ej2-splitbuttons" "~19.2.60"
-
-"@syncfusion/ej2-lists@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-lists/-/ej2-lists-19.2.60.tgz#3a1ed080f86f4eac08ccdbd8094c4a8c78c95fe9"
-  integrity sha512-aG4/KJr1WriaQEmLlwaD/MAzsPsb/yO5tMQtnZcaxGm5PPMAFKm5/z83PgZb+qi+TmJM9bxyC2lXhu6UA7n1VA==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-    "@syncfusion/ej2-data" "~19.2.60"
-
-"@syncfusion/ej2-navigations@~19.2.60", "@syncfusion/ej2-navigations@~19.2.62":
-  version "19.2.62"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-navigations/-/ej2-navigations-19.2.62.tgz#f8e0d2afb7006d84d3e0f2ea9eea4c9a3fc7bd06"
-  integrity sha512-KcCS0X6IevRt7mlLWveHZjae7QGsa1Zp2UWYpJKEc4l/zpeP5zlOF78YJ05ERXP8v+FCuQ62OpmIh+1Kcd9O3g==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-    "@syncfusion/ej2-data" "~19.2.60"
-    "@syncfusion/ej2-inputs" "~19.2.60"
-    "@syncfusion/ej2-lists" "~19.2.60"
-    "@syncfusion/ej2-popups" "~19.2.62"
-
-"@syncfusion/ej2-popups@~19.2.60", "@syncfusion/ej2-popups@~19.2.62":
-  version "19.2.62"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-popups/-/ej2-popups-19.2.62.tgz#5533a6b8fc986126594323d9497a6e97b6d30368"
-  integrity sha512-QyyoidZ6fNt5duPPHZzyrJyG8IA/7siIK3+23AMd1j6I+9dHZpoxL+83pjYJjCaluPgskGC5CRYeFKBBri+f+Q==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-
-"@syncfusion/ej2-react-base@~19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-base/-/ej2-react-base-19.2.60.tgz#07f0ae40318e75c5202eae7351e2b8a86f3d9832"
-  integrity sha512-J9BqTSP1G+qNJN3C/RaRYta7+gc8NcV2vJs3/Czhf2A4iedU7P4naIuFlsKYWEzbiI3boWdawoqMsHbBHSGUXQ==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-
-"@syncfusion/ej2-react-schedule@^19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-react-schedule/-/ej2-react-schedule-19.2.60.tgz#6c7bd64b9a2405af4bb3e6a4a402d30b0202d9fd"
-  integrity sha512-sSuO2fe27dBqNTs2PZVA1CSDOVMhsAIzM8lGVYfb4V7EHTEha8XYbG4kv1cBV5CSjH1eBuPxjsVHsrg6pjN09A==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-react-base" "~19.2.60"
-    "@syncfusion/ej2-schedule" "19.2.60"
-
-"@syncfusion/ej2-schedule@19.2.60":
-  version "19.2.60"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-schedule/-/ej2-schedule-19.2.60.tgz#e4c4faad5fb98ba5d8d30ba546b6f1f19fbb60e2"
-  integrity sha512-CR0isjSW+Ac+8RB9Hhs5U5i1Ek7bWAdM0N+VH4mSsYN+9b3Kq6Rveun8PUqelUneEnQrsSRqmrgglyqgXQwBQQ==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-buttons" "~19.2.60"
-    "@syncfusion/ej2-calendars" "~19.2.60"
-    "@syncfusion/ej2-data" "~19.2.60"
-    "@syncfusion/ej2-dropdowns" "~19.2.60"
-    "@syncfusion/ej2-excel-export" "~19.2.60"
-    "@syncfusion/ej2-inputs" "~19.2.60"
-    "@syncfusion/ej2-lists" "~19.2.60"
-    "@syncfusion/ej2-navigations" "~19.2.60"
-    "@syncfusion/ej2-popups" "~19.2.60"
-
-"@syncfusion/ej2-splitbuttons@~19.2.60":
-  version "19.2.62"
-  resolved "https://registry.yarnpkg.com/@syncfusion/ej2-splitbuttons/-/ej2-splitbuttons-19.2.62.tgz#780298e6d2bc208860a30f6b799675f841ff48d2"
-  integrity sha512-USWVQnaFZe5x6XcWNc+QZlg2SDsYVTcR++uJIQ/doFpxxrluARmhQFajotIizPgW+uogSGJFTLDZtoh+6e/buA==
-  dependencies:
-    "@syncfusion/ej2-base" "~19.2.60"
-    "@syncfusion/ej2-popups" "~19.2.62"
-
 "@testing-library/dom@*":
   version "8.5.0"
   resolved "https://registry.npmjs.org/@testing-library/dom/-/dom-8.5.0.tgz"
@@ -4216,6 +4068,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.4, create-hmac@^1.1.7:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+create-react-class@^15.5.2:
+  version "15.7.0"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
+  integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
+  dependencies:
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2:
   version "7.0.3"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
@@ -4845,6 +4705,10 @@ dotenv@8.2.0:
   version "8.2.0"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.2.0.tgz"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
+"drag-drop-touch-polyfill@https://github.com/Revln9/drag-drop-touch-polyfill-ES5-compiled.git":
+  version "1.0.0"
+  resolved "https://github.com/Revln9/drag-drop-touch-polyfill-ES5-compiled.git#9149472c1256683d86b388043fe8fd44a834d825"
 
 duplexer@^0.1.1:
   version "0.1.2"
@@ -8125,7 +7989,7 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-moment@^2.24.0, moment@^2.25.3:
+moment@^2.24.0, moment@^2.25.3, moment@^2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
@@ -8392,6 +8256,11 @@ oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://registry.npmjs.org/oauth-sign/-/oauth-sign-0.9.0.tgz"
   integrity sha512-fexhUFFPTGV8ybAtSIGbV6gOkSv8UtRbDBnAyLQw4QPKkgNlsH2ByPGtMUqdWkos6YCRmAqViwgZrJc/mRDzZQ==
+
+object-assign@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-3.0.0.tgz#9bedd5ca0897949bca47e7ff408062d549f587f2"
+  integrity sha1-m+3VygiXlJvKR+f/QIBi1Un1h/I=
 
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
@@ -9704,7 +9573,7 @@ prompts@2.4.0, prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.7, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10217,6 +10086,16 @@ rc-virtual-list@^3.0.1, rc-virtual-list@^3.2.0:
     rc-resize-observer "^1.0.0"
     rc-util "^5.0.7"
 
+react-agenda@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/react-agenda/-/react-agenda-0.0.8.tgz#1af24aa3a8ebdddc0017b6a97b219d0fc64a60a7"
+  integrity sha512-04QjUUh2XOzroQU/RN4rUlXZLmJa14L6JBrcdOcYGMqQUZKytbe2JwZONQjx31IkmZt4aQHgc9KgqbSm8Kq37A==
+  dependencies:
+    classnames "^2.2.6"
+    drag-drop-touch-polyfill "https://github.com/Revln9/drag-drop-touch-polyfill-ES5-compiled.git"
+    prop-types "^15.6.2"
+    react-datetime "^2.16.3"
+
 react-app-polyfill@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/react-app-polyfill/-/react-app-polyfill-2.0.0.tgz"
@@ -10228,6 +10107,16 @@ react-app-polyfill@^2.0.0:
     raf "^3.4.1"
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
+
+react-datetime@^2.16.3:
+  version "2.16.3"
+  resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-2.16.3.tgz#7f9ac7d4014a939c11c761d0c22d1fb506cb505e"
+  integrity sha512-amWfb5iGEiyqjLmqCLlPpu2oN415jK8wX1qoTq7qn6EYiU7qQgbNHglww014PT4O/3G5eo/3kbJu/M/IxxTyGw==
+  dependencies:
+    create-react-class "^15.5.2"
+    object-assign "^3.0.0"
+    prop-types "^15.5.7"
+    react-onclickoutside "^6.5.0"
 
 react-dev-utils@^11.0.3:
   version "11.0.4"
@@ -10287,6 +10176,11 @@ react-is@^17.0.1:
   version "17.0.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-17.0.1.tgz"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
+
+react-onclickoutside@^6.5.0:
+  version "6.12.0"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.12.0.tgz#c63db2e3c2c852b288160cdb6cff443604e28db4"
+  integrity sha512-oPlOTYcISLHfpMog2lUZMFSbqOs4LFcA4+vo7fpfevB5v9Z0D5VBDBkfeO5lv+hpEcGoaGk67braLT+QT+eICA==
 
 react-redux@^7.2.0:
   version "7.2.5"
