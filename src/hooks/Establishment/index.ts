@@ -18,7 +18,7 @@ const initialState: EstablishmentState = {
     },
     filtered: {
       state: 'pending',
-      data: []
+      data: undefined
     }
   }
 }
