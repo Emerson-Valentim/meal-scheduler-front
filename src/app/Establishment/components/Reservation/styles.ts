@@ -3,8 +3,9 @@ import styled from 'styled-components'
 
 export const MainWrapper = styled.div`
   overflow-y: auto;
+  overflow-x: auto;
   background-color: white;
-  padding: 1vw;
+  padding: 2vw;
 `
 
 export const CustomScheduleComponent = styled(ScheduleComponent)`

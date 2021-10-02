@@ -132,7 +132,7 @@ export const ModalWrapper = styled(Modal)`
 `
 
 export const CustomViewBody = styled.div`
-  padding: 1vh 0 1vh 0;
+  padding: 3vh 0 1vh 0;
   background-color: white;
   
   display: flex;
@@ -151,6 +151,8 @@ export const CustomMenu = styled(Menu)`
   flex-direction: row;
 
   justify-content: space-evenly;
+  
+  border-bottom: 1px solid black;
 `
 
 export const CustomMenuItem = styled(Menu.Item)`
