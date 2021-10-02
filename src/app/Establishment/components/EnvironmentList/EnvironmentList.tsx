@@ -5,6 +5,8 @@ import { EnvironmentCard, EnvironmentCardBody, EnvironmentCardRules } from './st
 import Meta from 'antd/lib/card/Meta';
 
 import { RiForbid2Fill, RiCheckboxCircleFill } from "react-icons/ri";
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { filterEnvironment } from '../../../../hooks/Reservation'
 
 type EnvironmentListDefinition = {
   environments: any[]
@@ -17,15 +19,23 @@ enum LocationLabel {
 
 export function EnvironmentList({ environments }: EnvironmentListDefinition) {
 
+  const dispatch = useAppDispatch()
+
+  const { environments: stateEnvironments } = useAppSelector( state => state.reservation.create.params )
+
   const getAllowedBox = (allow, text) => (
     <EnvironmentCardRules>{
       allow
-        ? <RiCheckboxCircleFill color='green'/>
-        : <RiForbid2Fill color='red'/>
+        ? <RiCheckboxCircleFill color='green' />
+        : <RiForbid2Fill color='red' />
     }
       {text}
     </EnvironmentCardRules>
   )
+
+  const selectEnvironment = (id) => {
+    dispatch(filterEnvironment(id))
+  }
 
   return (
     <CustomViewBody>
@@ -34,9 +44,11 @@ export function EnvironmentList({ environments }: EnvironmentListDefinition) {
           key={`${environment.id}-Table`}
           style={{ width: '44%' }}
           cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+          selected={stateEnvironments.includes(environment.id)}
+          onClick={() => selectEnvironment(environment.id)}
         >
           <EnvironmentCardBody>
-            <h4 style={{ fontWeight: 'lighter'}}>
+            <h4 style={{ fontWeight: 'lighter' }}>
               {`Ambiente ${LocationLabel[environment.location]}`}
             </h4>
             <p>
