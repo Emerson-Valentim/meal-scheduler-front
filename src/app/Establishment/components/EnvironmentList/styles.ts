@@ -16,6 +16,7 @@ export const EnvironmentCardBody = styled.div`
   min-height: 40%;
 
   p {
+    text-align: left;
     margin-bottom: 1px;
 
     :last-child {

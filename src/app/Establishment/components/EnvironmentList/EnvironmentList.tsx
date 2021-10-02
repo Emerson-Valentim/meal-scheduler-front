@@ -36,9 +36,9 @@ export function EnvironmentList({ environments }: EnvironmentListDefinition) {
           cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
         >
           <EnvironmentCardBody>
-            <p>
+            <h4 style={{ fontWeight: 'lighter'}}>
               {`Ambiente ${LocationLabel[environment.location]}`}
-            </p>
+            </h4>
             <p>
               {getAllowedBox(environment.smoking_allowed, 'Permitido fumar')}
             </p>
