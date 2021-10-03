@@ -85,7 +85,6 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         setEndTime(moment(formatDate(value).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
         break
       case 'range':
-        console.log(value)
         setReservationDate(formatDate(value[0]))
         setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
         setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
