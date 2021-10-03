@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { ReactAgenda } from 'react-agenda';
-import { Modal } from 'antd';
 
 export const MainWrapper = styled.div`
   width: 100%;
@@ -13,6 +12,10 @@ export const MainWrapper = styled.div`
   .agenda__table {
     overflow-y: hidden !important;
     height: 100%;
+
+    .dragDiv {
+      width: 100%;
+    }
   }
 `
 
@@ -39,11 +42,19 @@ export const WorkingDayDescription = styled.div`
 
 `
 
+const buildEffect = (visibility, opacity) => ({
+  visibility,
+  opacity
+})
+
 export const DateTimePicker = styled.div`
   width: 100%;
+
+  ${props => props.visible
+    ? buildEffect('visible', '100')
+    : buildEffect('hidden', '0')
+  }
   
-  visibility: ${props => props.visible ? () => 'visible' : 'hidden'};
-  opacity: ${props => props.visible ? () => '100' : '0'};
   transition: visibility 1s, opacity 0.5s linear;
   
   display: flex;

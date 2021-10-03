@@ -11,6 +11,7 @@ import { loadReservations, setReservationInterval } from '../../../../hooks/Rese
 import { updateLoading } from '../../../../hooks/Common';
 
 import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
+import { ReservationForm } from './components/ReservationForm/ReservationForm';
 
 require('moment/locale/pt.js');
 
@@ -71,7 +72,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
       name: `Reserva ${id}`,
       startDateTime: DateTime.fromISO(start).toJSDate(),
       endDateTime: DateTime.fromISO(end).toJSDate(),
-      classes: 'currentUser'
+      classes: id <= 19 ? 'currentUser' : 'otherUser'
     }))
   }, [reservations])
 
@@ -144,6 +145,8 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         numberOfDays={getWorkingDays().length}
         rowsPerHour={1}
         locale='pt'
+        fixedHeader={true}
+        itemComponent={ReservationForm}
       />
     </MainWrapper>
   )
