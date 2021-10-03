@@ -42,8 +42,9 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
   const [stateStartTime, setStartTime] = useState(moment())
   const [stateEndTime, setEndTime] = useState(moment())
-  const [stateMinDate, setMinDate] = useState(DateTime.now().toJSDate())
-  const [stateMaxDate, setMaxDate] = useState(DateTime.now().plus({ months: 1 }).toJSDate())
+
+  const [stateMinDate] = useState(DateTime.now().toJSDate())
+  const [stateMaxDate] = useState(DateTime.now().plus({ months: 1 }).toJSDate())
 
   const colors = {
     'currentUser': "rgba(102, 195, 131, 1)",
@@ -110,7 +111,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
       await dispatch(loadSchedule(scheduleId))
       await dispatch(loadReservations({ establishment_id: establishment, table_id: table }))
     })()
-  }, [scheduleId])
+  }, [scheduleId, table, establishment])
 
   return (
     <MainWrapper>
