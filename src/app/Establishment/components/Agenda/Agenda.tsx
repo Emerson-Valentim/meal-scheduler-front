@@ -76,7 +76,8 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     }))
   }, [reservations])
 
-  const updateReservationState = (value, action) => {
+  const updateIntervalInfo = (value, action) => {
+    setVisible(true)
     switch (action) {
       case 'cell':
         setReservationDate(formatDate(value))
@@ -84,18 +85,21 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         setEndTime(moment(formatDate(value).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
         break
       case 'range':
-        if(value[1] === value[0]) {
-          setReservationDate(formatDate(value[1]))
-          setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
-          setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
-        }
+        console.log(value)
+        setReservationDate(formatDate(value[0]))
+        setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
+        setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
     }
   }
 
-  const createReservation = useCallback(async (value, action) => {
-    setVisible(true)
-    updateReservationState(value, action)
+  useEffect(() => {
+    (async () => {
+      await dispatch(loadSchedule(scheduleId))
+      await dispatch(loadReservations({ establishment_id: establishment, table_id: table }))
+    })()
+  }, [scheduleId, table, establishment])
 
+  useEffect(() => {
     const formattedDate = reservationDate.toFormat('yyyy-LL-dd')
 
     const interval = {
@@ -105,13 +109,6 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
     dispatch(setReservationInterval(interval))
   }, [reservationDate, stateStartTime, stateEndTime])
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(loadSchedule(scheduleId))
-      await dispatch(loadReservations({ establishment_id: establishment, table_id: table }))
-    })()
-  }, [scheduleId, table, establishment])
 
   return (
     <MainWrapper>
@@ -125,22 +122,24 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
           allowClear
           size="large"
           value={stateStartTime}
+          onChange={(value) => setStartTime(value!)}
           placeholder="Entrada"
         />
         <TimePicker
           allowClear
           size="large"
           value={stateEndTime}
+          onChange={(value) => setEndTime(value!)}
           placeholder="Saída"
         />
       </DateTimePicker>
       <CustomAgenda
         startDate={stateStartDate}
-        minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0}).toJSDate()}
+        minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0 }).toJSDate()}
         items={getCurrentReservations()}
         itemColos={colors}
-        onCellSelect={(value) => createReservation(value, 'cell')}
-        onRangeSelection={(value) => createReservation(value, 'action')}
+        onCellSelect={(value) => updateIntervalInfo(value, 'cell')}
+        onRangeSelection={(value) => updateIntervalInfo(value, 'range')}
         onDateRangeChange={(startDate) => setStartDate(startDate)}
         numberOfDays={getWorkingDays().length}
         rowsPerHour={1}
