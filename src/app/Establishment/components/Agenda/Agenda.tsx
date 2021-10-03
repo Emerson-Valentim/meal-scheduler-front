@@ -43,8 +43,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   const [stateStartTime, setStartTime] = useState(moment())
   const [stateEndTime, setEndTime] = useState(moment())
 
-  const [stateMinDate] = useState(DateTime.now().toJSDate())
-  const [stateMaxDate] = useState(DateTime.now().plus({ months: 1 }).toJSDate())
+  const [stateStartDate, setStartDate] = useState(DateTime.now().toJSDate())
 
   const colors = {
     'currentUser': "rgba(102, 195, 131, 1)",
@@ -135,12 +134,13 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         />
       </DateTimePicker>
       <CustomAgenda
-        minDate={stateMinDate}
-        maxDate={stateMaxDate}
+        startDate={stateStartDate}
+        minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0}).toJSDate()}
         items={getCurrentReservations()}
         itemColos={colors}
         onCellSelect={(value) => createReservation(value, 'cell')}
         onRangeSelection={(value) => createReservation(value, 'action')}
+        onDateRangeChange={(startDate) => setStartDate(startDate)}
         numberOfDays={getWorkingDays().length}
         rowsPerHour={1}
         locale='pt'
