@@ -47,8 +47,9 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   const [stateStartDate, setStartDate] = useState(DateTime.now().toJSDate())
 
   const colors = {
-    'currentUser': "rgba(102, 195, 131, 1)",
-    "otherUser": "rgba(242, 177, 52, 1)",
+    'canceled': '#d32433',
+    'currentUser': '#50c775',
+    'otherUser': '#747371',
   }
 
   const getWorkingDays = useCallback((): JSX.Element[] => {
@@ -67,12 +68,14 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   }, [schedule]);
 
   const getCurrentReservations = useCallback(() => {
-    return reservations.data.map(({ id, interval: { end, start } }) => ({
+    return reservations.data.map(({ id, interval: { end, start }, status }) => ({
       _id: `reservation-${id}`,
       name: `Reserva ${id}`,
       startDateTime: DateTime.fromISO(start).toJSDate(),
       endDateTime: DateTime.fromISO(end).toJSDate(),
-      classes: id <= 19 ? 'currentUser' : 'otherUser'
+      classes: status === 'canceled' 
+        ? status
+        : (id > 19 ? 'currentUser' : 'otherUser')
     }))
   }, [reservations])
 
@@ -119,24 +122,24 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         <h4>Data de agendamento: {reservationDate.toFormat(dayFormat)}</h4>
         <TimePicker
           allowClear
-          size="large"
+          size='large'
           value={stateStartTime}
           onChange={(value) => setStartTime(value!)}
-          placeholder="Entrada"
+          placeholder='Entrada'
         />
         <TimePicker
           allowClear
-          size="large"
+          size='large'
           value={stateEndTime}
           onChange={(value) => setEndTime(value!)}
-          placeholder="Saída"
+          placeholder='Saída'
         />
       </DateTimePicker>
       <CustomAgenda
         startDate={stateStartDate}
         minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0 }).toJSDate()}
         items={getCurrentReservations()}
-        itemColos={colors}
+        itemColors={colors}
         onCellSelect={(value) => updateIntervalInfo(value, 'cell')}
         onRangeSelection={(value) => updateIntervalInfo(value, 'range')}
         onDateRangeChange={(startDate) => setStartDate(startDate)}

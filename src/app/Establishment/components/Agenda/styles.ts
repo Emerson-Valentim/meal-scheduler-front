@@ -15,6 +15,11 @@ export const MainWrapper = styled.div`
 
     .dragDiv {
       width: 100%;
+      cursor: default;
+    }
+
+    .currentUser, .otherUser, .canceled {
+      border: none
     }
   }
 `

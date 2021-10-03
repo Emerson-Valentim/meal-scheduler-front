@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 
-const buildStyle = (color, cursor) => ({
-  'background-color': color,
-  'cursor': cursor
-})
-
 export const AgendaCard = styled.div`
   min-height: 3vh;
 
-  ${props => props.permission
-    ? buildStyle('green', 'pointer')
-    : buildStyle('gray', 'default')
-  };
+  text-align: center;
+
+  p, h4 {
+    font-size: 1.1vh;
+    margin: 0;
+  }
+
+  cursor: ${props => props.permission ? 'pointer' : 'default'}
+
 `
