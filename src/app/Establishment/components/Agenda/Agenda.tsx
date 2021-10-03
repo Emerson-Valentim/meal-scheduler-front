@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState } from 'react'
 
-import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
+import { DateTime } from 'luxon';
+import { TimePicker } from 'antd';
+import moment from 'moment';
+
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
 import { loadSchedule } from '../../../../hooks/Schedule';
-
-import { DateTime } from 'luxon';
 import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation';
 import { updateLoading } from '../../../../hooks/Common';
-import { TimePicker } from 'antd';
+
+import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
 
 require('moment/locale/pt.js');
 
@@ -19,13 +21,13 @@ export type ReservationDefinition = {
   schedule: any
 }
 
-const formatDate = (date: Date): DateTime => DateTime.fromJSDate(new Date(date)).toUTC()
+const formatDate = (date: string): DateTime => DateTime.fromISO(date)
+const dayFormat = 'dd/LL/yyyy'
+const hourFormat = 'HH:mm:ss'
 
 export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
-  function capitalize(str) {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
   const dispatch = useAppDispatch();
 
@@ -35,13 +37,13 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   const { establishment, table } = useAppSelector(state => state.reservation.create.params)
 
   const [visible, setVisible] = useState(false)
-  const [dateTimeConfig, setDateTimeConfig] = useState({ 
-    date: DateTime.now(), 
-    interval: { 
-      start: DateTime.now(),
-      end: DateTime.now().plus({ hours: 1})
-    }
-  })
+
+  const [reservationDate, setReservationDate] = useState(DateTime.now())
+
+  const [stateStartTime, setStartTime] = useState(moment())
+  const [stateEndTime, setEndTime] = useState(moment())
+  const [stateMinDate, setMinDate] = useState(DateTime.now().toJSDate())
+  const [stateMaxDate, setMaxDate] = useState(DateTime.now().plus({ months: 1 }).toJSDate())
 
   const colors = {
     'currentUser': "rgba(102, 195, 131, 1)",
@@ -52,11 +54,13 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     dispatch(updateLoading(true))
     if (schedule?.state === 'ok' && schedule?.data?.definition) {
       dispatch(updateLoading(false))
-      return Object.entries(schedule?.data.definition).map(([day, interval]) => (
-        <WorkingDayDescription key={`schedule-${day}`}>
-          <p>{capitalize(DateTime.local().set({ weekday: +day }).weekdayLong)}: {interval.start} - {interval.end}</p>
-        </WorkingDayDescription>
-      ))
+      return Object.entries(schedule?.data.definition).map(([day, interval]) => {
+        return (
+          <WorkingDayDescription key={`schedule-${day}`}>
+            <p>{capitalize(DateTime.local().set({ weekday: +day }).weekdayLong)}: {interval.start} - {interval.end}</p>
+          </WorkingDayDescription>
+        )
+      })
     }
     return []
   }, [schedule]);
@@ -71,18 +75,35 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     }))
   }, [reservations])
 
-  const createReservation = useCallback((startDate) => {
+  const updateReservationState = (value, action) => {
+    switch (action) {
+      case 'cell':
+        setReservationDate(formatDate(value))
+        setStartTime(moment(formatDate(value).toFormat(hourFormat), hourFormat))
+        setEndTime(moment(formatDate(value).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
+        break
+      case 'range':
+        if(value[1] === value[0]) {
+          setReservationDate(formatDate(value[1]))
+          setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
+          setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
+        }
+    }
+  }
+
+  const createReservation = useCallback(async (value, action) => {
     setVisible(true)
-    console.log(startDate)
-    //const { StartTime, EndTime } = event.data;
+    updateReservationState(value, action)
 
-    // const interval = {
-    //   start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
-    //   end: formatDate(EndTime).minus({ milliseconds: 1 }).toString()
-    // }
+    const formattedDate = reservationDate.toFormat('yyyy-LL-dd')
 
-    // dispatch(setReservationInterval(interval))
-  }, [reservations])
+    const interval = {
+      start: formatDate(`${DateTime.fromISO(`${formattedDate}T${stateStartTime.format(hourFormat)}`)}`).plus({ milliseconds: 1 }).toString(),
+      end: formatDate(`${DateTime.fromISO(`${formattedDate}T${stateEndTime.format(hourFormat)}`)}`).minus({ milliseconds: 1 }).toString(),
+    }
+
+    dispatch(setReservationInterval(interval))
+  }, [reservationDate, stateStartTime, stateEndTime])
 
   useEffect(() => {
     (async () => {
@@ -98,17 +119,28 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
         {getWorkingDays()}
       </AgendaDescription>
       <DateTimePicker visible={visible}>
-        <h4>Agendar para</h4>
-        <TimePicker allowClear size="large" onChange={ (value) => console.log(value)} placeholder="Entrada"/>
-        <TimePicker allowClear size="large" onChange={ (value) => console.log(value)} placeholder="Saída"/>
+        <h4>Data de agendamento: {reservationDate.toFormat(dayFormat)}</h4>
+        <TimePicker
+          allowClear
+          size="large"
+          value={stateStartTime}
+          placeholder="Entrada"
+        />
+        <TimePicker
+          allowClear
+          size="large"
+          value={stateEndTime}
+          placeholder="Saída"
+        />
       </DateTimePicker>
       <CustomAgenda
-        minDate={DateTime.now().toJSDate()}
-        maxDate={DateTime.now().plus({ months: 2 }).toJSDate()}
+        minDate={stateMinDate}
+        maxDate={stateMaxDate}
         items={getCurrentReservations()}
         itemColos={colors}
-        onCellSelect={createReservation}
-        onRangeSelection={createReservation}
+        onCellSelect={(value) => createReservation(value, 'cell')}
+        onRangeSelection={(value) => createReservation(value, 'action')}
+        numberOfDays={getWorkingDays().length}
         rowsPerHour={1}
         locale='pt'
       />
