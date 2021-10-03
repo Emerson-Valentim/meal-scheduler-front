@@ -23,8 +23,9 @@ export function ReservationForm({ item }) {
     }
   }
 
-  const deleteReservation = useCallback(async () => {
+  const cancelReservation = useCallback(async () => {
     dispatch(updateLoading(true))
+    
     await dispatch(safeUpdateReservation({
       id: reservationId,
       status: 'canceled',
@@ -46,7 +47,7 @@ export function ReservationForm({ item }) {
     <Popconfirm
       placement="topLeft"
       title='Deseja cancelar essa reserva?'
-      onConfirm={deleteReservation}
+      onConfirm={cancelReservation}
       onCancel={() => {
         dispatch(setReservationDelete(''))
       }}
