@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState } from 'react'
 
-import { AgendaDescription, CreateEventModal, CustomAgenda, MainWrapper, WorkingDayDescription } from './styles'
+import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
 import { loadSchedule } from '../../../../hooks/Schedule';
 
 import { DateTime } from 'luxon';
 import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation';
 import { updateLoading } from '../../../../hooks/Common';
+import { TimePicker } from 'antd';
 
 require('moment/locale/pt.js');
 
@@ -34,13 +35,20 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   const { establishment, table } = useAppSelector(state => state.reservation.create.params)
 
   const [visible, setVisible] = useState(false)
+  const [dateTimeConfig, setDateTimeConfig] = useState({ 
+    date: DateTime.now(), 
+    interval: { 
+      start: DateTime.now(),
+      end: DateTime.now().plus({ hours: 1})
+    }
+  })
 
   const colors = {
     'currentUser': "rgba(102, 195, 131, 1)",
     "otherUser": "rgba(242, 177, 52, 1)",
   }
 
-  const workingDays = useCallback((): JSX.Element[] => {
+  const getWorkingDays = useCallback((): JSX.Element[] => {
     dispatch(updateLoading(true))
     if (schedule?.state === 'ok' && schedule?.data?.definition) {
       dispatch(updateLoading(false))
@@ -63,9 +71,10 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     }))
   }, [reservations])
 
-  const createReservation = useCallback((event) => {
+  const createReservation = useCallback((startDate) => {
     setVisible(true)
-    // const { StartTime, EndTime } = event.data;
+    console.log(startDate)
+    //const { StartTime, EndTime } = event.data;
 
     // const interval = {
     //   start: formatDate(StartTime).plus({ milliseconds: 1 }).toString(),
@@ -86,20 +95,20 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     <MainWrapper>
       <AgendaDescription>
         <h4>Horários de funcionamento</h4>
-        {workingDays()}
+        {getWorkingDays()}
       </AgendaDescription>
-      <CreateEventModal
-        visible={visible}
-        onCancel={() => setVisible(false)}
-      >
-        Olá
-      </CreateEventModal>
+      <DateTimePicker visible={visible}>
+        <h4>Agendar para</h4>
+        <TimePicker allowClear size="large" onChange={ (value) => console.log(value)} placeholder="Entrada"/>
+        <TimePicker allowClear size="large" onChange={ (value) => console.log(value)} placeholder="Saída"/>
+      </DateTimePicker>
       <CustomAgenda
         minDate={DateTime.now().toJSDate()}
         maxDate={DateTime.now().plus({ months: 2 }).toJSDate()}
         items={getCurrentReservations()}
         itemColos={colors}
         onCellSelect={createReservation}
+        onRangeSelection={createReservation}
         rowsPerHour={1}
         locale='pt'
       />
