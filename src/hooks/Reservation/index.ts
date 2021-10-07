@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { authRequest, request, HttpData } from '../../api'
 import { ReservationDefinition } from '../../app/Establishment/components/Agenda/Agenda'
+import { RootState } from '../store'
 
 type ReservationParams = {
   establishment?: number
@@ -17,9 +18,13 @@ type ReservationCreation = {
   params: ReservationParams
 }
 
+type ReservationDelete = {
+  id: number | undefined
+}
 export interface ReservationState {
   load: ReservationFilter
   create: ReservationCreation
+  delete: ReservationDelete
 }
 
 const initialState: ReservationState = {
@@ -39,17 +44,30 @@ const initialState: ReservationState = {
         end: ''
       }
     }
+  },
+  delete: {
+    id: undefined
   }
 }
 
-export const loadReservations = createAsyncThunk('reservation/safeLoad', async (params: Omit<ReservationDefinition, 'schedule'>): Promise<any[]> => {
-  const { data: reservationList } = await request<any[]>('GET', 'reservation/safeLoad', { params })
+export const loadReservations = createAsyncThunk('reservation/safeLoad', async (params: Omit<ReservationDefinition, 'schedule'> | undefined, { getState }): Promise<any[]> => {
+  const { reservation } = getState() as RootState
+  const payload = {
+    table_id: reservation.create.params.table,
+    establishment_id: reservation.create.params.establishment,
+  }
+  const { data: reservationList } = await request<any[]>('GET', 'reservation/safeLoad', { params: params || payload })
   return reservationList.length ? reservationList : []
 })
 
 export const createReservation = createAsyncThunk('reservation/create', async (data: any): Promise<any> => {
   const { data: newReservation } = await request<any>('POST', 'reservation/create', { data })
   return newReservation
+})
+
+export const safeUpdateReservation = createAsyncThunk('reservation/safeUpdate', async ({ id, ...data }: any): Promise<any> => {
+  const { data: updatedReservation } = await request<any>('PUT', `reservation/safeUpdate/${id}`, { data })
+  return updatedReservation
 })
 
 export const reservation = createSlice({
@@ -81,6 +99,9 @@ export const reservation = createSlice({
     },
     setReservationInterval: (state, { payload }: PayloadAction<any>) => {
       state.create.params.interval = payload
+    },
+    setReservationDelete: (state, { payload }: PayloadAction<any>) => {
+      state.delete.id = payload
     }
   },
   extraReducers: (builder) =>
@@ -123,11 +144,12 @@ export const reservation = createSlice({
       }),
 })
 
-export const { 
-  filterEnvironment, 
-  filterTable, 
+export const {
+  filterEnvironment,
+  filterTable,
   resetNewReservation,
-  setReservationInterval
+  setReservationInterval,
+  setReservationDelete
 } = reservation.actions
 
 export default reservation.reducer

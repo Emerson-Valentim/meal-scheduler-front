@@ -5,8 +5,17 @@ export interface ScheduleState {
   load: ScheduleFilter
 }
 
+type ScheduleDefinition = {
+  definition: {
+    [key: number]: {
+      start: string
+      end: string
+    }
+  }
+}
+
 type ScheduleFilter = {
-  filtered: HttpData<any>,
+  filtered: HttpData<ScheduleDefinition | undefined>,
 }
 
 const initialState: ScheduleState = {
@@ -19,7 +28,7 @@ const initialState: ScheduleState = {
 }
 
 export const loadSchedule = createAsyncThunk('schedule/load', async (scheduleId?: number): Promise<any> => {
-  if(scheduleId) {
+  if (scheduleId) {
     const { data: schedule } = await request<any[]>('GET', `schedule/load/${scheduleId}`)
     return schedule
   }

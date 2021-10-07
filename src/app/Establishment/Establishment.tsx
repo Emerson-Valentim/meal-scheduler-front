@@ -19,7 +19,7 @@ import { FaChair } from 'react-icons/fa';
 import { IoFastFoodOutline } from 'react-icons/io5';
 import { updateLoading } from '../../hooks/Common';
 import { TableList } from './components/TableList/TableList';
-import { createReservation, resetNewReservation } from '../../hooks/Reservation';
+import { createReservation, loadReservations, resetNewReservation } from '../../hooks/Reservation';
 
 const { Meta } = Card
 
@@ -91,6 +91,7 @@ export function Establishment(): JSX.Element {
     }))
     
     setConfirmLoading(false);
+    await dispatch(loadReservations())
   }, [params])
 
   return (
