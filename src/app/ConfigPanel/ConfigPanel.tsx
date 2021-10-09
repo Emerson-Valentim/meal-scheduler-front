@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { useAppSelector } from '../../hooks/hooks'
 import { ConfigMode } from '../../hooks/User'
 import { Configure } from './components/Configure/Configure'
+import { Info } from './components/Info/Info'
 
 import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
@@ -21,7 +22,7 @@ export function ConfigPanel() {
     {
       [ConfigMode.LOGIN]: <Login />,
       [ConfigMode.REGISTER]: <Register />,
-      [ConfigMode.INFO]: <div>Oi</div>
+      [ConfigMode.INFO]: <Info/>
     }
   ), [])
 
