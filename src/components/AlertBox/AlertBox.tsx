@@ -21,7 +21,7 @@ export function AlertBox(): JSX.Element {
         type={type}
         closable
         showIcon
-        style={ { zIndex: 3000, width: '100vw' }}
+        style={ { zIndex: 3000, width: '100vw', position: 'absolute' }}
         onClose={closeAlert} />) : null}
     </div>)
 }
