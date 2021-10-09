@@ -17,6 +17,7 @@ export const Card = styled.div`
   flex-direction: column;
 
   align-items: center;
+  align-self: center;
 
   width: 80%;
 
