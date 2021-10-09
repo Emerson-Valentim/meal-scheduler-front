@@ -1,9 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { authRequest } from '../../api'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { request, authRequest, HttpData } from '../../api'
 
 export type Credentials = {
   cnpj: string
   password: string
+}
+
+export type CreateUser = {
+  phone: string
 }
 
 export enum LoginState {
@@ -12,11 +16,34 @@ export enum LoginState {
   DEFAULT = 'default'
 }
 
+
+export enum RegisterState {
+  ERROR = 'error',
+  SUCCESS = 'success',
+  DEFAULT = 'default'
+}
+
+export enum ConfigMode {
+  LOGIN = 'login',
+  REGISTER = 'register',
+  INFO = 'info'
+}
+
 export interface UserState {
   credentials: Credentials
   logged: {
     value: boolean
     state: LoginState
+  }
+  config: {
+    mode: ConfigMode
+  }
+  create: {
+    params: Credentials & CreateUser
+    result?: {
+      data: any
+      state: RegisterState
+    }
   }
 }
 
@@ -29,6 +56,20 @@ const initialState: UserState = {
     value: false,
     state: LoginState.DEFAULT
   },
+  config: {
+    mode: ConfigMode.LOGIN
+  },
+  create: {
+    params: {
+      cnpj: '',
+      password: '',
+      phone: ''
+    },
+    result: {
+      data: undefined,
+      state: RegisterState.DEFAULT
+    }
+  }
 }
 
 const saveCredentials = (credentials?: Credentials) => window.localStorage.setItem('credentials', credentials ? JSON.stringify(credentials) : '')
@@ -39,10 +80,18 @@ export const authenticate = createAsyncThunk('user/load', async (credentials: Cr
   return userInfo
 })
 
+export const createUser = createAsyncThunk('user/create', async (info: Credentials & CreateUser) => {
+  const { data: userInfo } = await request('POST', 'user/create', { data: info })
+  return userInfo
+})
+
 export const user = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    updateConfigMode: (state, action: PayloadAction<ConfigMode>) => {
+      state.config.mode = action.payload
+    }
   },
   extraReducers: (builder) =>
     builder
@@ -63,7 +112,27 @@ export const user = createSlice({
           value: true,
           state: LoginState.LOGGED
         }
+      })
+      .addCase(createUser.pending, (state) => {
+        state.create.result = {
+          data: undefined,
+          state: RegisterState.DEFAULT
+        }
+      })
+      .addCase(createUser.rejected, (state) => {
+        state.create.result = {
+          data: undefined,
+          state: RegisterState.ERROR
+        }
+      })
+      .addCase(createUser.fulfilled, (state, { payload }) => {
+        state.create.result = {
+          data: payload,
+          state: RegisterState.SUCCESS
+        }
       }),
 })
+
+export const { updateConfigMode } = user.actions
 
 export default user.reducer
