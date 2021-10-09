@@ -25,7 +25,7 @@ export function ConfigPanel() {
     }
   ), [])
 
-  const [ currentComponent, setCurrentComponent ] = useState(panelComponents[ConfigMode.LOGIN])
+  const [ currentComponent, setCurrentComponent ] = useState(panelComponents[logged ? ConfigMode.INFO : ConfigMode.LOGIN])
 
 
   useEffect(() => {
