@@ -4,8 +4,8 @@ import { Button } from 'antd';
 import { useHistory } from 'react-router-dom'
 
 import { MainWrapper } from './styles';
-import { WestPlazaCard } from '../../../../components/ShoppingHolder/ShoppingHolder';
-import { Card } from '../../../../components/ShoppingHolder/styles';
+import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard';
+import { Card } from '../../../../components/WestPlazaCard/styles';
 import { CustomCarousel } from '../../../../components/CustomCarousel/CustomCarousel';
 import { CarouselStyle } from '../../../../components/CustomCarousel/styles';
 

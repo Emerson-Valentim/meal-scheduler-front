@@ -3,7 +3,7 @@ import React, { useCallback, useState, useEffect } from 'react'
 
 import { Card } from 'antd';
 
-import { WestPlazaCard } from '../../components/ShoppingHolder/ShoppingHolder'
+import { WestPlazaCard } from '../../components/WestPlazaCard/WestPlazaCard'
 import { CustomMenu, CustomMenuItem, EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
