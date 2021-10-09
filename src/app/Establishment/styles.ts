@@ -1,5 +1,6 @@
-import { Card, Modal, Menu } from "antd"
 import styled from "styled-components"
+import { Card, Modal, Menu } from "antd"
+import { colors } from '../../styles/colors'
 
 export const MainWrapper = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const MainWrapper = styled.div`
   
   align-items: center;
   
-  background-color: #C8D4A1;
+  background-color: ${colors.primary};
   
   height: 100vh;
   
@@ -86,7 +87,7 @@ export const ModalWrapper = styled(Modal)`
   .ant-modal-content {
     width: 100%;
 
-    background: #C8D4A1;
+    background: ${colors.primary};
 
     border:  ${modalBodyMargin} solid gray;
 
