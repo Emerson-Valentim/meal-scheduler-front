@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactAgenda } from 'react-agenda';
+import { ReactAgenda } from 'react-agenda'
 
 export const MainWrapper = styled.div`
   width: 100%;
@@ -58,7 +58,7 @@ export const DateTimePicker = styled.div`
   ${props => props.visible
     ? buildEffect('visible', '100')
     : buildEffect('hidden', '0')
-  }
+}
   
   transition: visibility 1s, opacity 0.5s linear;
   

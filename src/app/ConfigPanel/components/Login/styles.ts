@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 import { Form } from 'antd'
 
 export const MainWrapper = styled.div`
@@ -12,7 +12,6 @@ export const MainWrapper = styled.div`
   height: 100%;
 
   overflow-x: hidden;
-
 
   @media(max-width: 800px) {
     width: 100%;

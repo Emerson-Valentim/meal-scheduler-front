@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Card, ShoppingHolderDefinition } from "./styles"
+import { Card, ShoppingHolderDefinition } from './styles'
 
 type WestPlazaCardProps = {
   button?: JSX.Element | undefined

@@ -14,7 +14,6 @@
 		"@types/react-redux": "^7.1.7",
 		"antd": "^4.16.13",
 		"axios": "^0.21.4",
-		"cldr-data": "^36.0.0",
 		"luxon": "^2.0.2",
 		"moment": "^2.29.1",
 		"react": "^17.0.2",

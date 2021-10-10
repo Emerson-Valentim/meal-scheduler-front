@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { Card, Modal, Menu } from "antd"
+import styled from 'styled-components'
+import { Card, Modal, Menu } from 'antd'
 import { colors } from '../../styles/colors'
 
 export const MainWrapper = styled.div`

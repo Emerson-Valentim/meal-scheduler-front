@@ -1,13 +1,13 @@
 import React , { useCallback } from 'react'
-import { Button } from 'antd';
+import { Button } from 'antd'
 
 import { useHistory } from 'react-router-dom'
 
-import { MainWrapper } from './styles';
-import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard';
-import { Card } from '../../../../components/WestPlazaCard/styles';
-import { CustomCarousel } from '../../../../components/CustomCarousel/CustomCarousel';
-import { CarouselStyle } from '../../../../components/CustomCarousel/styles';
+import { MainWrapper } from './styles'
+import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard'
+import { Card } from '../../../../components/WestPlazaCard/styles'
+import { CustomCarousel } from '../../../../components/CustomCarousel/CustomCarousel'
+import { CarouselStyle } from '../../../../components/CustomCarousel/styles'
 
 export function Introduction(): JSX.Element {
 

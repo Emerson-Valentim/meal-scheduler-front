@@ -3,17 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { LoadingModal, Reload } from './styles'
 
-import { Button, Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-import { enableAlert } from '../../hooks/Common';
-
+import { Button, Spin } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import { enableAlert } from '../../hooks/Common'
 
 export function Loading() {
 
   const dispatch = useAppDispatch()
 
   const { enabled } = useAppSelector((state) => state.common.loadingState)
-  const antIcon = <LoadingOutlined style={{ fontSize: '200px', color: 'black' }} spin />;
+  const antIcon = <LoadingOutlined style={{ fontSize: '200px', color: 'black' }} spin />
 
   const [reload, allowReload] = useState(false)
 

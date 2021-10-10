@@ -1,14 +1,22 @@
 import React from 'react'
-import { useAppSelector } from '../../../../hooks/hooks'
+
+import { useAppDispatch } from '../../../../hooks/hooks'
+import { MainWrapper } from './styles'
 
 type ConfigureParams = {
-  logged: boolean
+  establishment: boolean
 }
 
-export function Configure( { logged }: ConfigureParams) {
+export function Configure({ establishment }: ConfigureParams) {
+
+  const dispatch = useAppDispatch()
+
   return (
-    <div>
-      { logged ? 'Logado' : 'Não logado'}
-    </div>
+    <MainWrapper>
+      {establishment
+        ? <div>Configurações preenchidas</div>
+        : <div>Configurações vazias</div>
+      }
+    </MainWrapper>
   )
 }

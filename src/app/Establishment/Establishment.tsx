@@ -1,25 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState, useEffect } from 'react'
 
-import { Card } from 'antd';
+import { Card } from 'antd'
 
 import { WestPlazaCard } from '../../components/WestPlazaCard/WestPlazaCard'
 import { CustomMenu, CustomMenuItem, EstablishmentCard, EstablishmentList, MainWrapper, ModalWrapper } from './styles'
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment';
-import { EnvironmentList } from './components/EnvironmentList/EnvironmentList';
-import { MenuList } from './components/MenuList/MenuList';
-import { Agenda } from './components/Agenda/Agenda';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { loadEstablishment, loadEstablishments } from '../../hooks/Establishment'
+import { EnvironmentList } from './components/EnvironmentList/EnvironmentList'
+import { MenuList } from './components/MenuList/MenuList'
+import { Agenda } from './components/Agenda/Agenda'
 import {
   CalendarFilled,
   ShopFilled,
-} from '@ant-design/icons/lib/icons';
+} from '@ant-design/icons/lib/icons'
 
-import { FaChair } from 'react-icons/fa';
-import { IoFastFoodOutline } from 'react-icons/io5';
-import { updateLoading } from '../../hooks/Common';
-import { TableList } from './components/TableList/TableList';
-import { createReservation, loadReservations, resetNewReservation } from '../../hooks/Reservation';
+import { FaChair } from 'react-icons/fa'
+import { IoFastFoodOutline } from 'react-icons/io5'
+import { updateLoading } from '../../hooks/Common'
+import { TableList } from './components/TableList/TableList'
+import { createReservation, loadReservations, resetNewReservation } from '../../hooks/Reservation'
 
 const { Meta } = Card
 
@@ -60,8 +60,8 @@ export function Establishment(): JSX.Element {
     'reservation': (<Agenda schedule={establishment?.schedule} establishment_id={establishment?.id} />)
   }
 
-  const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
   const [activeView, setActiveView] = useState(<></>)
 
   useEffect(() => {
@@ -77,20 +77,20 @@ export function Establishment(): JSX.Element {
     dispatch(updateLoading(true))
     await dispatch(loadEstablishment(id))
     dispatch(updateLoading(false))
-    setVisible(true);
+    setVisible(true)
   }, [])
 
   const confirmReservation = useCallback(async () => {
-    setConfirmLoading(true);
-    
+    setConfirmLoading(true)
+
     await dispatch(createReservation({
       ...params,
       status: 'scheduled',
       phone: '5511948083191',
       cpf: '46911198844'
     }))
-    
-    setConfirmLoading(false);
+
+    setConfirmLoading(false)
     await dispatch(loadReservations())
   }, [params])
 

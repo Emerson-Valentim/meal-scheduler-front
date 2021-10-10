@@ -1,8 +1,8 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Establishment } from '../app/Establishment/Establishment';
-import { Home } from '../app/Home/Home';
-import { ConfigPanel } from '../app/ConfigPanel/ConfigPanel';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Establishment } from '../app/Establishment/Establishment'
+import { Home } from '../app/Home/Home'
+import { ConfigPanel } from '../app/ConfigPanel/ConfigPanel'
 
 export function MainRouter(): JSX.Element {
 
@@ -20,5 +20,5 @@ export function MainRouter(): JSX.Element {
         </Route>
       </Switch>
     </Router>
-  );
+  )
 }

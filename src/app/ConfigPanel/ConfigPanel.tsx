@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { useAppSelector } from '../../hooks/hooks'
+import { updateLoading } from '../../hooks/Common'
+import { loadEstablishment } from '../../hooks/Establishment'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { ConfigMode } from '../../hooks/User'
 import { Configure } from './components/Configure/Configure'
+import { Info } from './components/Info/Info'
 
 import { Login } from './components/Login/Login'
 import { Register } from './components/Register/Register'
@@ -14,19 +17,32 @@ export type VisiblePanel = {
 
 export function ConfigPanel() {
 
-  const screenMode = useAppSelector(state => state.user.config.mode)
+  const dispatch = useAppDispatch()
+
+  const screenMode = useAppSelector((state) => state.user.config.mode)
   const { value: logged } = useAppSelector((state) => state.user.logged)
+  const { data: userInfo } = useAppSelector((state) => state.user.info)
+  const { data: establishment } = useAppSelector((state) => state.establishment.load.filtered)
 
   const panelComponents = useMemo(() => (
     {
       [ConfigMode.LOGIN]: <Login />,
       [ConfigMode.REGISTER]: <Register />,
-      [ConfigMode.INFO]: <div>Oi</div>
+      [ConfigMode.INFO]: <Info establishment={establishment}/>
     }
-  ), [])
+  ), [establishment])
 
-  const [ currentComponent, setCurrentComponent ] = useState(panelComponents[logged ? ConfigMode.INFO : ConfigMode.LOGIN])
+  const [currentComponent, setCurrentComponent] = useState(panelComponents[screenMode])
 
+  useEffect(() => {
+    if(logged && userInfo.establishment) {
+      (async () => {
+        dispatch(updateLoading(true))
+        await dispatch(loadEstablishment(userInfo.establishment.id))
+        dispatch(updateLoading(false))
+      })()
+    }
+  }, [dispatch, logged, userInfo])
 
   useEffect(() => {
     setCurrentComponent(panelComponents[screenMode])
@@ -37,7 +53,11 @@ export function ConfigPanel() {
       {
         currentComponent
       }
-      <Configure logged={logged} />
+      {
+        logged
+          ? <Configure establishment={establishment} />
+          : <div>Bem vindo!</div>
+      }
     </MainWrapper>
   )
 }

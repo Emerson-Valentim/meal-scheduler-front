@@ -2,10 +2,10 @@ import React from 'react'
 
 import { CustomViewBody } from '../../styles'
 import { EnvironmentCard, EnvironmentCardBody, EnvironmentCardRules } from './styles'
-import Meta from 'antd/lib/card/Meta';
+import Meta from 'antd/lib/card/Meta'
 
-import { RiForbid2Fill, RiCheckboxCircleFill } from "react-icons/ri";
-import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks';
+import { RiForbid2Fill, RiCheckboxCircleFill } from 'react-icons/ri'
+import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
 import { filterEnvironment } from '../../../../hooks/Reservation'
 
 type EnvironmentListDefinition = {
@@ -29,7 +29,7 @@ export function EnvironmentList({ environments }: EnvironmentListDefinition) {
         ? <RiCheckboxCircleFill color='green' />
         : <RiForbid2Fill color='red' />
     }
-      {text}
+    {text}
     </EnvironmentCardRules>
   )
 

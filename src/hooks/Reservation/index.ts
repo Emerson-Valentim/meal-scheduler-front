@@ -94,7 +94,7 @@ export const reservation = createSlice({
         : state.create.params.environments.push(payload)
     },
     filterTable: (state, { payload }: PayloadAction<any>) => {
-      const tableId = payload;
+      const tableId = payload
       state.create.params.table = tableId
     },
     setReservationInterval: (state, { payload }: PayloadAction<any>) => {

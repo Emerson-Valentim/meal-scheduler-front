@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState } from 'react'
 
-import { DateTime } from 'luxon';
-import { TimePicker } from 'antd';
-import moment from 'moment';
+import { DateTime } from 'luxon'
+import { TimePicker } from 'antd'
+import moment from 'moment'
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
-import { loadSchedule } from '../../../../hooks/Schedule';
-import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation';
-import { updateLoading } from '../../../../hooks/Common';
+import { loadSchedule } from '../../../../hooks/Schedule'
+import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation'
+import { updateLoading } from '../../../../hooks/Common'
 
 import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
-import { ReservationForm } from './components/ReservationForm/ReservationForm';
+import { ReservationForm } from './components/ReservationForm/ReservationForm'
 
-require('moment/locale/pt.js');
+require('moment/locale/pt.js')
 
 export type ReservationDefinition = {
   establishment_id?: number
@@ -30,9 +30,9 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const schedule = useAppSelector(state => state.schedule.load.filtered);
+  const schedule = useAppSelector(state => state.schedule.load.filtered)
   const reservations = useAppSelector(state => state.reservation.load.list)
 
   const { establishment, table } = useAppSelector(state => state.reservation.create.params)
@@ -65,7 +65,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
       })
     }
     return []
-  }, [schedule]);
+  }, [schedule])
 
   const getCurrentReservations = useCallback(() => {
     return reservations.data.map(({ id, interval: { end, start }, status }) => ({
@@ -73,7 +73,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
       name: `Reserva ${id}`,
       startDateTime: DateTime.fromISO(start).toJSDate(),
       endDateTime: DateTime.fromISO(end).toJSDate(),
-      classes: status === 'canceled' 
+      classes: status === 'canceled'
         ? status
         : (id > 19 ? 'currentUser' : 'otherUser')
     }))
@@ -82,15 +82,15 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
   const updateIntervalInfo = (value, action) => {
     setVisible(true)
     switch (action) {
-      case 'cell':
-        setReservationDate(formatDate(value))
-        setStartTime(moment(formatDate(value).toFormat(hourFormat), hourFormat))
-        setEndTime(moment(formatDate(value).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
-        break
-      case 'range':
-        setReservationDate(formatDate(value[0]))
-        setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
-        setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
+    case 'cell':
+      setReservationDate(formatDate(value))
+      setStartTime(moment(formatDate(value).toFormat(hourFormat), hourFormat))
+      setEndTime(moment(formatDate(value).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
+      break
+    case 'range':
+      setReservationDate(formatDate(value[0]))
+      setStartTime(moment(formatDate(value[0]).toFormat(hourFormat), hourFormat))
+      setEndTime(moment(formatDate(value[1]).plus({ hours: 1 }).toFormat(hourFormat), hourFormat))
     }
   }
 
@@ -152,4 +152,3 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
     </MainWrapper>
   )
 }
-
