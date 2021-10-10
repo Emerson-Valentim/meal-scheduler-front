@@ -13,7 +13,6 @@ export const MainWrapper = styled.div`
 
   overflow-x: hidden;
 
-
   @media(max-width: 800px) {
     width: 100%;
   }
