@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState } from 'react'
 
 import { DateTime } from 'luxon'

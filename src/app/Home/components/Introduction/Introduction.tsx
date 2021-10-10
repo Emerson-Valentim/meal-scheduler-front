@@ -30,32 +30,32 @@ export function Introduction(): JSX.Element {
   return (
     <CustomCarousel style={carouselStyle} items={
       [
-        <MainWrapper>
+        <MainWrapper key="wrapper-plaza">
           <WestPlazaCard/>
         </MainWrapper>,
-        <MainWrapper>
-          <Card>
+        <MainWrapper key="first-wrapper">
+          <Card key="first-card">
             <img src="/Intro1.png" alt="Welcome" />
             <h1>Celebre!</h1>
             <p>Aproveite os melhores momentos da sua vida com pessoas que você ama</p>
           </Card>
-        </MainWrapper>,
-        <MainWrapper>
-          <Card>
+        </MainWrapper> ,
+        <MainWrapper key="second-wrapper">
+          <Card key="second-card">
             <img src="/Intro2.png" alt="Location" />
             <h1>Localização</h1>
             <p>Tudo em um lugar só, o Boulevard Gastronômico do Shopping West Plaza inteiro na palpa de suas mãos</p>
           </Card>
         </MainWrapper>,
-        <MainWrapper>
-          <Card>
+        <MainWrapper key="third-wrapper">
+          <Card key="third-card">
             <img src="/Intro3.png" alt="Enjoy" />
             <h1>Aproveite e avalie</h1>
             <p>Aprecie a melhor da nossa Boulevard Gastronômico e ao final da sua experiência, deixe sua avaliação</p>
           </Card>
         </MainWrapper>,
-        <MainWrapper>
-          <Card>
+        <MainWrapper key="fourth-wrapper">
+          <Card key="fourth-card">
             <WestPlazaCard button={
               <Button onClick={listInfoAboutEstablishment}>Acessar</Button>
             }/>

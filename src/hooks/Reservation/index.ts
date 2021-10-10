@@ -132,15 +132,6 @@ export const reservation = createSlice({
             data: payload ? payload : (initialState.load.list?.data || []),
           }
         }
-      })
-      .addCase(createReservation.pending, (state) => {
-
-      })
-      .addCase(createReservation.rejected, (state) => {
-
-      })
-      .addCase(createReservation.fulfilled, (state) => {
-
       }),
 })
 

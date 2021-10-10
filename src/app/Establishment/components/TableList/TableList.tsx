@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 
 import Meta from 'antd/lib/card/Meta'
@@ -7,7 +8,11 @@ import { filterTable } from '../../../../hooks/Reservation'
 import { CustomViewBody } from '../../styles'
 import { TableCard } from './styles'
 
-export function TableList({ tables }) {
+type TableListParams = {
+  tables: any[]
+}
+
+export function TableList({ tables }: TableListParams): JSX.Element {
 
   const dispatch = useAppDispatch()
 

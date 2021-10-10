@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useCallback } from 'react'
 
 import { DateTime } from 'luxon'
@@ -9,7 +9,11 @@ import { setReservationDelete, safeUpdateReservation, loadReservations } from '.
 import { Popconfirm } from 'antd'
 import { updateLoading } from '../../../../../../hooks/Common'
 
-export function ReservationForm({ item }) {
+type ReservationFormParams = {
+  item: any
+}
+
+export function ReservationForm({ item }: ReservationFormParams): JSX.Element {
 
   const dispatch = useAppDispatch()
 
