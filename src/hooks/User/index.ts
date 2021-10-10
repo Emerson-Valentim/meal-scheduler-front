@@ -44,7 +44,8 @@ export interface UserState {
       data: any
       state: RegisterState
     }
-  }
+  },
+  info: HttpData<any>
 }
 
 const initialState: UserState = {
@@ -69,13 +70,17 @@ const initialState: UserState = {
       data: undefined,
       state: RegisterState.DEFAULT
     }
+  },
+  info: {
+    data: undefined,
+    state: 'pending'
   }
 }
 
 const saveCredentials = (credentials?: Credentials) => window.localStorage.setItem('credentials', credentials ? JSON.stringify(credentials) : '')
 
-export const authenticate = createAsyncThunk('user/load', async (credentials: Credentials) => {
-  saveCredentials(credentials)
+export const authenticate = createAsyncThunk('user/load', async (credentials?: Credentials) => {
+  credentials && saveCredentials(credentials)
   const { data: userInfo } = await authRequest('GET', 'user/load')
   return userInfo
 })
@@ -107,10 +112,14 @@ export const user = createSlice({
           state: LoginState.BAD_CREDENTIALS
         }
       })
-      .addCase(authenticate.fulfilled, (state) => {
+      .addCase(authenticate.fulfilled, (state, { payload }) => {
         state.logged = {
           value: true,
           state: LoginState.LOGGED
+        }
+        state.info = {
+          data: payload,
+          state: 'ok'
         }
       })
       .addCase(createUser.pending, (state) => {
@@ -130,7 +139,7 @@ export const user = createSlice({
           data: payload,
           state: RegisterState.SUCCESS
         }
-      }),
+      })
 })
 
 export const { updateConfigMode } = user.actions
