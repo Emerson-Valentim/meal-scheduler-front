@@ -34,7 +34,7 @@ export const loadEstablishment = createAsyncThunk('establishment/load/id', async
 })
 
 export const createEstablishment = createAsyncThunk('establishment/create', async (data: any): Promise<any> => {
-  const { data: establishment } = await authRequest<any[]>('POST', `establishment/create`, { data })
+  const { data: establishment } = await authRequest<any[]>('POST', 'establishment/create', { data })
   return establishment
 })
 

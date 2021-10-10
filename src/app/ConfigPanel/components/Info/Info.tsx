@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Form, Input, Radio, Space } from 'antd';
+import { Button, Form, Input, Radio, Space } from 'antd'
 
-import { ButtonWrapper, EstablishmentForm, EstablishmentFormItem, MainWrapper, RadioWrapper } from "./styles";
-import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard';
-import { useAppDispatch } from '../../../../hooks/hooks';
-import { createEstablishment, updateEstablishment } from '../../../../hooks/Establishment';
-import { updateLoading } from '../../../../hooks/Common';
-import { authenticate } from '../../../../hooks/User';
+import { ButtonWrapper, EstablishmentForm, EstablishmentFormItem, MainWrapper, RadioWrapper } from './styles'
+import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard'
+import { useAppDispatch } from '../../../../hooks/hooks'
+import { createEstablishment, updateEstablishment } from '../../../../hooks/Establishment'
+import { updateLoading } from '../../../../hooks/Common'
+import { authenticate } from '../../../../hooks/User'
 
 type InfoParams = {
   establishment?: any
@@ -38,7 +38,6 @@ export function Info({ establishment }: InfoParams) {
     }
   }, [establishment, form])
 
-
   const onFinish = async (values: any) => {
     dispatch(updateLoading(true))
 
@@ -51,7 +50,7 @@ export function Info({ establishment }: InfoParams) {
     await establishmentAction
 
     dispatch(updateLoading(false))
-  };
+  }
 
   return (
     <MainWrapper>

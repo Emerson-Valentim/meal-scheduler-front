@@ -14,9 +14,9 @@ export function TableList({ tables }) {
   const { environments: stateEnvironments, table: stateTable } = useAppSelector(state => state.reservation.create.params)
 
   const selectTable = (id) => {
-    stateTable === id 
-    ? dispatch(filterTable(undefined))
-    : dispatch(filterTable(id))
+    stateTable === id
+      ? dispatch(filterTable(undefined))
+      : dispatch(filterTable(id))
   }
 
   const generateTableCard = (table) => (

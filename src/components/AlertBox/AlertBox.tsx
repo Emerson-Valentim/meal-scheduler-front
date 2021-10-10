@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import { Alert } from 'antd';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { disableAlert } from '../../hooks/Common';
+import { Alert } from 'antd'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { disableAlert } from '../../hooks/Common'
 
 export function AlertBox(): JSX.Element {
 

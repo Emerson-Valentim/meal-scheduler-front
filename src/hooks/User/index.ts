@@ -16,7 +16,6 @@ export enum LoginState {
   DEFAULT = 'default'
 }
 
-
 export enum RegisterState {
   ERROR = 'error',
   SUCCESS = 'success',

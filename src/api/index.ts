@@ -1,9 +1,9 @@
-import axios, { Method, AxiosResponse } from 'axios';
-import { Credentials } from '../hooks/User';
+import axios, { Method, AxiosResponse } from 'axios'
+import { Credentials } from '../hooks/User'
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
-});
+})
 
 api.interceptors.request.use(async (config) => {
   const ipDataStorage = window.sessionStorage.getItem('ipData') || '{}'
@@ -40,8 +40,8 @@ export const request = <T>(
     url,
     params,
     data
-  });
-};
+  })
+}
 
 export const authRequest = <T>(
   method: Method,
@@ -58,5 +58,5 @@ export const authRequest = <T>(
       username: cnpj,
       password: password
     }
-  });
-};
+  })
+}

@@ -25,7 +25,7 @@ export function ReservationForm({ item }) {
 
   const cancelReservation = useCallback(async () => {
     dispatch(updateLoading(true))
-    
+
     await dispatch(safeUpdateReservation({
       id: reservationId,
       status: 'canceled',

@@ -16,7 +16,7 @@ export interface CommonState {
 }
 
 const initialState: CommonState = {
-	alertState: {
+  alertState: {
     message: 'Bem vindo, agora você já pode utilizar as funcionalidades!',
     type: 'info',
     enabled: false

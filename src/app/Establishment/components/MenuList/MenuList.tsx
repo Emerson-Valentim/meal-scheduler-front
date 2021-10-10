@@ -2,7 +2,7 @@ import React from 'react'
 
 import { CustomViewBody } from '../../styles'
 import { MenuCard } from './styles'
-import Meta from 'antd/lib/card/Meta';
+import Meta from 'antd/lib/card/Meta'
 
 type MenuListDefinition = {
   menu: any[]

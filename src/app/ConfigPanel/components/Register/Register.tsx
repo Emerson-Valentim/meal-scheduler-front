@@ -11,9 +11,9 @@ import { enableAlert, updateLoading } from '../../../../hooks/Common'
 
 export function Register() {
   const dispatch = useAppDispatch()
-  
+
   const { state: registerState } = useAppSelector((state) => state.user.create.result!)
-  
+
   const [credentials, setCredentials] = useState({ cnpj: '', password: ''})
 
   const onFinish = async (values: any) => {
@@ -105,9 +105,9 @@ export function Register() {
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
+                  return Promise.resolve()
                 }
-                return Promise.reject(new Error('Ambas as senhas devem ser iguais!'));
+                return Promise.reject(new Error('Ambas as senhas devem ser iguais!'))
               },
             }),
           ]}
