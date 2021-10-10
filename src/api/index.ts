@@ -5,6 +5,21 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
 });
 
+api.interceptors.request.use(async (config) => {
+  const ipDataStorage = window.sessionStorage.getItem('ipData') || '{}'
+  let ipData = JSON.parse(ipDataStorage)
+  if (!Object.keys(ipData)) {
+    const request = await fetch('https://geolocation-db.com/json/')
+    ipData = await request.json()
+    window.sessionStorage.setItem('ipData', JSON.stringify(ipData))
+  }
+
+  config.headers['user-ip'] = ipData.IPv4
+  config.headers['user-location'] = ipData.state
+
+  return config
+})
+
 export type HttpData<T> = {
   data: T
   state: 'ok' | 'error' | 'notFound' | 'pending'
