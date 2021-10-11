@@ -38,6 +38,7 @@ export function TableForm({ tables }: TableFormParams): JSX.Element {
         size='small'
         columns={tableColumns}
         dataSource={tables}
+        scroll={{x: '600px'}}
       />
     </UnitForm>
   )

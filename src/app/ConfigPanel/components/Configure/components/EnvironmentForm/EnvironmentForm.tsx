@@ -42,6 +42,7 @@ export function EnvironmentForm({ environments }: EnvironmentFormParams): JSX.El
         size='small'
         columns={tableColumns}
         dataSource={environments}
+        scroll={{x: '600px'}}
       />
     </UnitForm>
   )

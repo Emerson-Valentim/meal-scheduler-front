@@ -37,6 +37,7 @@ export function MenuForm({ menu_items }: MenuFormParams): JSX.Element {
         size='small'
         columns={tableColumns}
         dataSource={menu_items}
+        scroll={{x: '600px'}}
       />
     </UnitForm>
   )
