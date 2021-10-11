@@ -25,7 +25,7 @@ export function Loading() {
           message: 'Parece que tivemos um problema',
           type: 'error'
         }))
-      }, 5000)
+      }, 10000)
 
       return () => {
         clearTimeout(timeout)
