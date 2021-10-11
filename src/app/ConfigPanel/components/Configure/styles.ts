@@ -4,20 +4,28 @@ import { colors } from '../../../../styles/colors'
 import { Form, Radio, Table } from 'antd'
 
 export const MainWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  background-color: ${colors.secondary};
-
   width: 70%;
-  min-height: 100vh;
+  background-color: ${colors.secondary};
 
   overflow-y: auto;
 
   @media(max-width: 800px) {
+    overflow-y: unset;
     width: 100%;
-    overflow-y: hidden;
+  }
+`
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 0.3em;
+
+  width: 100%;
+
+  &:first-child {
+    margin-top: 1em;
   }
 `
 
@@ -28,10 +36,9 @@ export const UnitForm = styled(Form)`
   
   border-radius: 1em;
   
-  margin: 1em;
+  margin-bottom: 1em;
 
   @media(max-width: 800px) {
-    margin: unset;
     min-height: 24%;
     width: 100%;
   }
