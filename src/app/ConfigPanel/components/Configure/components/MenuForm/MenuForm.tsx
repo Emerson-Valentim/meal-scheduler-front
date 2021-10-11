@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { updateModal } from '../../../../../../hooks/Common'
+import { useAppDispatch } from '../../../../../../hooks/hooks'
 import { UnitForm, UnitTable } from '../../styles'
 import { ActionButton } from '../ActionButton/ActionButton'
 
@@ -7,6 +9,17 @@ type MenuFormParams = {
 }
 
 export function MenuForm({ menu_items }: MenuFormParams): JSX.Element {
+  const dispatch = useAppDispatch()
+
+  const editMenu = ({ id }): void => {
+    console.log(id)
+    dispatch(updateModal({
+      enabled: true,
+      component: <div>Oi lindo oi</div>,
+      title: 'Alterar menu'
+    }))
+  }
+
   const tableColumns = [
     {
       title: 'ID',
@@ -27,7 +40,7 @@ export function MenuForm({ menu_items }: MenuFormParams): JSX.Element {
     {
       title: 'Extra',
       dataIndex: 'id',
-      render: (id: string) => <ActionButton onEdit={() => { console.log(id) }} onDelete={() => { console.log(id) }}/>
+      render: (id: string) => <ActionButton onEdit={() => editMenu({ id })} onDelete={() => { console.log(id) }}/>
     }
   ]
 

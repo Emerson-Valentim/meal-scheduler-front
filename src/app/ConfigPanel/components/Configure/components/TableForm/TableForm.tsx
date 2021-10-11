@@ -1,4 +1,6 @@
 import React from 'react'
+import { updateModal } from '../../../../../../hooks/Common'
+import { useAppDispatch } from '../../../../../../hooks/hooks'
 import { UnitForm, UnitTable } from '../../styles'
 import { ActionButton } from '../ActionButton/ActionButton'
 
@@ -7,6 +9,17 @@ type TableFormParams = {
 }
 
 export function TableForm({ tables }: TableFormParams): JSX.Element {
+
+  const dispatch = useAppDispatch()
+
+  const editTable = ({ id }): void => {
+    console.log(id)
+    dispatch(updateModal({
+      enabled: true,
+      component: <div>Oi lindo oi</div>,
+      title: 'Alterar mesa'
+    }))
+  }
 
   const tableColumns = [
     {
@@ -28,7 +41,7 @@ export function TableForm({ tables }: TableFormParams): JSX.Element {
     {
       title: 'Ações',
       dataIndex: 'id',
-      render: (id: string) => <ActionButton onEdit={() => { console.log(id) }} onDelete={() => { console.log(id) }}/>
+      render: (id: string) => <ActionButton onEdit={() => editTable({ id })} onDelete={() => { console.log(id) }}/>
     }
   ]
 
