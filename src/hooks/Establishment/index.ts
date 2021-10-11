@@ -94,6 +94,15 @@ export const establishment = createSlice({
             data: payload
           }
         }
+      })
+      .addCase(createEstablishment.fulfilled, (state, { payload }) => {
+        state.load = {
+          ...state.load,
+          filtered: {
+            state: 'ok',
+            data: payload
+          }
+        }
       }),
 })
 

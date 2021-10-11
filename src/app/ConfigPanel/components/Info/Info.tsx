@@ -6,7 +6,6 @@ import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCar
 import { useAppDispatch } from '../../../../hooks/hooks'
 import { createEstablishment, updateEstablishment } from '../../../../hooks/Establishment'
 import { updateLoading } from '../../../../hooks/Common'
-import { authenticate } from '../../../../hooks/User'
 
 type InfoParams = {
   establishment?: any
@@ -20,7 +19,7 @@ export enum Segmentation {
   others = 'others'
 }
 
-export function Info({ establishment }: InfoParams) {
+export function Info({ establishment }: InfoParams): JSX.Element {
 
   const dispatch = useAppDispatch()
 
@@ -28,6 +27,7 @@ export function Info({ establishment }: InfoParams) {
   const [isEditDisabled, disableEdit] = useState(false)
 
   useEffect(() => {
+    console.log(establishment)
     if (establishment) {
       form.setFieldsValue({
         name: establishment?.name,
@@ -44,8 +44,6 @@ export function Info({ establishment }: InfoParams) {
     const establishmentAction = establishment
       ? dispatch(updateEstablishment({ id: establishment.id, ...values }))
       : dispatch(createEstablishment(values))
-
-    await dispatch(authenticate())
 
     await establishmentAction
 
