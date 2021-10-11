@@ -18,9 +18,24 @@ const initialState: MenuState = {
   }
 }
 
-export const loadMenus = createAsyncThunk('Menu/load', async (establishmentId: number): Promise<any[]> => {
-  const { data: menuList } = await request<any[]>('GET', 'Menu/load/')
+export const loadMenus = createAsyncThunk('menu/load', async (establishmentId: number): Promise<any[]> => {
+  const { data: menuList } = await request<any[]>('GET', 'menu/load/')
   return menuList.length ? menuList : []
+})
+
+export const createMenu = createAsyncThunk('menu/create', async (data: any): Promise<any> => {
+  const { data: menu } = await authRequest<any>('POST', 'menu/load/', { data })
+  return menu
+})
+
+export const updateMenu = createAsyncThunk('menu/update', async ({ id, ...data }: any): Promise<any> => {
+  const { data: menu } = await authRequest<any>('PUT', `menu/load/${id}`, data)
+  return menu
+})
+
+export const deleteMenu = createAsyncThunk('menu/delete', async (id: number): Promise<any> => {
+  const { data: menu } = await authRequest<any>('delete', `menu/delete/${id}`)
+  return menu
 })
 
 export const Menu = createSlice({
