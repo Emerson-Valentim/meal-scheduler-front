@@ -27,7 +27,6 @@ export function Info({ establishment }: InfoParams): JSX.Element {
   const [isEditDisabled, disableEdit] = useState(false)
 
   useEffect(() => {
-    console.log(establishment)
     if (establishment) {
       form.setFieldsValue({
         name: establishment?.name,
