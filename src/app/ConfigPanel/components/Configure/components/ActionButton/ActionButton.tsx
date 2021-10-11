@@ -10,6 +10,7 @@ type ActionButtonParams = {
 }
 
 export function ActionButton({ onEdit, onDelete }: ActionButtonParams): JSX.Element {
+
   return (
     <ButtonWrapper>
       <Button onClick={onEdit} icon={<RiEditBoxLine/>}/>
