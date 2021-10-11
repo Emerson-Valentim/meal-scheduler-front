@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+export enum EnumAlert {
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  ERROR = 'error'
+}
 export interface AlertState {
   message: string
-  type: 'success' | 'info' | 'warning' | 'error'
+  type: EnumAlert
   enabled: boolean
 }
 
@@ -18,7 +24,7 @@ export interface CommonState {
 const initialState: CommonState = {
   alertState: {
     message: 'Bem vindo, agora você já pode utilizar as funcionalidades!',
-    type: 'info',
+    type: EnumAlert.INFO,
     enabled: false
   },
   loadingState: {

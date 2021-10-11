@@ -5,9 +5,9 @@ import { LoadingModal, Reload } from './styles'
 
 import { Button, Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
-import { enableAlert } from '../../hooks/Common'
+import { enableAlert, EnumAlert } from '../../hooks/Common'
 
-export function Loading() {
+export function Loading(): JSX.Element {
 
   const dispatch = useAppDispatch()
 
@@ -23,7 +23,7 @@ export function Loading() {
         dispatch(enableAlert({
           enabled: true,
           message: 'Parece que tivemos um problema',
-          type: 'error'
+          type: EnumAlert.ERROR
         }))
       }, 10000)
 
