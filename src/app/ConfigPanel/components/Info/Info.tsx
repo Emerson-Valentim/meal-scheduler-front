@@ -85,7 +85,7 @@ export function Info({ establishment }: InfoParams) {
           name="category"
         >
           <RadioWrapper value={form.getFieldsValue().category} disabled={isEditDisabled}>
-            <Space direction="vertical">
+            <Space direction="vertical" align="start">
               <Radio value={Segmentation.bakery}>Café e pães</Radio>
               <Radio value={Segmentation.candy_store}>Doces e guloseimas</Radio>
               <Radio value={Segmentation.pub}>Bar e petiscos</Radio>

@@ -47,8 +47,6 @@ export const EstablishmentFormItem = styled(Form.Item)`
 export const RadioWrapper = styled(Radio.Group)`
   width: 100%;
   display: flex;
-
-  text-align-last: start;
   
   .ant-space-item {
     margin-left: 3px;
