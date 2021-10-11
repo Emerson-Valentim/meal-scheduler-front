@@ -7,7 +7,7 @@ type Colors = {
 
 export const colors: Colors = {
   primary: '#C8D4A1',
-  secondary: '',
+  secondary: 'gray',
   primaryButton: '',
   secondaryButton: ''
 }
