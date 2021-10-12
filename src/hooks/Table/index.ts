@@ -18,9 +18,19 @@ const initialState: TableState = {
   }
 }
 
-export const loadTables = createAsyncThunk('table/load', async (establishmentId: number): Promise<any[]> => {
+export const loadTables = createAsyncThunk('table/load', async (): Promise<any[]> => {
   const { data: tableList } = await request<any[]>('GET', 'table/load/')
   return tableList.length ? tableList : []
+})
+
+export const createTable = createAsyncThunk('table/create', async (data: any): Promise<any> => {
+  const { data: table } = await authRequest<any>('POST', 'table/create', { data })
+  return table
+})
+
+export const deleteTable = createAsyncThunk('table/delete/id', async (id: number): Promise<any> => {
+  const { data: table } = await authRequest<any[]>('DELETE', `table/delete/${id}`)
+  return table
 })
 
 export const table = createSlice({

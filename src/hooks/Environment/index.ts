@@ -7,6 +7,7 @@ export enum EnvironmentLocation {
 }
 
 type EnvironmentFilter = {
+  list: HttpData<any[]>
   filtered: HttpData<any>
 }
 
@@ -16,15 +17,24 @@ export interface EnvironmentState {
 
 const initialState: EnvironmentState = {
   load: {
+    list: {
+      state: 'pending',
+      data: []
+    },
     filtered: {
       state: 'pending',
       data: undefined
     }
-  }
+  },
 }
 
+export const loadEnvironments = createAsyncThunk('environment/load', async (): Promise<any> => {
+  const { data: environments } = await request<any[]>('GET', 'environment/load')
+  return environments
+})
+
 export const loadEnvironment = createAsyncThunk('environment/load/id', async (id: number): Promise<any> => {
-  const { data: environment } = await request<any[]>('GET', `environment/load/${id}`)
+  const { data: environment } = await authRequest<any[]>('GET', `environment/load/${id}`)
   return environment
 })
 
@@ -72,6 +82,15 @@ export const environment = createSlice({
         state.load = {
           ...state.load,
           filtered: {
+            state: 'ok',
+            data: payload
+          }
+        }
+      })
+      .addCase(loadEnvironments.fulfilled, (state, { payload }) => {
+        state.load = {
+          ...state.load,
+          list: {
             state: 'ok',
             data: payload
           }

@@ -29,7 +29,7 @@ export function CreateMenu(): JSX.Element {
 
   return (
     <UnitForm
-      name="create-environment"
+      name="create-menu"
       onFinish={onFinish}
       autoComplete="off"
       initialValues={{ remember: true }}
