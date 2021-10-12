@@ -13,7 +13,6 @@ export function CreateMenu(): JSX.Element {
   const establishment_id = useAppSelector((state) => state.establishment.load.filtered.data.id)
 
   const onFinish = async (data) => {
-    console.log(data)
     dispatch(updateLoading(true))
     await dispatch(createMenu({
       establishment: establishment_id,
