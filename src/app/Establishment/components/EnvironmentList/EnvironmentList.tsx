@@ -7,6 +7,7 @@ import Meta from 'antd/lib/card/Meta'
 import { RiForbid2Fill, RiCheckboxCircleFill } from 'react-icons/ri'
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
 import { filterEnvironment } from '../../../../hooks/Reservation'
+import { AllowedBox } from '../../../../components/AllowedBox/AllowedBox'
 
 type EnvironmentListDefinition = {
   environments: any[]
@@ -17,19 +18,15 @@ enum LocationLabel {
   outdoor = 'ao ar livre'
 }
 
-export function EnvironmentList({ environments }: EnvironmentListDefinition) {
+export function EnvironmentList({ environments }: EnvironmentListDefinition): JSX.Element {
 
   const dispatch = useAppDispatch()
 
   const { environments: stateEnvironments } = useAppSelector( state => state.reservation.create.params )
 
   const getAllowedBox = (allow, text) => (
-    <EnvironmentCardRules>{
-      allow
-        ? <RiCheckboxCircleFill color='green' />
-        : <RiForbid2Fill color='red' />
-    }
-    {text}
+    <EnvironmentCardRules>
+      <AllowedBox allow={allow} text={text}/>
     </EnvironmentCardRules>
   )
 

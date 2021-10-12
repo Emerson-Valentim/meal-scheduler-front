@@ -46,6 +46,11 @@ export const UnitForm = styled(Form)`
 
 export const UnitTable = styled(Table)`
   padding: 1em;
+  margin-bottom: 1em;
+
+  border-radius: 1em;
+
+  background-color: pink;
 
   .ant-table-cell {
     text-align: center !important;

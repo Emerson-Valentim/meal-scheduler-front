@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { AgendaForm } from './components/AgendaForm/AgendaForm'
-import { EnvironmentForm } from './components/EnvironmentForm/EnvironmentForm'
-import { MenuForm } from './components/MenuForm/MenuForm'
-import { TableForm } from './components/TableForm/TableForm'
+import { AgendaTable } from './components/AgendaTable/AgendaTable'
+import { EnvironmentTable } from './components/EnvironmentTable/EnvironmentTable'
+import { MenuTable } from './components/MenuTable/MenuTable'
+import { TableForm } from './components/TableEnv/TableEnv'
 import { Container, MainWrapper } from './styles'
 
 type ConfigureParams = {
@@ -17,11 +17,11 @@ export function Configure({ establishment }: ConfigureParams): JSX.Element {
       {establishment
         ? (
           <Container>
-            <EnvironmentForm
+            <EnvironmentTable
               environments={establishment.environments}
               key='environment-form-wrapper'
             />
-            <MenuForm
+            <MenuTable
               menu_items={establishment.menu_items}
               key='menu-form-wrapper'
             />
@@ -29,7 +29,7 @@ export function Configure({ establishment }: ConfigureParams): JSX.Element {
               tables={establishment.environments.flatMap(environment => environment.tables)}
               key='table-form-wrapper'
             />
-            <AgendaForm
+            <AgendaTable
               schedule={establishment.schedule}
               key='agenda-form-wrapper'
             />

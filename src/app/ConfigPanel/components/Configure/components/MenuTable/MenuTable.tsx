@@ -1,14 +1,15 @@
 import React from 'react'
+
 import { updateModal } from '../../../../../../hooks/Common'
 import { useAppDispatch } from '../../../../../../hooks/hooks'
-import { UnitForm, UnitTable } from '../../styles'
+import { UnitTable } from '../../styles'
 import { ActionButton } from '../ActionButton/ActionButton'
 
 type MenuFormParams = {
   menu_items: any[]
 }
 
-export function MenuForm({ menu_items }: MenuFormParams): JSX.Element {
+export function MenuTable({ menu_items }: MenuFormParams): JSX.Element {
   const dispatch = useAppDispatch()
 
   const editMenu = ({ id }): void => {
@@ -45,13 +46,12 @@ export function MenuForm({ menu_items }: MenuFormParams): JSX.Element {
   ]
 
   return (
-    <UnitForm>
-      <UnitTable
-        size='small'
-        columns={tableColumns}
-        dataSource={menu_items}
-        scroll={{x: '600px'}}
-      />
-    </UnitForm>
+    <UnitTable
+      size='small'
+      columns={tableColumns}
+      dataSource={menu_items}
+      scroll={{x: '600px'}}
+      title={() => 'Cardápio'}
+    />
   )
 }

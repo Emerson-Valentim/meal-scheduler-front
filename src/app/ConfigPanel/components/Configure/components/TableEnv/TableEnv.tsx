@@ -1,7 +1,8 @@
 import React from 'react'
+
 import { updateModal } from '../../../../../../hooks/Common'
 import { useAppDispatch } from '../../../../../../hooks/hooks'
-import { UnitForm, UnitTable } from '../../styles'
+import { UnitTable } from '../../styles'
 import { ActionButton } from '../ActionButton/ActionButton'
 
 type TableFormParams = {
@@ -46,13 +47,12 @@ export function TableForm({ tables }: TableFormParams): JSX.Element {
   ]
 
   return (
-    <UnitForm>
-      <UnitTable
-        size='small'
-        columns={tableColumns}
-        dataSource={tables}
-        scroll={{x: '600px'}}
-      />
-    </UnitForm>
+    <UnitTable
+      size='small'
+      columns={tableColumns}
+      dataSource={tables}
+      scroll={{x: '600px'}}
+      title={() => 'Mesas'}
+    />
   )
 }
