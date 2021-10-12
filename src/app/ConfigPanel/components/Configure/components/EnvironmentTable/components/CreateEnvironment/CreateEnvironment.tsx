@@ -19,16 +19,19 @@ export function CreateEnvironment(): JSX.Element {
 
   const onFinish = async (data) => {
     dispatch(updateLoading(true))
+
     await dispatch(createEnvironment({
       establishment: establishment_id,
       ...data
     }))
+
     await dispatch(loadEstablishment(establishment_id))
     dispatch(updateModal({
       enabled: false,
       component: undefined,
       title: ''
     }))
+
     dispatch(updateLoading(false))
   }
 
@@ -49,16 +52,17 @@ export function CreateEnvironment(): JSX.Element {
     >
       <UnitFormItem name="description"
         rules={[{ required: true, message: 'Por favor preencha a descrição!' }]}
+        label="Descrição"
       >
-        Descrição
         <TextArea
           autoSize={true}
           style={{ resize: 'none' }}
-          onChange={({ target: { value } }) => form.setFieldsValue({ description: value })}
         />
       </UnitFormItem>
-      <UnitFormItem name="location">
-        Localização
+      <UnitFormItem
+        name="location"
+        label=" Localização"
+      >
         <Select
           defaultValue='indoor'
           onChange={(value) => form.setFieldsValue({ location: value})}

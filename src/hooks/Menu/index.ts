@@ -24,7 +24,7 @@ export const loadMenus = createAsyncThunk('menu/load', async (establishmentId: n
 })
 
 export const createMenu = createAsyncThunk('menu/create', async (data: any): Promise<any> => {
-  const { data: menu } = await authRequest<any>('POST', 'menu/load/', { data })
+  const { data: menu } = await authRequest<any>('POST', 'menu/create', { data })
   return menu
 })
 

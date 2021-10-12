@@ -1,13 +1,13 @@
 import React from 'react'
 
 import { Button } from 'antd'
+import { deleteMenu } from '../../../../../../../../hooks/Menu'
 import { updateLoading, updateModal } from '../../../../../../../../hooks/Common'
 import { useAppDispatch, useAppSelector } from '../../../../../../../../hooks/hooks'
 import { EditDeleteParams } from '../../../../Configure'
-import { deleteEnvironment } from '../../../../../../../../hooks/Environment'
 import { loadEstablishment } from '../../../../../../../../hooks/Establishment'
 
-export function DeleteEnvironment({ id }: EditDeleteParams): JSX.Element {
+export function DeleteMenu({ id }: EditDeleteParams): JSX.Element {
 
   const dispatch = useAppDispatch()
 
@@ -15,7 +15,7 @@ export function DeleteEnvironment({ id }: EditDeleteParams): JSX.Element {
 
   const confirmDelete = async () => {
     dispatch(updateLoading(true))
-    await dispatch(deleteEnvironment(id))
+    await dispatch(deleteMenu(id))
     dispatch(updateModal({
       enabled: false,
       component: undefined,
@@ -27,7 +27,7 @@ export function DeleteEnvironment({ id }: EditDeleteParams): JSX.Element {
 
   return (
     <>
-      <p>Realmente deseja deletar o ambiente de ID {id}?</p>
+      <p>Realmente deseja deletar o cardápio de ID {id}?</p>
       <Button onClick={confirmDelete}>Confirmar</Button>
     </>
   )

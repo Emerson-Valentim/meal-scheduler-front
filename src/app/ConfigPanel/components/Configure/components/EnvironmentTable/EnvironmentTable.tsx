@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../../../../../hooks/hooks'
 import { UnitTable } from '../../styles'
 import { ActionButton } from '../ActionButton/ActionButton'
 import { CreateEnvironment } from './components/CreateEnvironment/CreateEnvironment'
-import { EditEnvironment } from './components/EditEnvironment/EditEnvironment'
 import { DeleteEnvironment } from './components/DeleteEnvironment/DeleteEnvironment'
 
 type EnvironmentFormParams = {
@@ -23,7 +22,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
   const editEnvironment = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
-      component: <EditEnvironment/>,
+      component: <div>Edit</div>,
       title: 'Alterar ambiente'
     }))
   }
@@ -32,7 +31,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
     dispatch(updateModal({
       enabled: true,
       component: <DeleteEnvironment id={id}/>,
-      title: 'Alterar ambiente'
+      title: 'Deletar ambiente'
     }))
   }
 
