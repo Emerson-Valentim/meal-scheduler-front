@@ -36,10 +36,6 @@ export const UnitForm = styled(Form)`
   
   margin-bottom: 1em;
 
-  @media(max-width: 800px) {
-    min-height: 24%;
-    width: 100%;
-  }
 `
 
 export const UnitFormItem = styled(Form.Item)`
@@ -47,6 +43,8 @@ export const UnitFormItem = styled(Form.Item)`
 `
 
 export const UnitTable = styled(Table)`
+  width: 96%;
+
   padding: 1em;
   margin-bottom: 1em;
 
@@ -56,6 +54,11 @@ export const UnitTable = styled(Table)`
 
   .ant-table-cell {
     text-align: center !important;
+  }
+
+  @media(max-width: 800px) {
+    min-height: 24%;
+    width: 100%;
   }
 `
 

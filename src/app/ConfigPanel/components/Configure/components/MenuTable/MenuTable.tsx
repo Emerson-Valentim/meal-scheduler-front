@@ -70,7 +70,7 @@ export function MenuTable({ menu_items }: MenuFormParams): JSX.Element {
       dataSource={menu_items}
       scroll={{x: '600px'}}
       title={() => 'Cardápio'}
-      footer={() => (<Button onClick={addMenu}>Adicionar novo cardápio</Button>)}
+      footer={() => (<Button type="primary" onClick={addMenu}>Adicionar novo cardápio</Button>)}
     />
   )
 }

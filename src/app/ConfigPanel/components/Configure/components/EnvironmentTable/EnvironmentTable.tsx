@@ -82,7 +82,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
       scroll={{ x: '600px' }}
       key="environment-table"
       title={() => 'Ambientes'}
-      footer={() => (<Button onClick={addEnvironment}>Adicionar ambiente</Button>)}
+      footer={() => (<Button type="primary" onClick={addEnvironment}>Adicionar ambiente</Button>)}
     />
   )
 }

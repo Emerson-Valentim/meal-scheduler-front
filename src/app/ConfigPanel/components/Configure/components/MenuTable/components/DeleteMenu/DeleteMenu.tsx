@@ -28,7 +28,7 @@ export function DeleteMenu({ id }: EditDeleteParams): JSX.Element {
   return (
     <>
       <p>Realmente deseja deletar o cardápio de ID {id}?</p>
-      <Button onClick={confirmDelete}>Confirmar</Button>
+      <Button type="primary" onClick={confirmDelete}>Confirmar</Button>
     </>
   )
 }
