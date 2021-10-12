@@ -31,9 +31,7 @@ export const Container = styled.div`
 
 export const UnitForm = styled(Form)`
   width: 96%;
-  
-  background-color: pink;
-  
+    
   border-radius: 1em;
   
   margin-bottom: 1em;
@@ -42,6 +40,10 @@ export const UnitForm = styled(Form)`
     min-height: 24%;
     width: 100%;
   }
+`
+
+export const UnitFormItem = styled(Form.Item)`
+  background-color: white;
 `
 
 export const UnitTable = styled(Table)`

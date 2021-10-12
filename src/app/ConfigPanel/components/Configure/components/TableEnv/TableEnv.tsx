@@ -14,7 +14,6 @@ export function TableForm({ tables }: TableFormParams): JSX.Element {
   const dispatch = useAppDispatch()
 
   const editTable = ({ id }): void => {
-    console.log(id)
     dispatch(updateModal({
       enabled: true,
       component: <div>Oi lindo oi</div>,

@@ -20,8 +20,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
 
   const dispatch = useAppDispatch()
 
-  const editEnvironment = ({ id }): void => {
-    console.log(id)
+  const editEnvironment = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
       component: <EditEnvironment/>,
@@ -29,11 +28,10 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
     }))
   }
 
-  const deleteEnvironment = ({ id }): void => {
-    console.log(id)
+  const deleteEnvironment = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
-      component: <DeleteEnvironment/>,
+      component: <DeleteEnvironment id={id}/>,
       title: 'Alterar ambiente'
     }))
   }
@@ -73,7 +71,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
     {
       title: 'Ações',
       dataIndex: 'id',
-      render: (id: string) => <ActionButton onEdit={() => editEnvironment({ id })} onDelete={() => deleteEnvironment({ id })} />
+      render: (id: number) => <ActionButton onEdit={() => editEnvironment(id)} onDelete={() => deleteEnvironment(id)} />
     }
   ]
 

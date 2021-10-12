@@ -10,6 +10,10 @@ type ConfigureParams = {
   establishment: any
 }
 
+export type EditDeleteParams = {
+  id: number
+}
+
 export function Configure({ establishment }: ConfigureParams): JSX.Element {
 
   return (

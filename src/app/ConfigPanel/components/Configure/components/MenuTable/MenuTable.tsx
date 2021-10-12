@@ -13,7 +13,6 @@ export function MenuTable({ menu_items }: MenuFormParams): JSX.Element {
   const dispatch = useAppDispatch()
 
   const editMenu = ({ id }): void => {
-    console.log(id)
     dispatch(updateModal({
       enabled: true,
       component: <div>Oi lindo oi</div>,

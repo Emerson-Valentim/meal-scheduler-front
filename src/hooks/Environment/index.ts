@@ -23,23 +23,28 @@ const initialState: EnvironmentState = {
   }
 }
 
-export const loadEnvironment = createAsyncThunk('establishment/load/id', async (filterId: number): Promise<any> => {
-  const { data: establishment } = await request<any[]>('GET', `establishment/load/${filterId}`)
-  return establishment
+export const loadEnvironment = createAsyncThunk('environment/load/id', async (id: number): Promise<any> => {
+  const { data: environment } = await request<any[]>('GET', `environment/load/${id}`)
+  return environment
 })
 
-export const createEnvironment = createAsyncThunk('establishment/create', async (data: any): Promise<any> => {
-  const { data: establishment } = await authRequest<any[]>('POST', 'establishment/create', { data })
-  return establishment
+export const createEnvironment = createAsyncThunk('environment/create', async (data: any): Promise<any> => {
+  const { data: environment } = await authRequest<any[]>('POST', 'environment/create', { data })
+  return environment
 })
 
-export const updateEnvironment = createAsyncThunk('establishment/update/id', async ({ id, ...data}: any): Promise<any> => {
-  const { data: establishment } = await authRequest<any[]>('PUT', `establishment/update/${id}`, { data })
-  return establishment
+export const updateEnvironment = createAsyncThunk('environment/update/id', async ({ id, ...data}: any): Promise<any> => {
+  const { data: environment } = await authRequest<any[]>('PUT', `environment/update/${id}`, { data })
+  return environment
 })
 
-export const establishment = createSlice({
-  name: 'establishment',
+export const deleteEnvironment = createAsyncThunk('environment/delete/id', async (id: number): Promise<any> => {
+  const { data: environment } = await authRequest<any[]>('DELETE', `environment/delete/${id}`)
+  return environment
+})
+
+export const environment = createSlice({
+  name: 'environment',
   initialState,
   reducers: {
   },
@@ -74,4 +79,4 @@ export const establishment = createSlice({
       }),
 })
 
-export default establishment.reducer
+export default environment.reducer
