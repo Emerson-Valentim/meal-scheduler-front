@@ -11,7 +11,7 @@ export const MainWrapper = styled.div`
   align-items: center;
 
   width: 30%;
-  height: 100%;
+  min-height: 100vh;
 
   overflow-x: hidden;
 
@@ -32,7 +32,7 @@ export const EstablishmentForm = styled(Form)`
   justify-content: center;
 
   width: 100%;
-  height: 60%;
+  height: 60vh;
 
   background-color: gray;
   border-radius: 1em;
@@ -47,8 +47,6 @@ export const EstablishmentFormItem = styled(Form.Item)`
 export const RadioWrapper = styled(Radio.Group)`
   width: 100%;
   display: flex;
-
-  text-align-last: start;
   
   .ant-space-item {
     margin-left: 3px;

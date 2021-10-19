@@ -6,7 +6,6 @@ import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCar
 import { useAppDispatch } from '../../../../hooks/hooks'
 import { createEstablishment, updateEstablishment } from '../../../../hooks/Establishment'
 import { updateLoading } from '../../../../hooks/Common'
-import { authenticate } from '../../../../hooks/User'
 
 type InfoParams = {
   establishment?: any
@@ -20,7 +19,7 @@ export enum Segmentation {
   others = 'others'
 }
 
-export function Info({ establishment }: InfoParams) {
+export function Info({ establishment }: InfoParams): JSX.Element {
 
   const dispatch = useAppDispatch()
 
@@ -44,8 +43,6 @@ export function Info({ establishment }: InfoParams) {
     const establishmentAction = establishment
       ? dispatch(updateEstablishment({ id: establishment.id, ...values }))
       : dispatch(createEstablishment(values))
-
-    await dispatch(authenticate())
 
     await establishmentAction
 
@@ -85,7 +82,7 @@ export function Info({ establishment }: InfoParams) {
           name="category"
         >
           <RadioWrapper value={form.getFieldsValue().category} disabled={isEditDisabled}>
-            <Space direction="vertical">
+            <Space direction="vertical" align="start">
               <Radio value={Segmentation.bakery}>Café e pães</Radio>
               <Radio value={Segmentation.candy_store}>Doces e guloseimas</Radio>
               <Radio value={Segmentation.pub}>Bar e petiscos</Radio>

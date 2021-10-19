@@ -5,6 +5,8 @@ import establishmentReducer from './Establishment'
 import tableReducer from './Table'
 import scheduleReducer from './Schedule'
 import reservationReducer from './Reservation'
+import environmentReducer from './Environment'
+import menuReducer from './Menu'
 
 export const store = configureStore({
   reducer: {
@@ -13,7 +15,9 @@ export const store = configureStore({
     establishment: establishmentReducer,
     table: tableReducer,
     schedule: scheduleReducer,
-    reservation: reservationReducer
+    reservation: reservationReducer,
+    environment: environmentReducer,
+    menu: menuReducer
   },
 })
 

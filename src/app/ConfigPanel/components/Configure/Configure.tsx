@@ -1,20 +1,44 @@
 import React from 'react'
 
-import { useAppDispatch } from '../../../../hooks/hooks'
-import { MainWrapper } from './styles'
+import { AgendaTable } from './components/AgendaTable/AgendaTable'
+import { EnvironmentTable } from './components/EnvironmentTable/EnvironmentTable'
+import { MenuTable } from './components/MenuTable/MenuTable'
+import { TableForm } from './components/TableEnv/TableEnv'
+import { Container, MainWrapper } from './styles'
 
 type ConfigureParams = {
-  establishment: boolean
+  establishment: any
 }
 
-export function Configure({ establishment }: ConfigureParams) {
+export type EditDeleteParams = {
+  id: number
+}
 
-  const dispatch = useAppDispatch()
+export function Configure({ establishment }: ConfigureParams): JSX.Element {
 
   return (
     <MainWrapper>
       {establishment
-        ? <div>Configurações preenchidas</div>
+        ? (
+          <Container>
+            <EnvironmentTable
+              environments={establishment.environments}
+              key='environment-form-wrapper'
+            />
+            <MenuTable
+              menu_items={establishment.menu_items}
+              key='menu-form-wrapper'
+            />
+            <TableForm
+              tables={establishment.environments.flatMap(environment => environment.tables)}
+              key='table-form-wrapper'
+            />
+            <AgendaTable
+              schedule={establishment.schedule}
+              key='agenda-form-wrapper'
+            />
+          </Container>
+        )
         : <div>Configurações vazias</div>
       }
     </MainWrapper>

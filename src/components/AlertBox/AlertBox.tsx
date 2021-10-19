@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Alert } from 'antd'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
-import { disableAlert } from '../../hooks/Common'
+import { disableAlert, EnumAlert } from '../../hooks/Common'
 
 export function AlertBox(): JSX.Element {
 
@@ -13,6 +13,18 @@ export function AlertBox(): JSX.Element {
   const closeAlert = () => {
     dispatch(disableAlert())
   }
+
+  useEffect(() => {
+    if (enabled && [EnumAlert.SUCCESS, EnumAlert.INFO].includes(type)) {
+      const timeout = setTimeout(() => {
+        closeAlert()
+      }, 5000)
+
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, [enabled, type])
 
   return (
     <div>

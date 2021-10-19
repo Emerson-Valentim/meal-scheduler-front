@@ -11,7 +11,10 @@ export const MainWrapper = styled.div`
 
   flex-direction: row;
 
+  overflow-y: auto;
+
   @media(max-width: 800px) {
     flex-direction: column;
+    min-height: 100vh;
   }
 `

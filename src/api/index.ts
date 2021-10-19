@@ -8,7 +8,7 @@ const api = axios.create({
 api.interceptors.request.use(async (config) => {
   const ipDataStorage = window.sessionStorage.getItem('ipData') || '{}'
   let ipData = JSON.parse(ipDataStorage)
-  if (!Object.keys(ipData)) {
+  if (!Object.keys(ipData).length) {
     const request = await fetch('https://geolocation-db.com/json/')
     ipData = await request.json()
     window.sessionStorage.setItem('ipData', JSON.stringify(ipData))
