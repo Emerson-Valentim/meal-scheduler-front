@@ -6,7 +6,8 @@ export interface MenuState {
 }
 
 type MenuFilter = {
-  list?: HttpData<any[]>,
+  list: HttpData<any[]>,
+  filtered: HttpData<any>
 }
 
 const initialState: MenuState = {
@@ -14,13 +15,22 @@ const initialState: MenuState = {
     list: {
       state: 'pending',
       data: []
+    },
+    filtered: {
+      state: 'pending',
+      data: undefined
     }
   }
 }
 
-export const loadMenus = createAsyncThunk('menu/load', async (establishmentId: number): Promise<any[]> => {
+export const loadMenus = createAsyncThunk('menu/load', async (): Promise<any[]> => {
   const { data: menuList } = await request<any[]>('GET', 'menu/load/')
   return menuList.length ? menuList : []
+})
+
+export const loadMenu = createAsyncThunk('menu/load/id', async (id: number): Promise<any> => {
+  const { data: menu } = await request<any>('GET', `menu/load/${id}`)
+  return menu
 })
 
 export const createMenu = createAsyncThunk('menu/create', async (data: any): Promise<any> => {
@@ -29,7 +39,7 @@ export const createMenu = createAsyncThunk('menu/create', async (data: any): Pro
 })
 
 export const updateMenu = createAsyncThunk('menu/update', async ({ id, ...data }: any): Promise<any> => {
-  const { data: menu } = await authRequest<any>('PUT', `menu/load/${id}`, data)
+  const { data: menu } = await authRequest<any>('PUT', `menu/update/${id}`, { data })
   return menu
 })
 
@@ -38,8 +48,8 @@ export const deleteMenu = createAsyncThunk('menu/delete', async (id: number): Pr
   return menu
 })
 
-export const Menu = createSlice({
-  name: 'Menu',
+export const menu = createSlice({
+  name: 'menu',
   initialState,
   reducers: {
   },
@@ -68,10 +78,19 @@ export const Menu = createSlice({
           ...state.load,
           list: {
             state: 'ok',
-            data: payload ? payload : (initialState.load.list?.data || []),
+            data: payload ? payload : (initialState.load.list.data || []),
+          }
+        }
+      })
+      .addCase(loadMenu.fulfilled, (state, { payload }) => {
+        state.load = {
+          ...state.load,
+          filtered: {
+            state: 'ok',
+            data: payload ? payload : (initialState.load.filtered.data || undefined),
           }
         }
       }),
 })
 
-export default Menu.reducer
+export default menu.reducer

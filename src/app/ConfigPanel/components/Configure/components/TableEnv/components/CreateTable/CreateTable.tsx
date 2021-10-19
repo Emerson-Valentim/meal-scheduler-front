@@ -1,22 +1,28 @@
 import React, { useEffect } from 'react'
 
-import { Button, Form, Input, Select, Typography } from 'antd'
+import { Button, Form, Input, Select } from 'antd'
 import { UnitForm, UnitFormItem } from '../../../../styles'
 import { useAppDispatch, useAppSelector } from '../../../../../../../../hooks/hooks'
 import { updateLoading, updateModal } from '../../../../../../../../hooks/Common'
 import { loadEnvironments } from '../../../../../../../../hooks/Environment'
 import { loadEstablishment } from '../../../../../../../../hooks/Establishment'
-import { createTable } from '../../../../../../../../hooks/Table'
+import { createTable, loadTable, updateTable } from '../../../../../../../../hooks/Table'
 
 const { Option } = Select
 
-export function CreateTable(): JSX.Element {
+type EditTableParams = {
+  id?: number
+}
+
+export function CreateTable({ id }: EditTableParams): JSX.Element {
   const dispatch = useAppDispatch()
 
   const [form] = Form.useForm()
 
   const establishment_id = useAppSelector((state) => state.establishment.load.filtered.data.id)
+
   const { data: environments } = useAppSelector((state) => state.environment.load.list)
+  const { data: table } = useAppSelector((state) => state.table.load.filtered)
 
   useEffect(() => {
     (async () => {
@@ -28,10 +34,31 @@ export function CreateTable(): JSX.Element {
     })()
   }, [])
 
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        dispatch(updateLoading(true))
+
+        await dispatch(loadTable(id))
+
+        dispatch(updateLoading(false))
+      })()
+    }
+  }, [id])
+
+  useEffect(() => {
+    id
+      ? form.setFieldsValue(table)
+      : form.setFieldsValue({})
+
+  }, [id, table])
+
   const onFinish = async (data) => {
     dispatch(updateLoading(true))
 
-    await dispatch(createTable(data))
+    id
+      ? await dispatch(updateTable({ id, ...data }))
+      : await dispatch(createTable(data))
 
     await dispatch(loadEstablishment(establishment_id))
     dispatch(updateModal({
@@ -77,6 +104,7 @@ export function CreateTable(): JSX.Element {
           style={{ width: '100%' }}
           onChange={(value) => form.setFieldsValue({ environment: value })}
           placeholder="Selecione um ambiente"
+          disabled={!!id}
         >
           {environments
             .filter(environment => environment.establishment === establishment_id)
@@ -89,7 +117,7 @@ export function CreateTable(): JSX.Element {
       </UnitFormItem>
       <UnitFormItem style={{ textAlign: 'center' }}>
         <Button type="primary" htmlType="submit">
-          Cadastrar
+          {id ? 'Atualizar' : 'Cadastrar'}
         </Button>
       </UnitFormItem>
     </UnitForm>

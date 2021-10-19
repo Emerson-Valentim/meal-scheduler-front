@@ -19,7 +19,7 @@ export function TableForm({ tables }: TableFormParams): JSX.Element {
   const editTable = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
-      component: <div>Oi lindo oi</div>,
+      component: <CreateTable id={id}/>,
       title: 'Alterar mesa'
     }))
   }

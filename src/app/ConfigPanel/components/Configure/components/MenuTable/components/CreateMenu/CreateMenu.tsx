@@ -1,23 +1,50 @@
 import React, { useEffect } from 'react'
 
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Form, Input } from 'antd'
 import { UnitForm, UnitFormItem } from '../../../../styles'
 import { useAppDispatch, useAppSelector } from '../../../../../../../../hooks/hooks'
 import { updateLoading, updateModal } from '../../../../../../../../hooks/Common'
-import { createMenu } from '../../../../../../../../hooks/Menu'
+import { createMenu, loadMenu, updateMenu } from '../../../../../../../../hooks/Menu'
 import { loadEstablishment } from '../../../../../../../../hooks/Establishment'
 
-export function CreateMenu(): JSX.Element {
+type EditMenuParams = {
+  id?: number
+}
+
+export function CreateMenu({ id }: EditMenuParams): JSX.Element {
   const dispatch = useAppDispatch()
 
+  const [form] = Form.useForm()
+
+  const { data: menu } = useAppSelector((state) => state.menu.load.filtered)
   const establishment_id = useAppSelector((state) => state.establishment.load.filtered.data.id)
+
+  useEffect(() => {
+    if (id) {
+      (async () => {
+        dispatch(updateLoading(true))
+
+        await dispatch(loadMenu(id))
+
+        dispatch(updateLoading(false))
+      })()
+    }
+  }, [id])
+
+  useEffect(() => {
+    id
+      ? form.setFieldsValue(menu)
+      : form.setFieldsValue({})
+
+  }, [id, menu])
 
   const onFinish = async (data) => {
     dispatch(updateLoading(true))
-    await dispatch(createMenu({
-      establishment: establishment_id,
-      ...data
-    }))
+
+    id
+      ? await dispatch(updateMenu({ id, ...data }))
+      : await dispatch(createMenu({ establishment: establishment_id, ...data }))
+
     await dispatch(loadEstablishment(establishment_id))
     dispatch(updateModal({
       enabled: false,
@@ -33,6 +60,7 @@ export function CreateMenu(): JSX.Element {
       onFinish={onFinish}
       autoComplete="off"
       initialValues={{ remember: true }}
+      form={form}
     >
       <UnitFormItem
         name="name"
@@ -58,7 +86,7 @@ export function CreateMenu(): JSX.Element {
       </UnitFormItem>
       <UnitFormItem style={{ textAlign: 'center' }}>
         <Button type="primary" htmlType="submit">
-          Cadastrar
+          { id ? 'Atualizar' : 'Cadastrar'}
         </Button>
       </UnitFormItem>
     </UnitForm>

@@ -18,7 +18,7 @@ export function MenuTable({ menu_items }: MenuFormParams): JSX.Element {
   const editMenu = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
-      component: <div>Oi lindo oi</div>,
+      component: <CreateMenu id={id}/>,
       title: 'Alterar menu'
     }))
   }

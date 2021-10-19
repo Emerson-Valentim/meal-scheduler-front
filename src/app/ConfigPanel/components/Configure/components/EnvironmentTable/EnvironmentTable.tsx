@@ -22,7 +22,7 @@ export function EnvironmentTable({ environments }: EnvironmentFormParams): JSX.E
   const editEnvironment = (id: number): void => {
     dispatch(updateModal({
       enabled: true,
-      component: <div>Edit</div>,
+      component: <CreateEnvironment id={id}/>,
       title: 'Alterar ambiente'
     }))
   }
