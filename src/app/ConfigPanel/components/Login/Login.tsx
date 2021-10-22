@@ -7,6 +7,8 @@ import { authenticate, updateConfigMode, ConfigMode, LoginState } from '../../..
 import { enableAlert, updateLoading } from '../../../../hooks/Common'
 import { ButtonWrapper, CustomLoginForm, LoginFormItem, MainWrapper } from './styles'
 import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCard'
+import { MaskedInput } from 'antd-mask-input'
+import { cleanText } from '../../../../utils'
 
 export function Login() {
   const dispatch = useAppDispatch()
@@ -29,7 +31,10 @@ export function Login() {
 
   const onFinish = async (values: any) => {
     dispatch(updateLoading(true))
-    await dispatch(authenticate(values))
+    await dispatch(authenticate({
+      ...values,
+      cnpj: cleanText(values.cnpj),
+    }))
     dispatch(updateLoading(false))
   }
 
@@ -56,7 +61,7 @@ export function Login() {
           name="cnpj"
           rules={[{ required: true, message: 'Por favor insira seu cnpj' }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="CNPJ" />
+          <MaskedInput prefix={<UserOutlined className="site-form-item-icon" />} placeholder="CNPJ" mask='11.111.111/1111-11' />
         </LoginFormItem>
         <LoginFormItem
           name="password"

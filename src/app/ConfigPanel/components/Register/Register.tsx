@@ -8,8 +8,10 @@ import LockOutlined from '@ant-design/icons/lib/icons/LockOutlined'
 import UserOutlined from '@ant-design/icons/lib/icons/UserOutlined'
 import PhoneOutlined from '@ant-design/icons/lib/icons/PhoneOutlined'
 import { enableAlert, updateLoading } from '../../../../hooks/Common'
+import { MaskedInput } from 'antd-mask-input'
+import { cleanText } from '../../../../utils'
 
-export function Register() {
+export function Register(): JSX.Element {
   const dispatch = useAppDispatch()
 
   const { state: registerState } = useAppSelector((state) => state.user.create.result!)
@@ -18,14 +20,14 @@ export function Register() {
 
   const onFinish = async (values: any) => {
     const formCredentials = {
-      cnpj: values.cnpj,
+      cnpj: cleanText(values.cnpj),
       password: values.password,
     }
     setCredentials(formCredentials)
     dispatch(updateLoading(true))
     await dispatch(createUser({
       ...formCredentials,
-      phone: values.phone
+      phone: cleanText(values.phone)
     }))
     dispatch(updateLoading(false))
   }
@@ -69,13 +71,13 @@ export function Register() {
           name="cnpj"
           rules={[{ required: true, message: 'Por favor insira seu cnpj' }]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="CNPJ" />
+          <MaskedInput prefix={<UserOutlined className="site-form-item-icon" />} placeholder="CNPJ" mask='11.111.111/1111-11' />
         </LoginFormItem>
         <LoginFormItem
           name="phone"
           rules={[{ required: true, message: 'Por favor insira seu telefone de contato' }]}
         >
-          <Input prefix={<PhoneOutlined className="site-form-item-icon" />} placeholder="Telefone" />
+          <MaskedInput prefix={<PhoneOutlined className="site-form-item-icon" />} placeholder="Telefone" mask="+11 (11) 11111-1111"/>
         </LoginFormItem>
         <LoginFormItem
           name="password"
