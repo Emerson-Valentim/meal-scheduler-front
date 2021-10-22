@@ -6,5 +6,8 @@ type AgendaFormParams = {
 
 export function AgendaTable({ schedule }: AgendaFormParams): JSX.Element {
 
+  /**
+  * @todo Implement this screen.
+  */
   return (<></>)
 }

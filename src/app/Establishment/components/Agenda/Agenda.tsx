@@ -25,7 +25,7 @@ const formatDate = (date: string): DateTime => DateTime.fromISO(date)
 const dayFormat = 'dd/LL/yyyy'
 const hourFormat = 'HH:mm:ss'
 
-export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
+export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Element {
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
 
@@ -110,6 +110,10 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition) {
 
     dispatch(setReservationInterval(interval))
   }, [reservationDate, stateStartTime, stateEndTime])
+
+  /**
+  * @todo add cpf and phone
+  */
 
   return (
     <MainWrapper>

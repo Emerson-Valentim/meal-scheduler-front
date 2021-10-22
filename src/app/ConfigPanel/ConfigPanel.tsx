@@ -56,6 +56,9 @@ export function ConfigPanel() {
       {
         logged
           ? <Configure establishment={establishment} />
+          /**
+          * @todo Implement this screen.
+          */
           : <div>Bem vindo!</div>
       }
     </MainWrapper>
