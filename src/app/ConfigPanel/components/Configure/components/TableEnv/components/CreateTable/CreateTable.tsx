@@ -57,7 +57,7 @@ export function CreateTable({ id }: EditTableParams): JSX.Element {
     dispatch(updateLoading(true))
 
     id
-      ? await dispatch(updateTable({ id, ...data }))
+      ? await dispatch(updateTable({ id, seats: data.seats, identification: data.identification }))
       : await dispatch(createTable(data))
 
     await dispatch(loadEstablishment(establishment_id))
