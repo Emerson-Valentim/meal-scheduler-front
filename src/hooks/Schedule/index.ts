@@ -35,6 +35,16 @@ export const loadSchedule = createAsyncThunk('schedule/load', async (scheduleId?
   return undefined
 })
 
+export const createSchedule = createAsyncThunk('schedule/create', async (data: any): Promise<any> => {
+  const { data: schedule } = await authRequest<any[]>('POST', 'schedule/create', { data })
+  return schedule
+})
+
+export const updateSchedule = createAsyncThunk('schedule/update', async ({id, ...data}: any): Promise<any> => {
+  const { data: schedule } = await authRequest<any[]>('PUT', `schedule/update/${id}`, { data })
+  return schedule
+})
+
 export const Schedule = createSlice({
   name: 'Schedule',
   initialState,
