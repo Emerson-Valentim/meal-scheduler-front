@@ -39,10 +39,7 @@ export function Configure({ establishment }: ConfigureParams): JSX.Element {
             />
           </Container>
         )
-        /**
-          * @todo Implement this screen.
-          */
-        : <div>Configurações vazias</div>
+        : null
       }
     </MainWrapper>
   )
