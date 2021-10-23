@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AgendaTable } from './components/AgendaTable/AgendaTable'
+import { Agenda } from './components/Agenda/Agenda'
 import { EnvironmentTable } from './components/EnvironmentTable/EnvironmentTable'
 import { MenuTable } from './components/MenuTable/MenuTable'
 import { TableForm } from './components/TableEnv/TableEnv'
@@ -33,7 +33,7 @@ export function Configure({ establishment }: ConfigureParams): JSX.Element {
               tables={establishment.environments.flatMap(environment => environment.tables)}
               key='table-form-wrapper'
             />
-            <AgendaTable
+            <Agenda
               schedule={establishment.schedule}
               key='agenda-form-wrapper'
             />
