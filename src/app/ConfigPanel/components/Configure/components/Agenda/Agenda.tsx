@@ -6,8 +6,11 @@ import { UnitForm, UnitFormItem } from '../../styles'
 import { Button, TimePicker, Form } from 'antd'
 import { DateTime } from 'luxon'
 import moment from 'moment'
+
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks/hooks'
-import { createSchedule, updateSchedule } from '../../../../../../hooks/Schedule'
+import { createSchedule, loadSchedule, updateSchedule } from '../../../../../../hooks/Schedule'
+import { updateLoading } from '../../../../../../hooks/Common'
+import { loadEstablishment } from '../../../../../../hooks/Establishment'
 
 const { RangePicker } = TimePicker
 
@@ -21,11 +24,39 @@ export function Agenda({ schedule }: AgendaFormParams): JSX.Element {
 
   const [form] = Form.useForm()
 
+  const { data: scheduleData } = useAppSelector(state => state.schedule.load.filtered)
+  const establishment_id = useAppSelector((state) => state.establishment.load.filtered.data.id)
+
+  const toMoment = (hourValue: string) => {
+    const [hour, minute, second] = hourValue.split(':')
+    return moment().set({
+      hour: +hour,
+      minute: +minute,
+      second: +second
+    })
+
+  }
+
   useEffect(() => {
-    schedule
-      ? form.setFieldsValue({})
-      : form.setFieldsValue({})
-  }, [form])
+    (async () => {
+      dispatch(updateLoading(true))
+      schedule
+        ? await dispatch(loadSchedule(schedule))
+        : form.setFieldsValue({})
+      dispatch(updateLoading(false))
+    })()
+  }, [])
+
+  useEffect(() => {
+    if(scheduleData) {
+      const formData = Object.entries(scheduleData.definition).reduce((object, [key, { start, end }]: any) => {
+        object[key] = [toMoment(start), toMoment(end)]
+        return object
+      }, {})
+
+      form.setFieldsValue(formData)
+    }
+  }, [scheduleData])
 
   const onFinish = async (formValue) => {
     const definition = Object.entries(formValue).reduce((object, [key, value]: any) => {
@@ -38,9 +69,16 @@ export function Agenda({ schedule }: AgendaFormParams): JSX.Element {
       return object
     }, {})
 
+    dispatch(updateLoading(true))
+
     schedule
       ? await dispatch(updateSchedule({ definition, id: schedule }))
       : await dispatch(createSchedule({ definition }))
+
+    await dispatch(loadEstablishment(establishment_id))
+
+    dispatch(updateLoading(false))
+
   }
 
   return (

@@ -27,12 +27,9 @@ const initialState: ScheduleState = {
   }
 }
 
-export const loadSchedule = createAsyncThunk('schedule/load', async (scheduleId?: number): Promise<any> => {
-  if (scheduleId) {
-    const { data: schedule } = await request<any[]>('GET', `schedule/load/${scheduleId}`)
-    return schedule
-  }
-  return undefined
+export const loadSchedule = createAsyncThunk('schedule/load', async (scheduleId: number): Promise<any> => {
+  const { data: schedule } = await request<any[]>('GET', `schedule/load/${scheduleId}`)
+  return schedule
 })
 
 export const createSchedule = createAsyncThunk('schedule/create', async (data: any): Promise<any> => {
@@ -75,7 +72,7 @@ export const Schedule = createSlice({
           ...state.load,
           filtered: {
             state: 'ok',
-            data: payload ? payload : (initialState.load.filtered?.data || {}),
+            data: payload,
           }
         }
       }),
