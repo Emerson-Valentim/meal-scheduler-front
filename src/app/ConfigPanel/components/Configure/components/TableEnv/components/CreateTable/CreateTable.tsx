@@ -110,7 +110,7 @@ export function CreateTable({ id }: EditTableParams): JSX.Element {
             .filter(environment => environment.establishment === establishment_id)
             .map((environment) => (
               <Option value={environment.id} key={`environment-${environment.id}`}>
-                {environment.id}
+                {`${environment.id} - ${environment.description}`}
               </Option>
             ))}
         </Select>
