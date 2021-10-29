@@ -40,7 +40,7 @@ export function EnvironmentList({ environments }: EnvironmentListDefinition): JS
         <EnvironmentCard
           key={`${environment.id}-Table`}
           style={{ width: '44%' }}
-          cover={<img alt="example" src="Intro3.png" />}
+          cover={<img alt={`${environment.location}.png`} src={`${environment.location}.png`} />}
           selected={stateEnvironments.includes(environment.id)}
           onClick={() => selectEnvironment(environment.id)}
         >

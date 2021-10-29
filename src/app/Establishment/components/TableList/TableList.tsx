@@ -30,7 +30,9 @@ export function TableList({ tables }: TableListParams): JSX.Element {
       selected={stateTable === table.id}
       onClick={() => selectTable(table.id)}
     >
-      <Meta title={`Mesa ${table.identification}`} description={`Mesa com ${table.seats} lugares`} />
+      <Meta
+        title={`Mesa ${table.identification}`}
+        description={`Mesa com ${table.seats} lugares`} />
     </TableCard>
   )
 

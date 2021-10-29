@@ -8,13 +8,13 @@ type MenuListDefinition = {
   menu: any[]
 }
 
-export function MenuList({ menu }: MenuListDefinition) {
+export function MenuList({ menu }: MenuListDefinition): JSX.Element {
   return (
     <CustomViewBody >
       {menu?.map(item =>
         <MenuCard
           key={`${item.id}-MenuItem`}
-          cover={<img alt="example" src="Intro1.png" />}
+          cover={<img alt="food.png" src="food.png" />}
         >
           <Meta title={item.name} description={item.ingredients} />
         </MenuCard>

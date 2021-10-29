@@ -98,10 +98,10 @@ export function Establishment(): JSX.Element {
       <WestPlazaCard card={CardStyle} />
       <h1>Confira os locais disponíveis</h1>
       <EstablishmentList>
-        {establishments?.map(({ name, description, id, image }) => (
+        {establishments?.map(({ name, description, id, category }) => (
           <EstablishmentCard
             hoverable
-            cover={<img src={image || 'Intro2.png'} alt={`${name}`} />}
+            cover={<img src={`${category}.png`} alt={`${category}.png`} />}
             onClick={() => openEstablishmentModal({ id })}
             key={`establishment-${id}`}
           >
