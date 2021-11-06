@@ -45,10 +45,10 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
 
   const [stateStartDate, setStartDate] = useState(DateTime.now().toJSDate())
 
-  const colors = {
-    'canceled': '#d32433',
-    'currentUser': '#50c775',
-    'otherUser': '#747371',
+  const classes = {
+    'canceled':'red',
+    'scheduled': 'lightgreen',
+    'finished': 'lightblue',
   }
 
   const getWorkingDays = useCallback((): JSX.Element[] => {
@@ -72,9 +72,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
       name: `Reserva ${id}`,
       startDateTime: DateTime.fromISO(start).toJSDate(),
       endDateTime: DateTime.fromISO(end).toJSDate(),
-      classes: status === 'canceled'
-        ? status
-        : (id > 19 ? 'currentUser' : 'otherUser')
+      classes: status
     }))
   }, [reservations])
 
@@ -142,7 +140,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
         startDate={stateStartDate}
         minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0 }).toJSDate()}
         items={getCurrentReservations()}
-        itemColors={colors}
+        itemColors={classes}
         onCellSelect={(value) => updateIntervalInfo(value, 'cell')}
         onRangeSelection={(value) => updateIntervalInfo(value, 'range')}
         onDateRangeChange={(startDate) => setStartDate(startDate)}

@@ -3,6 +3,12 @@ import { authRequest, request, HttpData } from '../../api'
 import { ReservationDefinition } from '../../app/Establishment/components/Agenda/Agenda'
 import { RootState } from '../store'
 
+export enum ReservationStatus {
+  SCHEDULED = 'scheduled',
+  CANCELED = 'canceled',
+  FINISHED = 'finished'
+}
+
 type ReservationParams = {
   establishment?: number
   environments: number[]
@@ -23,12 +29,19 @@ type ReservationDelete = {
 }
 export interface ReservationState {
   load: ReservationFilter
+  privateLoad: ReservationFilter
   create: ReservationCreation
   delete: ReservationDelete
 }
 
 const initialState: ReservationState = {
   load: {
+    list: {
+      state: 'pending',
+      data: []
+    }
+  },
+  privateLoad: {
     list: {
       state: 'pending',
       data: []
@@ -60,9 +73,19 @@ export const loadReservations = createAsyncThunk('reservation/safeLoad', async (
   return reservationList.length ? reservationList : []
 })
 
+export const privateLoadReservations = createAsyncThunk('reservation/load', async (): Promise<any[]> => {
+  const { data: reservationList } = await authRequest<any[]>('GET', 'reservation/load')
+  return reservationList.length ? reservationList : []
+})
+
 export const createReservation = createAsyncThunk('reservation/create', async (data: any): Promise<any> => {
   const { data: newReservation } = await request<any>('POST', 'reservation/create', { data })
   return newReservation
+})
+
+export const updateReservation = createAsyncThunk('reservation/update', async ({ id, ...data }: any): Promise<any> => {
+  const { data: updatedReservation } = await authRequest<any>('PUT', `reservation/update/${id}`, { data })
+  return updatedReservation
 })
 
 export const safeUpdateReservation = createAsyncThunk('reservation/safeUpdate', async ({ id, ...data }: any): Promise<any> => {
@@ -132,7 +155,17 @@ export const reservation = createSlice({
             data: payload ? payload : (initialState.load.list?.data || []),
           }
         }
-      }),
+      })
+      .addCase(privateLoadReservations.fulfilled, (state, { payload }) => {
+        state.privateLoad = {
+          ...state.privateLoad,
+          list: {
+            state: 'ok',
+            data: payload.map(reservation => ({...reservation, key: reservation})).sort((a, b) => b.id - a.id)
+          }
+        }
+      })
+  ,
 })
 
 export const {

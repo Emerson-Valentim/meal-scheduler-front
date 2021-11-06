@@ -56,6 +56,10 @@ export const UnitTable = styled(Table)`
     text-align: center !important;
   }
 
+  svg {
+    vertical-align: -0.125em;
+  }
+
   @media(max-width: 800px) {
     min-height: 24%;
     width: 100%;
