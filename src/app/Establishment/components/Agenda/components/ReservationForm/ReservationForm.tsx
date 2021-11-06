@@ -19,7 +19,7 @@ export function ReservationForm({ item }: ReservationFormParams): JSX.Element {
 
   const reservationId = useAppSelector((state) => state.reservation.delete.id)
 
-  const [hasPermission] = useState(item.classes === 'currentUser')
+  const [hasPermission] = useState(item.classes === 'scheduled')
 
   const handleClick = () => {
     if (hasPermission) {

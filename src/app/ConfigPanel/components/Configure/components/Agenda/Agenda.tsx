@@ -88,7 +88,7 @@ export function Agenda({ schedule }: AgendaFormParams): JSX.Element {
         onFinish={onFinish}
         form={form}
       >
-        {['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'].map((day, index) => (
+        {['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'].map((day, index) => (
           <UnitFormItem
             key={index}
             name={`${index + 1}`}
@@ -105,7 +105,6 @@ export function Agenda({ schedule }: AgendaFormParams): JSX.Element {
           </Button>
         </UnitFormItem>
       </UnitForm>
-
     </MainWrapper>
   )
 }
