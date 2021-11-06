@@ -25,14 +25,18 @@ export function ReservationTable(): JSX.Element {
   }
 
   const updateReservationStatus = async (status: ReservationStatus) => {
-    dispatch(updateLoading(true))
+    if(selectedReservation.length) {
+      dispatch(updateLoading(true))
 
-    const promises = selectedReservation.map(async reservation => dispatch(updateReservation({id: reservation.id, status})))
+      const promises = selectedReservation.map(async reservation => dispatch(updateReservation({id: reservation.id, status})))
 
-    await Promise.allSettled(promises)
-    await dispatch(privateLoadReservations())
+      await Promise.allSettled(promises)
+      await dispatch(privateLoadReservations())
 
-    dispatch(updateLoading(false))
+      setSelectedReservations([])
+
+      dispatch(updateLoading(false))
+    }
   }
 
   useEffect(() => {
@@ -89,8 +93,8 @@ export function ReservationTable(): JSX.Element {
       title={() => 'Reservas'}
       footer={() => (
         <ButtonWrapper>
-          <Button type="primary" onClick={() => updateReservationStatus(ReservationStatus.CANCELED)}>Cancelar</Button>
-          <Button type="primary" onClick={() => updateReservationStatus(ReservationStatus.FINISHED)}>Finalizar</Button>
+          <Button type="primary" onClick={() => updateReservationStatus(ReservationStatus.CANCELED)} disabled={!selectedReservation.length}>Cancelar</Button>
+          <Button type="primary" onClick={() => updateReservationStatus(ReservationStatus.FINISHED)} disabled={!selectedReservation.length}>Finalizar</Button>
         </ButtonWrapper>
       )}
     />
