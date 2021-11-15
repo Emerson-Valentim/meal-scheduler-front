@@ -15,7 +15,7 @@ export type VisiblePanel = {
   enabled: boolean
 }
 
-export function ConfigPanel() {
+export function ConfigPanel(): JSX.Element {
 
   const dispatch = useAppDispatch()
 
@@ -54,12 +54,7 @@ export function ConfigPanel() {
         currentComponent
       }
       {
-        logged
-          ? <Configure establishment={establishment} />
-          /**
-          * @todo Implement this screen.
-          */
-          : <div>Bem vindo!</div>
+        logged && <Configure establishment={establishment} />
       }
     </MainWrapper>
   )

@@ -11,6 +11,8 @@ export const MainWrapper = styled.div`
 
   flex-direction: row;
 
+  justify-content: center;
+
   overflow-y: auto;
 
   @media(max-width: 800px) {

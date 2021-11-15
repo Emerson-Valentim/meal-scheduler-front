@@ -10,7 +10,7 @@ import { WestPlazaCard } from '../../../../components/WestPlazaCard/WestPlazaCar
 import { MaskedInput } from 'antd-mask-input'
 import { cleanText } from '../../../../utils'
 
-export function Login() {
+export function Login(): JSX.Element {
   const dispatch = useAppDispatch()
   const logged = useAppSelector((state) => state.user.logged)
 
@@ -49,7 +49,7 @@ export function Login() {
   }, [logged, ACTION_MESSAGES, dispatch])
 
   return (
-    <MainWrapper>
+    <MainWrapper width="70vw">
       <CustomLoginForm
         name="normal_login"
         className="login-form"

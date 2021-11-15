@@ -59,7 +59,7 @@ export function Register(): JSX.Element {
   }, [registerState, ACTION_MESSAGES, dispatch, credentials])
 
   return (
-    <MainWrapper>
+    <MainWrapper width="70vw">
       <CustomLoginForm
         name="normal_login"
         className="login-form"
