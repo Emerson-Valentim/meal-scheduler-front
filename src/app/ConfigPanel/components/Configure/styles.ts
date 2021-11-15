@@ -39,7 +39,6 @@ export const UnitForm = styled(Form)`
 `
 
 export const UnitFormItem = styled(Form.Item)`
-  background-color: ${colors.primary};
 `
 
 export const UnitTable = styled(Table)`
@@ -50,7 +49,7 @@ export const UnitTable = styled(Table)`
 
   border-radius: 1em;
 
-  background-color: ${colors.primary};;
+  background-color: ${colors.primary};
 
   .ant-table-cell {
     text-align: center !important;
