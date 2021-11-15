@@ -15,11 +15,9 @@ export const MainWrapper = styled.div`
 
   overflow-x: hidden;
 
-  border-right: 3px black solid;
 
   @media(max-width: 800px) {
     border-right: none;
-    border-bottom: 3px black solid;
     width: 100%;
   }
 `
