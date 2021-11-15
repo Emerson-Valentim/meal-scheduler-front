@@ -61,9 +61,15 @@ export const EstablishmentCard = styled(Card)`
     font-size: 3vh;
   }
 
-  img {
+  .ant-card-cover {
     margin-top: 2vh;
-    width: 95%
+    max-width: 95%;
+    max-height: 80%;
+  }
+   
+  img {
+    height: 100%;
+    width: 100%;
   }
 `
 
