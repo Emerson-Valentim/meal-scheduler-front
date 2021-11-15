@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from '../../../../../../styles/colors'
 
 export const MainWrapper = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ export const MainWrapper = styled.div`
 
   width: 96%;
 
-  background-color: pink;
+  background-color: ${colors.primary};
 
   form {
     width: 100%;
