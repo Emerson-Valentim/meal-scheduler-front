@@ -39,6 +39,7 @@ export function Establishment(): JSX.Element {
 
   const establishment = useAppSelector(state => state.establishment.load.filtered?.data)
   const establishments = useAppSelector(state => state.establishment.load.list?.data)
+  const { table } = useAppSelector(state => state.reservation.create.params)
 
   const {
     environments: stateEnvironments,
@@ -85,8 +86,6 @@ export function Establishment(): JSX.Element {
     await dispatch(createReservation({
       ...params,
       status: 'scheduled',
-      phone: '5511948083191',
-      cpf: '46911198844'
     }))
 
     setConfirmLoading(false)
@@ -141,7 +140,7 @@ export function Establishment(): JSX.Element {
           <CustomMenuItem key={EnumViewMapping.TABLE} icon={<FaChair />}>
             Mesas
           </CustomMenuItem>
-          <CustomMenuItem key={EnumViewMapping.RESERVATION} icon={<CalendarFilled />}>
+          <CustomMenuItem key={EnumViewMapping.RESERVATION} icon={<CalendarFilled />} disabled={!table}>
             Reservas
           </CustomMenuItem>
         </CustomMenu>

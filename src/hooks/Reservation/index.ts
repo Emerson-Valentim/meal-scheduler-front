@@ -14,6 +14,8 @@ type ReservationParams = {
   environments: number[]
   table?: number
   interval: any
+  cpf: string
+  phone: string
 }
 
 type ReservationFilter = {
@@ -55,7 +57,9 @@ const initialState: ReservationState = {
       interval: {
         start: '',
         end: ''
-      }
+      },
+      cpf: '',
+      phone: ''
     }
   },
   delete: {
@@ -105,7 +109,9 @@ export const reservation = createSlice({
         interval: {
           start: '',
           end: ''
-        }
+        },
+        cpf: '',
+        phone: ''
       }
     },
     filterEnvironment: (state, { payload }: PayloadAction<any>) => {
@@ -125,6 +131,10 @@ export const reservation = createSlice({
     },
     setReservationDelete: (state, { payload }: PayloadAction<any>) => {
       state.delete.id = payload
+    },
+    setIndividualInfo: (state, { payload }: PayloadAction<any>) => {
+      state.create.params.cpf = payload.cpf
+      state.create.params.phone = payload.phone
     }
   },
   extraReducers: (builder) =>
@@ -173,7 +183,8 @@ export const {
   filterTable,
   resetNewReservation,
   setReservationInterval,
-  setReservationDelete
+  setReservationDelete,
+  setIndividualInfo
 } = reservation.actions
 
 export default reservation.reducer

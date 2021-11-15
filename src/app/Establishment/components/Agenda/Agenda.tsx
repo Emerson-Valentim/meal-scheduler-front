@@ -1,16 +1,21 @@
 import React, { useEffect, useCallback, useState } from 'react'
 
 import { DateTime } from 'luxon'
-import { TimePicker } from 'antd'
+import { Input, TimePicker } from 'antd'
 import moment from 'moment'
 
 import { useAppDispatch, useAppSelector } from '../../../../hooks/hooks'
 import { loadSchedule } from '../../../../hooks/Schedule'
-import { loadReservations, setReservationInterval } from '../../../../hooks/Reservation'
+import { loadReservations, setReservationInterval, setIndividualInfo } from '../../../../hooks/Reservation'
 import { updateLoading } from '../../../../hooks/Common'
 
 import { AgendaDescription, CustomAgenda, DateTimePicker, MainWrapper, WorkingDayDescription } from './styles'
 import { ReservationForm } from './components/ReservationForm/ReservationForm'
+import UserOutlined from '@ant-design/icons/lib/icons/UserOutlined'
+import { MaskedInput } from 'antd-mask-input'
+import PhoneOutlined from '@ant-design/icons/lib/icons/PhoneOutlined'
+import { InputCard } from './components/ReservationForm/styles'
+import { cleanText } from '../../../../utils'
 
 require('moment/locale/pt.js')
 
@@ -36,14 +41,14 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
 
   const { establishment, table } = useAppSelector(state => state.reservation.create.params)
 
-  const [visible, setVisible] = useState(false)
-
   const [reservationDate, setReservationDate] = useState(DateTime.now())
 
   const [stateStartTime, setStartTime] = useState(moment())
   const [stateEndTime, setEndTime] = useState(moment())
 
   const [stateStartDate, setStartDate] = useState(DateTime.now().toJSDate())
+  const [cpf, setCpf] = useState('')
+  const [phone, setPhone] = useState('')
 
   const classes = {
     'canceled':'red',
@@ -77,7 +82,6 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
   }, [reservations])
 
   const updateIntervalInfo = (value, action) => {
-    setVisible(true)
     switch (action) {
     case 'cell':
       setReservationDate(formatDate(value))
@@ -109,6 +113,10 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
     dispatch(setReservationInterval(interval))
   }, [reservationDate, stateStartTime, stateEndTime])
 
+  useEffect(() => {
+    dispatch(setIndividualInfo({cpf, phone}))
+  }, [cpf, phone])
+
   /**
   * @todo add cpf and phone
   */
@@ -119,7 +127,7 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
         <h4>Horários de funcionamento</h4>
         {getWorkingDays()}
       </AgendaDescription>
-      <DateTimePicker visible={visible}>
+      <DateTimePicker visible={true}>
         <h4>Data de agendamento: {reservationDate.toFormat(dayFormat)}</h4>
         <TimePicker
           allowClear
@@ -136,6 +144,22 @@ export function Agenda({ schedule: scheduleId }: ReservationDefinition): JSX.Ele
           placeholder='Saída'
         />
       </DateTimePicker>
+      <InputCard>
+        <MaskedInput
+          value={cpf}
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="CPF"
+          mask='111.111.111-11'
+          onChange={({ target }) => setCpf(cleanText(target.value))}
+        />
+        <MaskedInput
+          value={phone}
+          prefix={<PhoneOutlined className="site-form-item-icon" />}
+          placeholder="Telefone"
+          mask="+11 (11) 11111-1111"
+          onChange={({ target }) => setPhone(cleanText(target.value))}
+        />
+      </InputCard>
       <CustomAgenda
         startDate={stateStartDate}
         minDate={DateTime.now().set({ hour: 0, minute: 0, millisecond: 0 }).toJSDate()}

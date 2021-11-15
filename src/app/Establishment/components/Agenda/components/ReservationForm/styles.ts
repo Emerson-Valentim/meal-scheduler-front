@@ -13,3 +13,19 @@ export const AgendaCard = styled.div`
   cursor: ${props => props.permission ? 'pointer' : 'default'}
 
 `
+
+export const InputCard = styled.div`
+  width: 100%;
+  margin-top: 2px;
+  text-align: left;
+
+  display: flex;
+  justify-content: space-around;
+
+  span {
+    width: 49%;
+    span {
+      width: 2em;
+    }
+  }
+`
