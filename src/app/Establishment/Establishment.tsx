@@ -42,6 +42,7 @@ export function Establishment(): JSX.Element {
   const { table } = useAppSelector(state => state.reservation.create.params)
 
   const {
+    environments: stateEnvironments,
     ...params
   } = useAppSelector(state => state.reservation.create.params)
 
