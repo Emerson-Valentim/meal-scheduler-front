@@ -18,6 +18,7 @@ export function ReservationForm({ item }: ReservationFormParams): JSX.Element {
   const dispatch = useAppDispatch()
 
   const reservationId = useAppSelector((state) => state.reservation.delete.id)
+  const { cpf, phone } = useAppSelector(state => state.reservation.create.params)
 
   const [hasPermission] = useState(item.classes === 'scheduled')
 
@@ -33,8 +34,8 @@ export function ReservationForm({ item }: ReservationFormParams): JSX.Element {
     await dispatch(safeUpdateReservation({
       id: reservationId,
       status: 'canceled',
-      cpf: '46911198844',
-      phone: '5511948083191'
+      cpf,
+      phone
     }))
 
     await dispatch(loadReservations())
